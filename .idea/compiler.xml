@@ -16,10 +16,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="WirMachenEinJavaProjekt" />
         <module name="WMEJP" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="WirMachenEinJavaProjekt" target="1.8" />
       <module name="WMEJP" target="1.8" />
     </bytecodeTargetLevel>
   </component>
