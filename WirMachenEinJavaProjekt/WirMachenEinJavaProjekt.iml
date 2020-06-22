@@ -51,5 +51,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.plexus:plexus-compiler-javac:2.8.4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:15-ea+6" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:15-ea+6" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.h2database:h2:1.4.197" level="project" />
   </component>
 </module>
