@@ -65,6 +65,8 @@ public class MainWindowController implements Initializable{
     @FXML
     void delStudentOnClick(ActionEvent event) {
 
+        if(studList.getSelectionModel().getSelectedIndex()>=0){
+        studList.getItems().remove(studList.getSelectionModel().getSelectedIndex());}
     }
 
     @FXML
