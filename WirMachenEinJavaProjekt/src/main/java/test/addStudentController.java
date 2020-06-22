@@ -41,7 +41,7 @@ public class addStudentController implements Initializable {
         //Create Student based on User Inputs (java experience and Kurs, not yet implemented)
         else{
         Student newbie= new Student(nameField.getText(), numberField.getText(), "TINF19AI2", companyField.getText(), 10);
-        MainWindow.mainController1.insertInTable(newbie);
+        MainHandler.mainWindowController1.insertInTable(newbie);
         }
 
     }

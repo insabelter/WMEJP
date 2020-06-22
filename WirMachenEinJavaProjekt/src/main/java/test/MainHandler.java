@@ -1,6 +1,5 @@
 package test;
 
-import classes.Student;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,9 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainWindow extends Application {
+public class MainHandler extends Application {
     Parent root = null;
-    static mainController mainController1;
+    static MainWindowController mainWindowController1;
 
     public static void main(String[] args) {
         launch(args);
@@ -38,7 +37,7 @@ public class MainWindow extends Application {
         }
 
         //get Controller of loader for later access/passing back values
-        mainController1 = loader.getController();
+        mainWindowController1 = loader.getController();
 
 
 

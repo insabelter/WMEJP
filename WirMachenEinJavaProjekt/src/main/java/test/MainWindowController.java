@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class mainController implements Initializable{
+public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
     private boolean initialized;
     //main
