@@ -25,7 +25,7 @@ public class MainDBConnectTest {
 
             //STEP 3: Execute a query
             stmt = conn.createStatement();
-            String sql =  "Create Table ups";
+            String sql =  "";
             stmt.executeUpdate(sql);
 
             // STEP 4: Clean-up environment
