@@ -76,10 +76,11 @@ public class MainWindowController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //initialize the Table in main window to properly take Student objects as rows
+        //allow multiple selection
         studList.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE
         );
+        //initialize the Table in main window to properly take Student objects as rows
         studList.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
         studList.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("kurs"));
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("matnr"));
