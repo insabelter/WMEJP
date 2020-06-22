@@ -4,9 +4,7 @@ import classes.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +19,10 @@ public class addStudentController implements Initializable {
     private Button addButton;
 
     @FXML
-    private Label javaSlider;
+    private ComboBox courseDropdown;
+
+    @FXML
+    private Slider javaSlider;
 
     @FXML
     private TextField nameField;
@@ -38,10 +39,11 @@ public class addStudentController implements Initializable {
         if(nameField.getText().equals("")||numberField.getText().equals("")||companyField.getText().equals("")){
             System.out.println("is it possible to learn this power?");
         }
-        //Create Student based on User Inputs (java experience and Kurs, not yet implemented)
+        //Create Student based on User Inputs
         else{
-        Student newbie= new Student(nameField.getText(), numberField.getText(), "TINF19AI2", companyField.getText(), 10);
-        MainHandler.mainWindowController1.insertInTable(newbie);
+
+            Student newbie= new Student(nameField.getText(), numberField.getText(), courseDropdown.getSelectionModel().getSelectedItem().toString(), companyField.getText(),  ((int) javaSlider.getValue())/10);
+            MainHandler.mainWindowController1.insertInTable(newbie);
         }
 
     }
@@ -49,6 +51,7 @@ public class addStudentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        
+        // add options to dropdown
+        courseDropdown.getItems().addAll("TINF19AI2","TINF19AI1","KINGSIZE CHONKERS");
     }
 }
