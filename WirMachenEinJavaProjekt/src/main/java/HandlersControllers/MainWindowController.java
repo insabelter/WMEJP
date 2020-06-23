@@ -7,13 +7,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
@@ -33,6 +36,19 @@ public class MainWindowController implements Initializable{
 
     @FXML
     private Button addCourse;
+
+    @FXML
+    private ComboBox fakultaetDropdown;
+
+    @FXML
+    private ComboBox studienrichtungCombobox;
+
+    @FXML
+    private ComboBox kursCombobox;
+
+    @FXML
+    private ComboBox javaCombobox;
+
 
     @FXML
     void addCourseOnClick(ActionEvent event) {
@@ -77,6 +93,11 @@ public class MainWindowController implements Initializable{
         studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("matnr"));
         studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("firma"));
         studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
+
+        fakultaetDropdown.getItems().addAll("Technik","Wirtschaft","KINGSIZE CHONKERS");
+        studienrichtungCombobox.getItems().addAll("Informatik","KINGSIZE CHONKERS");
+        kursCombobox.getItems().addAll("TINF19AI2","TINF19AI1","KINGSIZE CHONKERS");
+        javaCombobox.getItems().addAll("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
 
     }
