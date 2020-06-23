@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.addStudentController">
-   <children>
-      <Button fx:id="addButton" layoutX="491.0" layoutY="337.0" mnemonicParsing="false" onAction="#newStudent" text="Add" />
-      <Label layoutX="156.0" layoutY="14.0" text="Student hinzufügen">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="72.0" layoutY="99.0" prefHeight="232.0" prefWidth="245.0">
+<BorderPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.addStudentController">
+   <right>
+      <ImageView fitHeight="80.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
+         <image>
+            <Image url="@DHBW-Logo.svg.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets right="5.0" top="10.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </right>
+   <left>
+      <GridPane prefHeight="232.0" prefWidth="245.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,11 +45,25 @@
             <Slider fx:id="javaSlider" majorTickUnit="10.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Nachname" GridPane.rowIndex="1" />
          </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
       </GridPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="349.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@DHBW-Logo.svg.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+   </left>
+   <bottom>
+      <Button fx:id="addButton" mnemonicParsing="false" onAction="#newStudent" text="Add" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin></Button>
+   </bottom>
+   <top>
+      <Label text="Student hinzufügen" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>
