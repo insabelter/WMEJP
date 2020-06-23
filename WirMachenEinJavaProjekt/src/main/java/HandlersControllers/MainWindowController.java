@@ -1,16 +1,14 @@
 package HandlersControllers;
 
 import classes.Student;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -24,6 +22,12 @@ public class MainWindowController implements Initializable{
     //main
     @FXML
     private TableView<Student> studList;
+
+    @FXML
+    private TableColumn<Student,String> fakultaet;
+
+    @FXML
+    private TableColumn<Student,String> studienrichtung;
 
     @FXML
     private Button addStudent;
@@ -87,16 +91,21 @@ public class MainWindowController implements Initializable{
                 SelectionMode.MULTIPLE
         );
         //initialize the Table in main window to properly take Student objects as rows
-        studList.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("firstname"));
-        studList.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("lastname"));
-        studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("kurs"));
-        studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("matnr"));
-        studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("firma"));
-        studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
 
-        fakultaetDropdown.getItems().addAll("Technik","Wirtschaft","KINGSIZE CHONKERS");
-        studienrichtungCombobox.getItems().addAll("Informatik","KINGSIZE CHONKERS");
-        kursCombobox.getItems().addAll("TINF19AI2","TINF19AI1","KINGSIZE CHONKERS");
+        fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
+        studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
+
+        studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("firstname"));
+        studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("kurs"));
+        studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("matnr"));
+        studList.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("firma"));
+        studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
+
+
+        fakultaetDropdown.getItems().addAll("Technik","Wirtschaft");
+        studienrichtungCombobox.getItems().addAll("Informatik");
+        kursCombobox.getItems().addAll("TINF19AI2","TINF19AI1");
         javaCombobox.getItems().addAll("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
 

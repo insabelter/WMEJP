@@ -6,6 +6,14 @@ public class Studiengang {
     private String studienGangsleiter;
     private Fakultaet fakultaet;
 
+    public Studiengang(String name){
+        this(name,new Fakultaet("-"));
+    }
+    public Studiengang(String name,Fakultaet f){
+        this.name = name;
+        this.fakultaet = f;
+    }
+
 
     public String getName() {
         return name;

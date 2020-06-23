@@ -9,7 +9,12 @@ public class Kurs {
 
 
     public Kurs(String name){
+        this(name,new Studienrichtung("-"));
+
+    }
+    public Kurs(String name, Studienrichtung s ){
         this.jahrgang = name;
+        this.studienrichtung = s;
     }
 
     public String getJahrgang() {

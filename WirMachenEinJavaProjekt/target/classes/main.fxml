@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.20534223706176963" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.MainWindowController">
+<SplitPane dividerPositions="0.20534223706176963" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.MainWindowController">
    <items>
       <SplitPane dividerPositions="0.47250859106529214" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -37,8 +43,8 @@
       </SplitPane>
       <TableView fx:id="studList" cache="true" editable="true" focusTraversable="false" prefHeight="698.0" prefWidth="316.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Fakultät" />
-            <TableColumn prefWidth="131.19998168945312" text="Studienrichtung" />
+            <TableColumn fx:id="fakultaet" prefWidth="75.0" text="Fakultät" />
+            <TableColumn fx:id="studienrichtung" prefWidth="131.19998168945312" text="Studienrichtung" />
             <TableColumn prefWidth="139.20004272460938" text="Vorname" />
             <TableColumn prefWidth="151.0" resizable="false" text="Nachname" />
             <TableColumn prefWidth="100.0" resizable="false" text="Kurs" />

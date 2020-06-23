@@ -10,7 +10,7 @@ public class Student {
     private String matnr;
 
     public Student(String firstname,String lastname,String matnr,int javaxp){
-        this(firstname,lastname,matnr,null,null,javaxp);
+        this(firstname,lastname,matnr,new Kurs("-"),new Firma("-"),javaxp);
     }
     public Student(String firstname,String lastname,String matnr,Kurs kurs,Firma company,int javaxp){
         this.firstname =firstname;

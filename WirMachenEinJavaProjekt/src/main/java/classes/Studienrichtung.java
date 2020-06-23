@@ -5,6 +5,14 @@ public class Studienrichtung {
     private String kuerzel;
     private Studiengang studiengang;
 
+    public Studienrichtung(String name){
+        this(name,new Studiengang("-"));
+    }
+    public Studienrichtung(String name, Studiengang s){
+        this.name = name;
+        this.studiengang = s;
+    }
+
     public String getName() {
         return name;
     }
