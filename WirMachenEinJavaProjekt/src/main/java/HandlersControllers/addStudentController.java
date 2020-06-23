@@ -1,4 +1,4 @@
-package test;
+package HandlersControllers;
 
 import classes.Firma;
 import classes.Kurs;

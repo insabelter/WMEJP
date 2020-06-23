@@ -1,4 +1,4 @@
-package test;
+package HandlersControllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
