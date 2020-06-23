@@ -97,9 +97,11 @@ public class MainWindowController implements Initializable{
     }
     private void loadAddStudentWindow(){
         try{
+
             //load addStudent window
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/addStudent.fxml"));
             Parent root= loader.load();
+
             //show addStudent window
             addStudentStage = new Stage();
             addStudentStage.setScene(new Scene(root));
