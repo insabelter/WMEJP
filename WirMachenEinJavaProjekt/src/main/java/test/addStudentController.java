@@ -21,7 +21,7 @@ public class addStudentController implements Initializable {
     private Button addButton;
 
     @FXML
-    private ComboBox<Kurs> courseDropdown;
+    private ComboBox courseDropdown;
 
     @FXML
     private Slider javaSlider;
