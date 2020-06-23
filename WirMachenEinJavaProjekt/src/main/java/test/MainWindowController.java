@@ -30,9 +30,6 @@ public class MainWindowController implements Initializable{
     private TableView<Student> studList;
 
     @FXML
-    private GridPane buttons;
-
-    @FXML
     private Button addStudent;
 
     @FXML
@@ -81,11 +78,12 @@ public class MainWindowController implements Initializable{
                 SelectionMode.MULTIPLE
         );
         //initialize the Table in main window to properly take Student objects as rows
-        studList.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("name"));
-        studList.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("kurs"));
-        studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("matnr"));
-        studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("company"));
-        studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
+        studList.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("firstname"));
+        studList.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("kurs"));
+        studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("matnr"));
+        studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("firma"));
+        studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
 
 
     }
