@@ -2,31 +2,31 @@ package classes;
 
 public class Student {
     //this is a very basic Student class just for testing purposes, WIP
-    private int javaxp;
+    private int javakenntnisse;
     private String firstname;
     private String lastname;
     private Kurs kurs;
     private Firma firma;
-    private String matnr;
+    private String matrikelnummer;
 
-    public Student(String firstname,String lastname,String matnr,int javaxp){
-        this(firstname,lastname,matnr,new Kurs("-"),new Firma("-"),javaxp);
+    public Student(String firstname, String lastname, String matrikelnummer, int javakenntnisse){
+        this(firstname,lastname, matrikelnummer,new Kurs("-"),new Firma("-"), javakenntnisse);
     }
-    public Student(String firstname,String lastname,String matnr,Kurs kurs,Firma company,int javaxp){
+    public Student(String firstname, String lastname, String matrikelnummer, Kurs kurs, Firma company, int javakenntnisse){
         this.firstname =firstname;
         this.lastname = lastname;
         this.kurs = kurs;
-        this.matnr=matnr;
+        this.matrikelnummer = matrikelnummer;
         this.firma=company;
-        this.javaxp = javaxp;
+        this.javakenntnisse = javakenntnisse;
     }
 
-    public int getJavaxp() {
-        return javaxp;
+    public int getJavakenntnisse() {
+        return javakenntnisse;
     }
 
-    public void setJavaxp(int javaxp) {
-        this.javaxp = javaxp;
+    public void setJavakenntnisse(int javakenntnisse) {
+        this.javakenntnisse = javakenntnisse;
     }
 
     public String getFirstname() {
@@ -61,11 +61,11 @@ public class Student {
         this.firma = firma;
     }
 
-    public String getMatnr() {
-        return matnr;
+    public String getMatrikelnummer() {
+        return matrikelnummer;
     }
 
-    public void setMatnr(String matnr) {
-        this.matnr = matnr;
+    public void setMatrikelnummer(String matrikelnummer) {
+        this.matrikelnummer = matrikelnummer;
     }
 }

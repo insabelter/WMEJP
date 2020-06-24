@@ -1,7 +1,9 @@
 package classes;
 
 public class Kurs {
-    private String jahrgang;
+    private String name;
+    private Student students[]= new Student[40];
+    private int jahrgang;
     private int nummer;
     private String raum;
     private String emailVerteiler;
@@ -13,15 +15,31 @@ public class Kurs {
 
     }
     public Kurs(String name, Studienrichtung s ){
-        this.jahrgang = name;
+        this.name = name;
         this.studienrichtung = s;
     }
 
-    public String getJahrgang() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Student[] getStudents() {
+        return students;
+    }
+
+    public void setStudents(Student[] students) {
+        this.students = students;
+    }
+
+    public int getJahrgang() {
         return jahrgang;
     }
 
-    public void setJahrgang(String jahrgang) {
+    public void setJahrgang(int jahrgang) {
         this.jahrgang = jahrgang;
     }
 
@@ -59,6 +77,11 @@ public class Kurs {
 
     @Override
     public String toString() {
-        return jahrgang;
+        return name;
+    }
+
+    public String getStudentenName(Student s){
+        return s.getFirstname() +" "+s.getLastname();
     }
 }
+

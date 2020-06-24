@@ -5,13 +5,10 @@ public class Studiengang {
     private String kuerzel;
     private String studienGangsleiter;
     private Fakultaet fakultaet;
+    private Studienrichtung[] studienrichtungs= new Studienrichtung[100];
 
-    public Studiengang(String name){
-        this(name,new Fakultaet("-"));
-    }
-    public Studiengang(String name,Fakultaet f){
-        this.name = name;
-        this.fakultaet = f;
+    public Studiengang(String abkürzung){
+
     }
 
 

@@ -47,7 +47,7 @@ public class addStudentController implements Initializable {
         }
         //Create Student based on User Inputs
         else{
-
+            Kurs k = new Kurs(courseDropdown.getSelectionModel().getSelectedItem().toString());
             Student newbie= new Student(nameField.getText(),lastNameField.getText(), numberField.getText(),new Kurs(courseDropdown.getSelectionModel().getSelectedItem().toString()),new Firma(companyField.getText()),((int) javaSlider.getValue())/10);
             MainHandler.mainWindowController1.insertInTable(newbie);
         }
@@ -65,6 +65,7 @@ public class addStudentController implements Initializable {
         // add options to dropdown
 
         courseDropdown.getItems().addAll("TINF19AI2","TINF19AI1","KINGSIZE CHONKERS");
+        courseDropdown.getSelectionModel().selectFirst();
     }
 
 

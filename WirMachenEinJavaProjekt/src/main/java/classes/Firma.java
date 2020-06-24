@@ -2,6 +2,8 @@ package classes;
 
 public class Firma {
     private String name;
+    private String ansprechpartner;
+    private String adresse;
 
     public Firma(String name){
         this.name = name;

@@ -2,9 +2,11 @@ package classes;
 
 public class Fakultaet {
     private String name;
+    private Studiengang studiengang[]= new Studiengang[100];
+    private String verantwortlicher;
 
-    public Fakultaet(String name){
-        this.name= name;
+    public Fakultaet(String abkürzung){
+
     }
 
     public String getName() {

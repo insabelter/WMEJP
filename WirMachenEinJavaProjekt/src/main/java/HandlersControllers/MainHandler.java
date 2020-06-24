@@ -7,8 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainHandler extends Application {
+
+
     Parent root = null;
     static MainWindowController mainWindowController1;
 

@@ -4,6 +4,7 @@ public class Studienrichtung {
     private String name;
     private String kuerzel;
     private Studiengang studiengang;
+    private Kurs kurse[]= new Kurs[100];
 
     public Studienrichtung(String name){
         this(name,new Studiengang("-"));
