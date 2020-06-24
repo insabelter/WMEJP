@@ -2,6 +2,7 @@ package HandlersControllers;
 
 import classes.Student;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
@@ -53,6 +55,9 @@ public class MainWindowController implements Initializable{
     @FXML
     private ComboBox javaCombobox;
 
+    @FXML
+    private TextField numberField;
+
 
     @FXML
     void addCourseOnClick(ActionEvent event) {
@@ -82,6 +87,27 @@ public class MainWindowController implements Initializable{
     void edit(ActionEvent event) {
 
     }
+    @FXML
+    void filterList(){
+        FilteredList<Student> filteredList= new FilteredList<>(studList.getItems());
+
+        filteredList.setPredicate(new Predicate<Student>() {
+            @Override
+            public boolean test(Student student) {
+                if(!student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName().equals(fakultaetDropdown.getSelectionModel().getSelectedItem().toString())&&!fakultaetDropdown.getSelectionModel().getSelectedItem().toString().equals("Alle")){
+                    return false;
+                }
+                if(!student.getKurs().getStudienrichtung().getName().equals(studienrichtungCombobox.getSelectionModel().getSelectedItem().toString())&&!studienrichtungCombobox.getSelectionModel().getSelectedItem().toString().equals("Alle")){
+                    return false;
+                }
+
+
+                return true;
+            }
+        });
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -103,10 +129,10 @@ public class MainWindowController implements Initializable{
         studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
 
 
-        fakultaetDropdown.getItems().addAll("Technik","Wirtschaft");
-        studienrichtungCombobox.getItems().addAll("Informatik");
-        kursCombobox.getItems().addAll("TINF19AI2","TINF19AI1");
-        javaCombobox.getItems().addAll("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+        fakultaetDropdown.getItems().addAll("Alle","Technik","Wirtschaft");
+        studienrichtungCombobox.getItems().addAll("Alle","Informatik");
+        kursCombobox.getItems().addAll("Alle","TINF19AI2","TINF19AI1");
+        javaCombobox.getItems().addAll("Alle","0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
 
     }
@@ -136,6 +162,8 @@ public class MainWindowController implements Initializable{
 
         }
     }
+
+
 
 
 }
