@@ -1,30 +1,26 @@
 package classes;
 
+import java.util.List;
+
 public class Studiengang {
     private int id;
     private String name;
     private String kuerzel;
     private String studienGangsleiter;
     private Fakultaet fakultaet;
-    private Studienrichtung[] studienrichtungs;
+    private List<Studienrichtung>studienrichtungs;
 
 
-    public Studiengang(String abkuerzung,Studienrichtung[] studienrichtungs){
+    public Studiengang(String abkuerzung, List<Studienrichtung> studienrichtungs){
         this.name = abkuerzung;
         this.studienrichtungs = studienrichtungs;
-
-        for (Studienrichtung s:this.studienrichtungs) {
-            s.setStudiengang(this);
-        }
+        this.studienrichtungs = studienrichtungs;
     }
-    public Studiengang(int id,String abkuerzung,Studienrichtung[] studienrichtungs){
+    public Studiengang(int id,String abkuerzung,List<Studienrichtung>studienrichtungs){
         this.id=id;
         this.name = abkuerzung;
         this.studienrichtungs = studienrichtungs;
 
-        for (Studienrichtung s:this.studienrichtungs) {
-            s.setStudiengang(this);
-        }
     }
 
 
@@ -60,12 +56,18 @@ public class Studiengang {
         this.fakultaet = fakultaet;
     }
 
-    public Studienrichtung[] getStudienrichtungs() {
+    public List<Studienrichtung>getStudienrichtungs() {
         return studienrichtungs;
     }
 
-    public void setStudienrichtungs(Studienrichtung[] studienrichtungs) {
+
+    public void setStudienrichtungs(List<Studienrichtung>studienrichtungs) {
         this.studienrichtungs = studienrichtungs;
+    }
+
+    public void addSlave(Studienrichtung studienrichtung) {
+        this.studienrichtungs.add(studienrichtung);
+        studienrichtung.setStudiengang(this);
     }
 
     @Override

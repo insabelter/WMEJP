@@ -1,9 +1,11 @@
 package classes;
 
+import java.util.List;
+
 public class Kurs {
     private int id;
     private String name;
-    private Student students[]= new Student[40];
+    private List<Student> students;
     private int jahrgang;
     private int nummer;
     private String raum;
@@ -18,7 +20,10 @@ public class Kurs {
         this.id = id;
         this.name = name;
     }
-
+    public void addSlave(Student student) {
+        this.students.add(student);
+        student.setKurs(this);
+    }
 
     public String getName() {
         return name;
@@ -28,11 +33,11 @@ public class Kurs {
         this.name = name;
     }
 
-    public Student[] getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Student[] students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 

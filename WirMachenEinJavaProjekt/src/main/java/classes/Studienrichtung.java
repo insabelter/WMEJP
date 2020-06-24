@@ -1,15 +1,16 @@
 package classes;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Studienrichtung {
     private int id;
     private String name;
     private String kuerzel;
     private Studiengang studiengang;
-    private Kurs kurse[];
+    private List<Kurs> kurse;
 
-    public Studienrichtung(String name,Kurs[] kurse){
+    public Studienrichtung(String name, List<Kurs> kurse){
         this.name = name;
         this.kurse = kurse;
 
@@ -17,7 +18,7 @@ public class Studienrichtung {
             k.setStudienrichtung(this);
         }
     }
-    public Studienrichtung(int id,String name,Kurs[] kurse){
+    public Studienrichtung(int id,String name,List<Kurs> kurse){
         this.id = id;
         this.name = name;
         this.kurse = kurse;
@@ -25,6 +26,10 @@ public class Studienrichtung {
         for (Kurs k:this.kurse) {
             k.setStudienrichtung(this);
         }
+    }
+    public void addSlave(Kurs kurs) {
+        this.kurse.add(kurs);
+        kurs.setStudienrichtung(this);
     }
 
     public String getName() {
@@ -51,11 +56,11 @@ public class Studienrichtung {
         this.studiengang = studiengang;
     }
 
-    public Kurs[] getKurse() {
+    public List<Kurs> getKurse() {
         return kurse;
     }
 
-    public void setKurse(Kurs[] kurse) {
+    public void setKurse(List<Kurs> kurse) {
         this.kurse = kurse;
     }
 

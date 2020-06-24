@@ -1,18 +1,18 @@
 package classes;
 
+import java.util.List;
+
 public class Fakultaet {
     private int id;
     private String name;
-    private Studiengang studiengang[];
+    private List<Studiengang> studiengang;
     private String verantwortlicher;
 
-    public Fakultaet(String name,Studiengang[] studiengangs){
+    public Fakultaet(String name,List<Studiengang> studiengangs){
         this.name=name;
         this.studiengang = studiengangs;
 
-        for (Studiengang s :this.studiengang) {
-            s.setFakultaet(this);
-        }
+        this.studiengang = studiengangs;
     }
 
     public Fakultaet(int id,String name){
@@ -29,12 +29,17 @@ public class Fakultaet {
         this.name = name;
     }
 
-    public Studiengang[] getStudiengang() {
+    public List<Studiengang> getStudiengang() {
         return studiengang;
     }
 
-    public void setStudiengang(Studiengang[] studiengang) {
+    public void setStudiengang(List<Studiengang> studiengangs) {
         this.studiengang = studiengang;
+    }
+
+    public void addSlave(Studiengang studiengang) {
+        this.studiengang.add(studiengang);
+        studiengang.setFakultaet(this);
     }
 
     public String getVerantwortlicher() {

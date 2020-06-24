@@ -37,6 +37,11 @@ public class DatabaseDatamanager {
             while(rs.next()){
                 lsFakultaet.add(new Fakultaet(rs.getInt("FAKULTAET_ID"),rs.getString("name")));
             }
+            rs = getAllX("studiengang");
+            //add objekts to List
+            while(rs.next()){
+                lsFakultaet.add(new Fakultaet(rs.getInt("studiengang_ID"),rs.getString("name")));
+            }
 
 
 

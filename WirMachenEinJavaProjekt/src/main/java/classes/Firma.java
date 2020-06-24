@@ -1,10 +1,13 @@
 package classes;
 
+import java.util.List;
+
 public class Firma {
     private int id;
     private String name;
     private String ansprechpartner;
     private String adresse;
+    private List<Student> studenten;
 
     public Firma(String name){
         this.name = name;
