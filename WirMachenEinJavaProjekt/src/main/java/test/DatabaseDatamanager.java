@@ -16,11 +16,12 @@ public class DatabaseDatamanager {
     static final String USER = "sa";
     static final String PASS = "";
 
+    Connection conn = null;
+    Statement stmt = null;
+
     public List<Fakultaet> getAll(){
         List<Fakultaet> lsFakultaet = new ArrayList<>();
 
-        Connection conn = null;
-        Statement stmt = null;
         ResultSet rs =null;
 
         try {
@@ -29,24 +30,21 @@ public class DatabaseDatamanager {
 
             //STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            System.out.println("connect");
 
-            //STEP 3: Execute a query
-            stmt = conn.createStatement();
-            String sql =  "SELECT * FROM FAKULTAET;";
-            rs= stmt.executeQuery(sql);
-            System.out.println(rs);
-
+            //Fakultaeten list mit entsprehenedem Resultset füllen.
+            rs = getAllX("fakultaet");
+            //add objekts to List
             while(rs.next()){
-                System.out.println(String.valueOf(rs.getInt("FAKULTAET_ID")));
-                lsFakultaet.add(new Fakultaet(
-                        rs.getInt("FAKULTAET_ID"),rs.getString("name"))
-                );
+                lsFakultaet.add(new Fakultaet(rs.getInt("FAKULTAET_ID"),rs.getString("name")));
             }
+
+
 
             // STEP 4: Clean-up environment
             stmt.close();
             conn.close();
+
+            //return list
             return lsFakultaet;
         } catch(SQLException se) {
 
@@ -65,5 +63,10 @@ public class DatabaseDatamanager {
             }
         }
         return lsFakultaet;
+    }
+    private ResultSet getAllX(String klass) throws SQLException { //"SELECT * FROM "+klass+";"  -> gibt Resultset aud der DB zurück.'
+        stmt = conn.createStatement();
+        String sql =  "SELECT * FROM "+klass+";";
+        return stmt.executeQuery(sql);
     }
 }

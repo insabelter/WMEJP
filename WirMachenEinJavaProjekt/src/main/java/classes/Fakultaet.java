@@ -19,9 +19,6 @@ public class Fakultaet {
         this.id = id;
         this.name=name;
 
-        for (Studiengang s :this.studiengang) {
-            s.setFakultaet(this);
-        }
     }
 
     public String getName() {
