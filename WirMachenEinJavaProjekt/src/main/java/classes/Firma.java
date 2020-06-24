@@ -21,6 +21,18 @@ public class Firma {
         return name;
     }
 
+    public List<Student> getStudenten() {
+        return studenten;
+    }
+    public void addSlave(Student student) {
+        this.studenten.add(student);
+        student.setFirma(this);
+    }
+
+    public void setStudenten(List<Student> studenten) {
+        this.studenten = studenten;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -16,10 +16,11 @@ public class Studiengang {
         this.studienrichtungs = studienrichtungs;
         this.studienrichtungs = studienrichtungs;
     }
-    public Studiengang(int id,String abkuerzung,List<Studienrichtung>studienrichtungs){
+    public Studiengang(int id,String name,String kuerzel,String studienGangsleiter){
         this.id=id;
-        this.name = abkuerzung;
-        this.studienrichtungs = studienrichtungs;
+        this.name = name;
+        this.kuerzel = kuerzel;
+        this.studienGangsleiter =studienGangsleiter;
 
     }
 

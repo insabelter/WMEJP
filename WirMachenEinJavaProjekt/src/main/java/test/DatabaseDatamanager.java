@@ -1,6 +1,7 @@
 package test;
 
 import classes.Fakultaet;
+import classes.Studiengang;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class DatabaseDatamanager {
 
     public List<Fakultaet> getAll(){
         List<Fakultaet> lsFakultaet = new ArrayList<>();
+        List<Studiengang> lsStudiengang = new ArrayList<>();
 
         ResultSet rs =null;
 
@@ -40,7 +42,7 @@ public class DatabaseDatamanager {
             rs = getAllX("studiengang");
             //add objekts to List
             while(rs.next()){
-                lsFakultaet.add(new Fakultaet(rs.getInt("studiengang_ID"),rs.getString("name")));
+                lsStudiengang.add(new Studiengang(rs.getInt("studiengang_ID"),rs.getString("name"),rs.getString("kuerzel"),rs.getString("Studiengangsleiter")));
             }
 
 
