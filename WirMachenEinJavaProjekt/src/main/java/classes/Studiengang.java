@@ -5,10 +5,16 @@ public class Studiengang {
     private String kuerzel;
     private String studienGangsleiter;
     private Fakultaet fakultaet;
-    private Studienrichtung[] studienrichtungs= new Studienrichtung[100];
+    private Studienrichtung[] studienrichtungs;
 
-    public Studiengang(String abkürzung){
 
+    public Studiengang(String abkuerzung,Studienrichtung[] studienrichtungs){
+        this.name = abkuerzung;
+        this.studienrichtungs = studienrichtungs;
+
+        for (Studienrichtung s:this.studienrichtungs) {
+            s.setStudiengang(this);
+        }
     }
 
 
@@ -42,5 +48,18 @@ public class Studiengang {
 
     public void setFakultaet(Fakultaet fakultaet) {
         this.fakultaet = fakultaet;
+    }
+
+    public Studienrichtung[] getStudienrichtungs() {
+        return studienrichtungs;
+    }
+
+    public void setStudienrichtungs(Studienrichtung[] studienrichtungs) {
+        this.studienrichtungs = studienrichtungs;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

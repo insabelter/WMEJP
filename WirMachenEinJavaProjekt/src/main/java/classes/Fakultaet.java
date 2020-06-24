@@ -2,11 +2,16 @@ package classes;
 
 public class Fakultaet {
     private String name;
-    private Studiengang studiengang[]= new Studiengang[100];
+    private Studiengang studiengang[];
     private String verantwortlicher;
 
-    public Fakultaet(String abkürzung){
+    public Fakultaet(String abkuerzung,Studiengang[] studiengangs){
+        this.name=abkuerzung;
+        this.studiengang = studiengangs;
 
+        for (Studiengang s :this.studiengang) {
+            s.setFakultaet(this);
+        }
     }
 
     public String getName() {
@@ -15,6 +20,22 @@ public class Fakultaet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Studiengang[] getStudiengang() {
+        return studiengang;
+    }
+
+    public void setStudiengang(Studiengang[] studiengang) {
+        this.studiengang = studiengang;
+    }
+
+    public String getVerantwortlicher() {
+        return verantwortlicher;
+    }
+
+    public void setVerantwortlicher(String verantwortlicher) {
+        this.verantwortlicher = verantwortlicher;
     }
 
     @Override

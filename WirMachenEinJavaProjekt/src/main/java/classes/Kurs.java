@@ -11,13 +11,9 @@ public class Kurs {
 
 
     public Kurs(String name){
-        this(name,new Studienrichtung("-"));
-
-    }
-    public Kurs(String name, Studienrichtung s ){
         this.name = name;
-        this.studienrichtung = s;
     }
+
 
     public String getName() {
         return name;

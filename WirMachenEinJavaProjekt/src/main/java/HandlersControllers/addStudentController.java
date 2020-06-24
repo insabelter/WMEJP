@@ -7,7 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,12 +46,12 @@ public class addStudentController implements Initializable {
     void newStudent(ActionEvent event) {
         //Check if every Textfield is not empty
         if(nameField.getText().equals("")||numberField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
-            System.out.println("is it possible to learn this power?");
+            JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
 
         }
         //Create Student based on User Inputs
         else{
-            Kurs k = new Kurs(courseDropdown.getSelectionModel().getSelectedItem().toString());
+
             Student newbie= new Student(nameField.getText(),lastNameField.getText(), numberField.getText(),new Kurs(courseDropdown.getSelectionModel().getSelectedItem().toString()),new Firma(companyField.getText()),((int) javaSlider.getValue())/10);
             MainHandler.mainWindowController1.insertInTable(newbie);
         }

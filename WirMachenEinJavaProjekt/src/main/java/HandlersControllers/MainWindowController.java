@@ -1,5 +1,7 @@
 package HandlersControllers;
 
+import classes.Firma;
+import classes.Kurs;
 import classes.Student;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.transformation.FilteredList;
@@ -15,12 +17,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
-    private boolean initialized;
+    public static List<Kurs> alleKurse = new ArrayList<Kurs>();
+    public static List<Firma> alleFirmen = new ArrayList<Firma>();
+
+
+
     //main
     @FXML
     private TableView<Student> studList;
@@ -33,9 +41,6 @@ public class MainWindowController implements Initializable{
 
     @FXML
     private Button addStudent;
-
-    @FXML
-    private Button editData;
 
     @FXML
     private Button delStudent;
@@ -60,7 +65,7 @@ public class MainWindowController implements Initializable{
 
 
     @FXML
-    void addCourseOnClick(ActionEvent event) {
+    void manageCourses(ActionEvent event) {
 
     }
 
@@ -83,10 +88,6 @@ public class MainWindowController implements Initializable{
         studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
     }
 
-    @FXML
-    void edit(ActionEvent event) {
-
-    }
     @FXML
     void filterList(){
         FilteredList<Student> filteredList= new FilteredList<>(studList.getItems());
@@ -124,15 +125,17 @@ public class MainWindowController implements Initializable{
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("firstname"));
         studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lastname"));
         studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("kurs"));
-        studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("matnr"));
+        studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("matrikelnummer"));
         studList.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("firma"));
-        studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javaxp"));
-
-
-        fakultaetDropdown.getItems().addAll("Alle","Technik","Wirtschaft");
+        studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javakenntnisse"));
+        fakultaetDropdown.getItems().addAll("Alle","Technik","Wirtschaft","Gesundheit");
         studienrichtungCombobox.getItems().addAll("Alle","Informatik");
         kursCombobox.getItems().addAll("Alle","TINF19AI2","TINF19AI1");
         javaCombobox.getItems().addAll("Alle","0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+
+        //later data from db, but for now test data
+
+
 
 
     }
