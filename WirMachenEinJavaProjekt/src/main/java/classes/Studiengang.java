@@ -1,6 +1,7 @@
 package classes;
 
 public class Studiengang {
+    private int id;
     private String name;
     private String kuerzel;
     private String studienGangsleiter;
@@ -9,6 +10,15 @@ public class Studiengang {
 
 
     public Studiengang(String abkuerzung,Studienrichtung[] studienrichtungs){
+        this.name = abkuerzung;
+        this.studienrichtungs = studienrichtungs;
+
+        for (Studienrichtung s:this.studienrichtungs) {
+            s.setStudiengang(this);
+        }
+    }
+    public Studiengang(int id,String abkuerzung,Studienrichtung[] studienrichtungs){
+        this.id=id;
         this.name = abkuerzung;
         this.studienrichtungs = studienrichtungs;
 

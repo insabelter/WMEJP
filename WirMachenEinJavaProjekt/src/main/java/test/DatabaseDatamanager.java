@@ -1,10 +1,13 @@
-package HandlersControllers;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+package test;
 
-public class MainDBConnectTest {
+import classes.Fakultaet;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DatabaseDatamanager {
+
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.h2.Driver";
     static final String DB_URL = "jdbc:h2:./wmejpTest";
@@ -13,41 +16,54 @@ public class MainDBConnectTest {
     static final String USER = "sa";
     static final String PASS = "";
 
-    public static void main(String[] args) {
+    public List<Fakultaet> getAll(){
+        List<Fakultaet> lsFakultaet = new ArrayList<>();
+
         Connection conn = null;
         Statement stmt = null;
+        ResultSet rs =null;
+
         try {
             // STEP 1: Register JDBC driver
             Class.forName(JDBC_DRIVER);
 
             //STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            System.out.println("connect");
 
             //STEP 3: Execute a query
             stmt = conn.createStatement();
-            String sql =  "";
-            stmt.executeUpdate(sql);
+            String sql =  "SELECT * FROM FAKULTAET;";
+            rs= stmt.executeQuery(sql);
+            System.out.println(rs);
+
+            while(rs.next()){
+                System.out.println(String.valueOf(rs.getInt("FAKULTAET_ID")));
+                lsFakultaet.add(new Fakultaet(
+                        rs.getInt("FAKULTAET_ID"),rs.getString("name"))
+                );
+            }
 
             // STEP 4: Clean-up environment
             stmt.close();
             conn.close();
+            return lsFakultaet;
         } catch(SQLException se) {
-            //Handle errors for JDBC
+
             se.printStackTrace();
         } catch(Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try{
                 if(stmt!=null) stmt.close();
             } catch(SQLException se2) {
-            } // nothing we can do
+            }
             try {
                 if(conn!=null) conn.close();
             } catch(SQLException se){
                 se.printStackTrace();
-            } //end finally try
-        } //end try
+            }
+        }
+        return lsFakultaet;
     }
 }

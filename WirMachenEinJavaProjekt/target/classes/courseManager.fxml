@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.335243553008596" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <TextField layoutX="41.0" layoutY="224.0" prefWidth="150.0" promptText="Kurs" />
+            <ComboBox layoutX="41.0" layoutY="57.0" prefWidth="150.0" promptText="Kurs anzeigen" />
+            <TextField layoutX="42.0" layoutY="267.0" prefWidth="150.0" promptText="Raum" />
+            <Label layoutX="42.0" layoutY="100.0" text="Kursraum:" />
+            <Label layoutX="115.0" layoutY="100.0" text="Label" />
+            <Label layoutX="53.0" layoutY="179.0" text="Neuen Kurs hinzufügen" />
+            <Button layoutX="40.0" layoutY="310.0" mnemonicParsing="false" prefWidth="150.0" text="Hinzufügen" />
+         </children></Pane>
+      <TableView prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn prefWidth="144.2000274658203" text="Matrikelnummer" />
+          <TableColumn prefWidth="169.00001525878906" text="Nachname" />
+          <TableColumn prefWidth="133.4000244140625" text="Vorname" />
+        </columns>
+      </TableView>
+   </items>
+</SplitPane>

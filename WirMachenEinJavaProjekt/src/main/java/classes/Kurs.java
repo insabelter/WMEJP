@@ -1,6 +1,7 @@
 package classes;
 
 public class Kurs {
+    private int id;
     private String name;
     private Student students[]= new Student[40];
     private int jahrgang;
@@ -11,6 +12,10 @@ public class Kurs {
 
 
     public Kurs(String name){
+        this.name = name;
+    }
+    public Kurs(int id,String name){
+        this.id = id;
         this.name = name;
     }
 

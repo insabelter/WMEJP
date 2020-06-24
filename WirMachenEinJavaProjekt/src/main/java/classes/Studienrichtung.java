@@ -3,12 +3,22 @@ package classes;
 import java.util.Arrays;
 
 public class Studienrichtung {
+    private int id;
     private String name;
     private String kuerzel;
     private Studiengang studiengang;
     private Kurs kurse[];
 
     public Studienrichtung(String name,Kurs[] kurse){
+        this.name = name;
+        this.kurse = kurse;
+
+        for (Kurs k:this.kurse) {
+            k.setStudienrichtung(this);
+        }
+    }
+    public Studienrichtung(int id,String name,Kurs[] kurse){
+        this.id = id;
         this.name = name;
         this.kurse = kurse;
 
