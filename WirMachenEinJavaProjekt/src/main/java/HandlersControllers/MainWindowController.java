@@ -26,6 +26,7 @@ public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
     public static List<Kurs> alleKurse = new ArrayList<Kurs>();
     public static List<Firma> alleFirmen = new ArrayList<Firma>();
+    Stage addCourseStage=null;
 
 
 
@@ -66,7 +67,11 @@ public class MainWindowController implements Initializable{
 
     @FXML
     void manageCourses(ActionEvent event) {
-
+        if(addCourseStage==null){
+            loadAddCourseWindow();}
+        else if (!addCourseStage.isShowing()){
+            addCourseStage.show();
+        }
     }
 
     @FXML
@@ -74,13 +79,14 @@ public class MainWindowController implements Initializable{
 
         //handling the opening of addStudent window to be only openable once at a time
         if(addStudentStage==null){
-        loadAddStudentWindow();}
+        loadAddCourseWindow();}
         else if (!addStudentStage.isShowing()){
             addStudentStage.show();
         }
 
 
     }
+
 
     @FXML
     void delStudentOnClick(ActionEvent event) {
@@ -150,6 +156,27 @@ public class MainWindowController implements Initializable{
 
             //load addStudent window
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/addStudent.fxml"));
+            Parent root= loader.load();
+
+            //show addStudent window
+            addStudentStage = new Stage();
+            addStudentStage.setScene(new Scene(root));
+            addStudentStage.show();
+
+
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+
+        }
+    }
+
+    private void loadAddCourseWindow(){
+        try{
+
+            //load addStudent window
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/courseManager.fxml"));
             Parent root= loader.load();
 
             //show addStudent window

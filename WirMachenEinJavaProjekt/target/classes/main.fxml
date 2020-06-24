@@ -10,17 +10,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.20534223706176963" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.MainWindowController">
+<SplitPane dividerPositions="0.20534223706176963" prefHeight="700.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.MainWindowController">
    <items>
       <SplitPane dividerPositions="0.47250859106529214" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ComboBox fx:id="fakultaetDropdown" layoutX="33.0" layoutY="37.0" prefWidth="150.0" promptText="Fakultät" />
-                  <ComboBox fx:id="studienrichtungCombobox" layoutX="33.0" layoutY="79.0" prefWidth="150.0" promptText="Studienrichtung" />
-                  <ComboBox fx:id="kursCombobox" layoutX="33.0" layoutY="121.0" prefWidth="150.0" promptText="Kurs" />
-                  <ComboBox fx:id="javaCombobox" layoutX="33.0" layoutY="164.0" prefWidth="150.0" promptText="Java Kenntnisse" />
-                  <TextField layoutX="34.0" layoutY="207.0" promptText="Matrikelnummer" />
+                  <ComboBox fx:id="fakultaetDropdown" layoutX="33.0" layoutY="37.0" onAction="#filterList" prefWidth="150.0" promptText="Fakultät" />
+                  <ComboBox fx:id="studienrichtungCombobox" layoutX="33.0" layoutY="79.0" onAction="#filterList" prefWidth="150.0" promptText="Studienrichtung" />
+                  <ComboBox fx:id="kursCombobox" layoutX="33.0" layoutY="121.0" onAction="#filterList" prefWidth="150.0" promptText="Kurs" />
+                  <ComboBox fx:id="javaCombobox" layoutX="33.0" layoutY="164.0" onAction="#filterList" prefWidth="150.0" promptText="Java Kenntnisse" />
+                  <TextField fx:id="numberField" layoutX="34.0" layoutY="207.0" onAction="#filterList" promptText="Matrikelnummer" />
                   <Label layoutX="77.0" layoutY="-1.0" text="Filtern">
                      <font>
                         <Font name="System Bold" size="20.0" />
@@ -35,9 +35,8 @@
                      </font>
                   </Label>
                   <Button fx:id="addStudent" layoutX="46.0" layoutY="42.0" mnemonicParsing="false" onAction="#addStudClick" prefHeight="25.0" prefWidth="124.0" text="Student hinzufügen" />
-                  <Button fx:id="editData" layoutX="46.0" layoutY="101.0" mnemonicParsing="false" onAction="#edit" prefHeight="25.0" prefWidth="126.0" text="Daten bearbeiten" />
-                  <Button fx:id="delStudent" layoutX="46.0" layoutY="149.0" mnemonicParsing="false" onAction="#delStudentOnClick" prefHeight="25.0" prefWidth="126.0" text="Student exmatrikulieren" />
-                  <Button fx:id="addCourse" layoutX="48.0" layoutY="200.0" mnemonicParsing="false" onAction="#addCourseOnClick" prefHeight="25.0" prefWidth="123.0" text="Kurs hinzufügenn" />
+                  <Button fx:id="delStudent" layoutX="47.0" layoutY="92.0" mnemonicParsing="false" onAction="#delStudentOnClick" prefHeight="25.0" prefWidth="126.0" text="Student exmatrikulieren" />
+                  <Button fx:id="addCourse" layoutX="47.0" layoutY="141.0" mnemonicParsing="false" onAction="#manageCourses" prefHeight="25.0" prefWidth="123.0" text="Kurse verwalten" />
                </children></Pane>
         </items>
       </SplitPane>
