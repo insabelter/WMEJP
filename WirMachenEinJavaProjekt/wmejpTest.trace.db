@@ -1,4 +1,0 @@
-2020-06-25 16:55:10 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "STUDENT" nicht gefunden
-Table "STUDENT" not found; SQL statement:
-SELECT * FROM STUDENT [42102-199]
