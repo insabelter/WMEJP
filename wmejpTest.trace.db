@@ -33583,3 +33583,51 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:D:/Dokumente
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:390)
 	... 20 more
+2020-06-25 20:45:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Feld "STUDENT.FIMRA_ID" nicht gefunden
+Column "STUDENT.FIMRA_ID" not found; SQL statement:
+SELECT * FROM Student JOIN Firma WHERE Student.fimra_id=firma.firma_id [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.expression.condition.Comparison.optimize(Comparison.java:190)
+	at org.h2.command.dml.Select.prepare(Select.java:1209)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2020-06-25 20:49:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "ALTER TABLE STUDENT
+NEW[*] COLUMN FIRMA VARCHAR(50)"; erwartet "., ADD, SET, RENAME, DROP, ALTER"
+Syntax error in SQL statement "ALTER TABLE STUDENT
+NEW[*] COLUMN FIRMA VARCHAR(50)"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+ALTER TABLE STUDENT
+NEW COLUMN FIRMA VARCHAR(50) [42001-200]
+2020-06-25 21:04:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "STUDENTS" nicht gefunden
+Table "STUDENTS" not found; SQL statement:
+SELECT * FROM STUDENTS LIMIT  1 [42102-200]
+2020-06-25 21:04:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "STUDENTS" nicht gefunden
+Table "STUDENTS" not found; SQL statement:
+SELECT * FROM STUDENTS LIMIT  1 [42102-200]
+2020-06-25 21:05:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT * FROM STUDENT LIMIT[*]"; erwartet "NOT, EXISTS, INTERSECTS, UNIQUE"
+Syntax error in SQL statement "SELECT * FROM STUDENT LIMIT[*]"; expected "NOT, EXISTS, INTERSECTS, UNIQUE"; SQL statement:
+SELECT * FROM STUDENT LIMIT [42001-200]
+2020-06-25 21:05:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT * FROM STUDENT LIMIT[*]"; erwartet "NOT, EXISTS, INTERSECTS, UNIQUE"
+Syntax error in SQL statement "SELECT * FROM STUDENT LIMIT[*]"; expected "NOT, EXISTS, INTERSECTS, UNIQUE"; SQL statement:
+SELECT * FROM STUDENT LIMIT [42001-200]
