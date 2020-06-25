@@ -1,28 +1,42 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class Fakultaet {
     private int id;
     private String name;
-    private List<Studiengang> studiengang;
-    private String verantwortlicher;
+    private String verantwortlicher; //muss hinzugefügt werden in DB
+    private List<Studiengang> studiengaenge;
+
+
+    public Fakultaet(int id,String name,String verantwortlicher,List<Studiengang> studiengaenge){
+        this.id = id;
+        this.name=name;
+        this.verantwortlicher = verantwortlicher;
+        this.studiengaenge = studiengaenge;
+    }
+
+    static public void fillArray(List<Fakultaet> toFill, Connection conn) throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM FAKULTAET");
+
+        //add objects to List
+        while(rsBasicInformation.next()){
+            toFill.add(new Fakultaet(
+                    rsBasicInformation.getInt("FAKULTAET_ID"),
+                    rsBasicInformation.getString("NAME"),
+                    rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
+                    null));
+        }
+    }
 
     public int getId() {
         return id;
-    }
-
-    public Fakultaet(String name, List<Studiengang> studiengangs){
-        this.name=name;
-        this.studiengang = studiengangs;
-
-        this.studiengang = studiengangs;
-    }
-
-    public Fakultaet(int id,String name){
-        this.id = id;
-        this.name=name;
-
     }
 
     public String getName() {
@@ -34,16 +48,16 @@ public class Fakultaet {
     }
 
     public List<Studiengang> getStudiengang() {
-        return studiengang;
+        return studiengaenge;
     }
 
     public void setStudiengang(List<Studiengang> studiengangs) {
-        this.studiengang = studiengang;
+        this.studiengaenge = studiengaenge;
     }
 
     public void addSlave(Studiengang studiengang) {
         System.out.println(studiengang.getName());
-        this.studiengang.add(studiengang);
+        this.studiengaenge.add(studiengang);
     }
 
     public String getVerantwortlicher() {
@@ -58,4 +72,5 @@ public class Fakultaet {
     public String toString() {
         return String.valueOf(id)+" "+name;
     }
+
 }
