@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Kurs {
+public class Kurs implements HasID{
     private int id;
     private int jahrgang;
     private int nummer;
@@ -26,29 +27,11 @@ public class Kurs {
         this.emailVerteiler = emailVerteiler;
         this.studienrichtung = studienrichtung;
         this.students = students;
-//        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
+        this.name = "";
     }
 
-    static public void fillArray(List<Kurs> toFill, Connection conn) throws SQLException {
-
-        Statement stmt = conn.createStatement();
-        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM KURS");
-        //ResultSet rsStudienrichtungen = stmt.executeQuery("SELECT KURS.KURS_ID, STUDIENRICHTUNG.NAME FROM KURS JOIN STUDIENRICHTUNG ON KURS.STUDIENRICHTUNG_ID = STUDIENRICHTUNG.STUDIENRICHTUNG_ID");
-
-        //add objects to List
-        while(rsBasicInformation.next()){
-
-            toFill.add(new Kurs(
-                    rsBasicInformation.getInt("KURS_ID"),
-                    rsBasicInformation.getInt("JAHRGANG"),
-                    rsBasicInformation.getInt("NUMMER"),
-                    rsBasicInformation.getString("RAUM"),
-                    rsBasicInformation.getString("EMAILVERTEILER"),
-                    //toDo: Funktion, die zu Studienrichtung_id die Studienrichtung zurückgibt
-                    null, //findStudienrichtung(rsStudienrichtungen.getInt("STUDIENRICHTUNG_ID"))
-                    null));
-        }
-
+    public void createName(){
+        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
     }
 
     public void addSlave(Student student) {
@@ -56,6 +39,7 @@ public class Kurs {
         student.setKurs(this);
     }
 
+    @Override
     public int getId() {
         return id;
     }

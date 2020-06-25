@@ -1,9 +1,8 @@
-package test;
+package DataBase;
 
-import classes.*;
+import classes.Kurs;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseDatamanager {
@@ -28,25 +27,25 @@ public class DatabaseDatamanager {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Fill Arrays
+            dm.lsFirma.fillArray(dm, conn);
+            dm.lsKurs.fillArray(dm, conn);
+            dm.lsStudent.fillArray(dm, conn);
+            dm.lsStudienrichtung.fillArray(dm, conn);
+            dm.lsStudiengang.fillArray(dm, conn);
+            dm.lsFakultaet.fillArray(dm, conn);
 
-            //fill lsStudent
-            Student.fillArray(dm.lsStudent, conn);
-            printArray(dm.lsStudent);
-            //fill lsFirma
-            Firma.fillArray(dm.lsFirma, conn);
-            printArray(dm.lsFirma);
-            //fill lsKurs
-            Kurs.fillArray(dm.lsKurs, conn);
-            printArray(dm.lsKurs);
-            //fill lsStudienrichtung
-            Studienrichtung.fillArray(dm.lsStudienrichtung, conn);
-            printArray(dm.lsStudienrichtung);
-            //fill lsStudiengang
-            Studiengang.fillArray(dm.lsStudiengang, conn);
-            printArray(dm.lsStudiengang);
-            //fill lsFakultaet
-            Fakultaet.fillArray(dm.lsFakultaet, conn);
-            printArray(dm.lsFakultaet);
+//            for (Kurs kurs:dm.lsKurs.list
+//                 ) {
+//                kurs.createName();
+//            }
+
+            //Print
+            dm.lsFirma.printArray();
+            dm.lsKurs.printArray();
+            dm.lsStudent.printArray();
+            dm.lsStudienrichtung.printArray();
+            dm.lsStudiengang.printArray();
+            dm.lsFakultaet.printArray();
 
             // STEP 4: Clean-up environment
             conn.close();

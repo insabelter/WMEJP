@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class Student{
+public class Student implements HasID{
     //this is a very basic Student class just for testing purposes, WIP
 
-    private String matrikelnummer;
+    private int matrikelnummer;
     private String vorname;
     private String nachname;
     private int javakenntnisse;
@@ -18,7 +18,7 @@ public class Student{
     private Firma firma;
 
 
-    public Student(String matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, Firma firma){
+    public Student(int matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, Firma firma){
         this.matrikelnummer = matrikelnummer;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -77,6 +77,7 @@ public class Student{
         this.javakenntnisse = javakenntnisse;
     }
 
+
     public Kurs getKurs() {
         return kurs;
     }
@@ -94,14 +95,19 @@ public class Student{
     }
 
     @Override
+    public int getId() {
+        return matrikelnummer;
+    }
+
+    @Override
     public String toString() {
         return "Student{" +
                 "matrikelnummer='" + matrikelnummer + '\'' +
                 ", vorname='" + vorname + '\'' +
                 ", nachname='" + nachname + '\'' +
                 ", javakenntnisse=" + javakenntnisse +
-                ", kurs=" + kurs +
-                ", firma=" + firma +
+                ", kurs=" + kurs.getName() +
+                ", firma=" + firma.getName() +
                 '}';
     }
 }
