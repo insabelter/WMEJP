@@ -1,8 +1,6 @@
 package test;
 
-import classes.Fakultaet;
-import classes.Studiengang;
-import classes.Studienrichtung;
+import classes.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,23 +10,15 @@ public class DatabaseDatamanager {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:./wmejpTest";
+    static final String DB_URL = "jdbc:h2:../wmejpTest";
 
     //  Database credentials
     static final String USER = "sa";
     static final String PASS = "";
 
     Connection conn = null;
-    Statement stmt = null;
 
-    List<Fakultaet> lsFakultaet = new ArrayList<>();
-    List<Studiengang> lsStudiengang = new ArrayList<>();
-    List<Studienrichtung> lsStudienrichtung = new ArrayList<>();
-
-    public List<Studiengang> getAll(){
-
-
-        ResultSet rs =null;
+    public void initializeAll(DataManager dm){
 
         try {
             // STEP 1: Register JDBC driver
@@ -37,68 +27,50 @@ public class DatabaseDatamanager {
             //STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            //Fakultaeten
-            rs = getAllX("fakultaet");
-            //add objekts to List
-            while(rs.next()){
-                lsFakultaet.add(new Fakultaet(rs.getInt("FAKULTAET_ID"),rs.getString("name")));
-            }
+            //STEP 3: Fill Arrays
 
-            //studiengang
-            rs = getAllX("studiengang");
-            //add objekts to List
-            while(rs.next()){
-                Studiengang i = new Studiengang(rs.getInt("studiengang_ID"),rs.getString("name"),rs.getString("kuerzel"),rs.getString("Studiengangsleiter"));
-
-                for(Fakultaet x: lsFakultaet){
-                    if(x.getId()==rs.getInt("fakultaet_ID")){
-                        x.addSlave(i);
-                        i.setFakultaet(x);
-
-                        System.out.println(i.getFakultaet());
-
-                    }
-                }
-                lsStudiengang.add(i);
-            }
-
-            //studienrichtung
-            rs = getAllX("studienrichtung");
-            //add objekts to List
-            while(rs.next()){
-                lsStudienrichtung.add(new Studienrichtung(rs.getInt("Studienrichtung_id"),rs.getString("name")));
-            }
-
-
-
+            //fill lsStudent
+            Student.fillArray(dm.lsStudent, conn);
+            printArray(dm.lsStudent);
+            //fill lsFirma
+            Firma.fillArray(dm.lsFirma, conn);
+            printArray(dm.lsFirma);
+            //fill lsKurs
+            Kurs.fillArray(dm.lsKurs, conn);
+            printArray(dm.lsKurs);
+            //fill lsStudienrichtung
+            Studienrichtung.fillArray(dm.lsStudienrichtung, conn);
+            printArray(dm.lsStudienrichtung);
+            //fill lsStudiengang
+            Studiengang.fillArray(dm.lsStudiengang, conn);
+            printArray(dm.lsStudiengang);
+            //fill lsFakultaet
+            Fakultaet.fillArray(dm.lsFakultaet, conn);
+            printArray(dm.lsFakultaet);
 
             // STEP 4: Clean-up environment
-            stmt.close();
             conn.close();
 
-            //return list
-            return lsStudiengang;
         } catch(SQLException se) {
 
             se.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
-            try{
-                if(stmt!=null) stmt.close();
-            } catch(SQLException se2) {
-            }
+
             try {
                 if(conn!=null) conn.close();
             } catch(SQLException se){
                 se.printStackTrace();
             }
         }
-        return lsStudiengang;
     }
-    private ResultSet getAllX(String klass) throws SQLException { //"SELECT * FROM "+klass+";"  -> gibt Resultset aud der DB zurück.'
-        stmt = conn.createStatement();
-        String sql =  "SELECT * FROM "+klass+";";
-        return stmt.executeQuery(sql);
+
+    static public void printArray(List<?> list){
+        for (Object x: list
+             ) {
+            System.out.println(x.toString());
+        }
+        System.out.println("");
     }
 }

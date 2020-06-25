@@ -1,31 +1,63 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class Kurs {
     private int id;
-    private String name;
-    private List<Student> students;
     private int jahrgang;
     private int nummer;
     private String raum;
     private String emailVerteiler;
     private Studienrichtung studienrichtung;
 
-    public int getId() {
-        return id;
+    private List<Student> students;
+
+    private String name;
+
+    public Kurs(int id, int jahrgang, int nummer, String raum, String emailVerteiler, Studienrichtung studienrichtung, List<Student> students) {
+        this.id = id;
+        this.jahrgang = jahrgang;
+        this.nummer = nummer;
+        this.raum = raum;
+        this.emailVerteiler = emailVerteiler;
+        this.studienrichtung = studienrichtung;
+        this.students = students;
+//        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
     }
 
-    public Kurs(String name){
-        this.name = name;
+    static public void fillArray(List<Kurs> toFill, Connection conn) throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM KURS");
+        //ResultSet rsStudienrichtungen = stmt.executeQuery("SELECT KURS.KURS_ID, STUDIENRICHTUNG.NAME FROM KURS JOIN STUDIENRICHTUNG ON KURS.STUDIENRICHTUNG_ID = STUDIENRICHTUNG.STUDIENRICHTUNG_ID");
+
+        //add objects to List
+        while(rsBasicInformation.next()){
+
+            toFill.add(new Kurs(
+                    rsBasicInformation.getInt("KURS_ID"),
+                    rsBasicInformation.getInt("JAHRGANG"),
+                    rsBasicInformation.getInt("NUMMER"),
+                    rsBasicInformation.getString("RAUM"),
+                    rsBasicInformation.getString("EMAILVERTEILER"),
+                    //toDo: Funktion, die zu Studienrichtung_id die Studienrichtung zurückgibt
+                    null, //findStudienrichtung(rsStudienrichtungen.getInt("STUDIENRICHTUNG_ID"))
+                    null));
+        }
+
     }
-    public Kurs(int id,String name){
-        this.id = id;
-        this.name = name;
-    }
+
     public void addSlave(Student student) {
         this.students.add(student);
         student.setKurs(this);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -84,13 +116,26 @@ public class Kurs {
         this.studienrichtung = studienrichtung;
     }
 
-    @Override
-    public String toString() {
+    public String getStudentenName(Student s){
+        return s.getFirstname() +" "+s.getLastname();
+    }
+
+    public String printUI() {
         return name;
     }
 
-    public String getStudentenName(Student s){
-        return s.getFirstname() +" "+s.getLastname();
+    @Override
+    public String toString() {
+        return "Kurs{" +
+                "id=" + id +
+                ", jahrgang=" + jahrgang +
+                ", nummer=" + nummer +
+                ", raum='" + raum + '\'' +
+                ", emailVerteiler='" + emailVerteiler + '\'' +
+                ", studienrichtung=" + studienrichtung +
+                ", students=" + students +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
 
