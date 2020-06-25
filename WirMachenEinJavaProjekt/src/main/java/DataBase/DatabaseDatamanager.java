@@ -25,24 +25,19 @@ public class DatabaseDatamanager {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Fill Arrays
+            dm.lsFirma.fillArray(dm, conn);
+            dm.lsKurs.fillArray(dm, conn);
+            dm.lsStudent.fillArray(dm, conn);
+            dm.lsStudienrichtung.fillArray(dm, conn);
+            dm.lsStudiengang.fillArray(dm, conn);
+            dm.lsFakultaet.fillArray(dm, conn);
 
-            //fill lsFirma
-            dm.lsFirma.fillArray(conn);
+            //Print
             dm.lsFirma.printArray();
-            //fill lsKurs
-            dm.lsKurs.fillArray(conn);
             dm.lsKurs.printArray();
-            //fill lsStudent
-            dm.lsStudent.fillArray(conn);
             dm.lsStudent.printArray();
-            //fill lsStudienrichtung
-            dm.lsStudienrichtung.fillArray(conn);
             dm.lsStudienrichtung.printArray();
-            //fill lsStudiengang
-            dm.lsStudiengang.fillArray(conn);
             dm.lsStudiengang.printArray();
-            //fill lsFakultaet
-            dm.lsFakultaet.fillArray(conn);
             dm.lsFakultaet.printArray();
 
             // STEP 4: Clean-up environment

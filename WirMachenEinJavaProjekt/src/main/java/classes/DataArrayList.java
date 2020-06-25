@@ -1,5 +1,7 @@
 package classes;
 
+import DataBase.DataManager;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public abstract class DataArrayList<C extends HasID> {
         this.list = new ArrayList<>();
     }
 
-    abstract public void fillArray(Connection conn) throws SQLException;
+    abstract public void fillArray(DataManager dm, Connection conn) throws SQLException;
 
     public C getById(int id){
         C toReturn = null;

@@ -4,11 +4,11 @@ import classes.*;
 
 public class DataManager {
 
-    StudentList lsStudent = new StudentList();
-    FirmaList lsFirma = new FirmaList();
-    KursList lsKurs = new KursList();
-    StudienrichtungList lsStudienrichtung = new StudienrichtungList();
-    StudiengangList lsStudiengang = new StudiengangList();
-    FakultaetList lsFakultaet = new FakultaetList();
+    public StudentList lsStudent = new StudentList();
+    public FirmaList lsFirma = new FirmaList();
+    public KursList lsKurs = new KursList();
+    public StudienrichtungList lsStudienrichtung = new StudienrichtungList();
+    public StudiengangList lsStudiengang = new StudiengangList();
+    public FakultaetList lsFakultaet = new FakultaetList();
 
 }
