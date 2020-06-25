@@ -12,15 +12,15 @@ public class Studiengang implements HasID{
     private String kuerzel;
     private String studienGangsleiter;
     private Fakultaet fakultaet;
-    private List<Studienrichtung>studienrichtungs;
+    private List<Studienrichtung>studienrichtungen;
 
-    public Studiengang(int id, String name, String kuerzel, String studienGangsleiter, Fakultaet fakultaet, List<Studienrichtung> studienrichtungs) {
+    public Studiengang(int id, String name, String kuerzel, String studienGangsleiter, Fakultaet fakultaet, List<Studienrichtung> studienrichtungen) {
         this.id = id;
         this.name = name;
         this.kuerzel = kuerzel;
         this.studienGangsleiter = studienGangsleiter;
         this.fakultaet = fakultaet;
-        this.studienrichtungs = studienrichtungs;
+        this.studienrichtungen = studienrichtungen;
     }
 
     public String getName() {
@@ -61,16 +61,16 @@ public class Studiengang implements HasID{
     }
 
     public List<Studienrichtung>getStudienrichtungs() {
-        return studienrichtungs;
+        return studienrichtungen;
     }
 
 
     public void setStudienrichtungs(List<Studienrichtung>studienrichtungs) {
-        this.studienrichtungs = studienrichtungs;
+        this.studienrichtungen = studienrichtungs;
     }
 
     public void addSlave(Studienrichtung studienrichtung) {
-        this.studienrichtungs.add(studienrichtung);
+        this.studienrichtungen.add(studienrichtung);
         studienrichtung.setStudiengang(this);
     }
 
@@ -85,8 +85,8 @@ public class Studiengang implements HasID{
                 ", name='" + name + '\'' +
                 ", kuerzel='" + kuerzel + '\'' +
                 ", studienGangsleiter='" + studienGangsleiter + '\'' +
-                ", fakultaet=" + fakultaet +
-                ", studienrichtungs=" + studienrichtungs +
+                ", fakultaet=" + fakultaet.getName() +
+                ", studienrichtungs=" + studienrichtungen +
                 '}';
     }
 }

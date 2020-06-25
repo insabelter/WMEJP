@@ -1,5 +1,7 @@
 package classes;
 
+import javafx.fxml.Initializable;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,16 +17,58 @@ public class Student implements HasID{
     private int javakenntnisse;
 
     private Kurs kurs;
-    private Firma firma;
+    private String firma;
 
 
-    public Student(int matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, Firma firma){
+    public Student(int matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, String firma){
         this.matrikelnummer = matrikelnummer;
         this.vorname = vorname;
         this.nachname = nachname;
         this.javakenntnisse = javakenntnisse;
         this.kurs = kurs;
         this.firma = firma;
+    }
+
+    public static void fillArray(List<Student> toFill, Connection conn) throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDENT");
+
+        //add objects to List
+        while(rsBasicInformation.next()){
+            toFill.add(new Student(
+                    rsBasicInformation.getInt("MATRIKEL_NR"),
+                    rsBasicInformation.getString("VORNAME"),
+                    rsBasicInformation.getString("NACHNAME"),
+                    rsBasicInformation.getInt("Javakenntnisse"),
+                    null,
+                    null));
+        }
+
+    }
+
+    public Integer getMatrikelnummer() {
+        return matrikelnummer;
+    }
+
+    public void setMatrikelnummer(Integer matrikelnummer) {
+        this.matrikelnummer = matrikelnummer;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
     public int getJavakenntnisse() {
@@ -35,21 +79,6 @@ public class Student implements HasID{
         this.javakenntnisse = javakenntnisse;
     }
 
-    public String getFirstname() {
-        return vorname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.vorname = firstname;
-    }
-
-    public String getLastname() {
-        return nachname;
-    }
-
-    public void setLastname(String lastname) {
-        this.nachname = lastname;
-    }
 
     public Kurs getKurs() {
         return kurs;
@@ -59,11 +88,11 @@ public class Student implements HasID{
         this.kurs = kurs;
     }
 
-    public Firma getFirma() {
+    public String getFirma() {
         return firma;
     }
 
-    public void setFirma(Firma firma) {
+    public void setFirma(String firma) {
         this.firma = firma;
     }
 
@@ -80,7 +109,7 @@ public class Student implements HasID{
                 ", nachname='" + nachname + '\'' +
                 ", javakenntnisse=" + javakenntnisse +
                 ", kurs=" + kurs.getName() +
-                ", firma=" + firma.getName() +
+                ", firma=" + firma +
                 '}';
     }
 }

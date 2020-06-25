@@ -17,15 +17,25 @@ public class KursList extends DataArrayList<Kurs>{
 
         //add objects to List
         while(rsBasicInformation.next()){
-
-            list.add(new Kurs(
+            Kurs newKurs = new Kurs(
                     rsBasicInformation.getInt("KURS_ID"),
                     rsBasicInformation.getInt("JAHRGANG"),
                     rsBasicInformation.getInt("NUMMER"),
                     rsBasicInformation.getString("RAUM"),
                     rsBasicInformation.getString("EMAILVERTEILER"),
                     null,
-                    new ArrayList<Student>())); //wird bei Studentenerstellung befüllt
+                    new ArrayList<Student>()); //wird bei Studentenerstellung befüllt
+
+            //find Studienrichtung
+            int studienrichtung_id = rsBasicInformation.getInt("STUDIENRICHTUNG_ID");
+            Studienrichtung studienrichtung = dm.lsStudienrichtung.getById(studienrichtung_id);
+            studienrichtung.addSlave(newKurs);
+            //Error Handling:
+            if(newKurs.getStudienrichtung() == null){
+                System.out.println("Der Kurs hat immer noch keine Studienrichtung!");
+            }
+
+            list.add(newKurs);
         }
     }
 }

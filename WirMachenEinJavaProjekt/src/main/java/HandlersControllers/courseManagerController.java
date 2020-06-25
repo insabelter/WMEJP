@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,5 +46,19 @@ public class courseManagerController implements Initializable {
         studList.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("matrikelnummer"));
         studList.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("lastname"));
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("firstname"));
+        courseCombobox.setConverter(new StringConverter<Kurs>() {
+            @Override
+            public String toString(Kurs k) {
+                if (k==null) return "";
+                else{return k.getName();}
+            }
+
+            @Override
+            public Kurs fromString(String s) {
+                return null;
+            }
+        });
+        courseCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
+
     }
 }

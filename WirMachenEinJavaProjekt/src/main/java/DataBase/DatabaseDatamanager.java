@@ -9,7 +9,7 @@ public class DatabaseDatamanager {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:./wmejpTest";
+    static final String DB_URL = "jdbc:h2:../wmejpTest";
 
     //  Database credentials
     static final String USER = "sa";
@@ -27,20 +27,18 @@ public class DatabaseDatamanager {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Fill Arrays
-            dm.lsFirma.fillArray(dm, conn);
+            dm.lsFakultaet.fillArray(dm, conn);
+            dm.lsStudiengang.fillArray(dm, conn);
+            dm.lsStudienrichtung.fillArray(dm, conn);
             dm.lsKurs.fillArray(dm, conn);
             dm.lsStudent.fillArray(dm, conn);
-            dm.lsStudienrichtung.fillArray(dm, conn);
-            dm.lsStudiengang.fillArray(dm, conn);
-            dm.lsFakultaet.fillArray(dm, conn);
 
-//            for (Kurs kurs:dm.lsKurs.list
-//                 ) {
-//                kurs.createName();
-//            }
+            for (Kurs kurs:dm.lsKurs.list
+                 ) {
+                kurs.createName();
+            }
 
             //Print
-            dm.lsFirma.printArray();
             dm.lsKurs.printArray();
             dm.lsStudent.printArray();
             dm.lsStudienrichtung.printArray();

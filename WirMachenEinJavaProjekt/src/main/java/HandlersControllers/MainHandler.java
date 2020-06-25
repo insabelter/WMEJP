@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import DataBase.DataManager;
+import DataBase.DatabaseDatamanager;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,6 +17,8 @@ public class MainHandler extends Application {
 
     Parent root = null;
     static MainWindowController mainWindowController1;
+    static DataManager dm = new DataManager();
+    static DatabaseDatamanager dbm = new DatabaseDatamanager();
 
     public static void main(String[] args) {
         launch(args);
@@ -22,6 +26,7 @@ public class MainHandler extends Application {
 
     @Override
     public void start(Stage stage){
+        dbm.initializeAll(dm);
         buildScene();
 
         //Set root as scene and show

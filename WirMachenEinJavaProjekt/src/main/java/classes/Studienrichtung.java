@@ -73,7 +73,7 @@ public class Studienrichtung implements HasID{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", kuerzel='" + kuerzel + '\'' +
-                ", studiengang=" + studiengang +
+                ", studiengang=" + studiengang.getName() +
                 ", kurse=" + kurse +
                 '}';
     }
