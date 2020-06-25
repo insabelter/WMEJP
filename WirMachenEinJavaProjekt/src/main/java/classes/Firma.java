@@ -9,6 +9,10 @@ public class Firma {
     private String adresse;
     private List<Student> studenten;
 
+    public int getId() {
+        return id;
+    }
+
     public Firma(String name){
         this.name = name;
     }

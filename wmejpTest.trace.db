@@ -697,3 +697,116 @@ Column "ID" not found [42122-199]
 	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:350)
 	at test.DatabaseDatamanager.getAll(DatabaseDatamanager.java:42)
 	at test.MainDBConnectTest.main(MainDBConnectTest.java:14)
+2020-06-25 00:09:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT * FAKULTAET[*]"
+Syntax error in SQL statement "SELECT * FAKULTAET[*]"; SQL statement:
+SELECT * FAKULTAET [42000-200]
+2020-06-25 00:10:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "INSER[*] INTO FAKULTAET(NAME)
+VALUES('Hallo')"; erwartet "INSERT"
+Syntax error in SQL statement "INSER[*] INTO FAKULTAET(NAME)
+VALUES('Hallo')"; expected "INSERT"; SQL statement:
+INSER INTO FAKULTAET(NAME)
+VALUES('Hallo') [42001-200]
+2020-06-25 00:16:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT [*]' FIMRA"
+Syntax error in SQL statement "SELECT [*]' FIMRA"; SQL statement:
+SELECT ' FIMRA [42000-200]
+2020-06-25 00:18:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT * FIRMA[*]"
+Syntax error in SQL statement "SELECT * FIRMA[*]"; SQL statement:
+SELECT * FIRMA [42000-200]
+2020-06-25 00:28:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT *FROM FAKULTAET
+SELEFT *[*] FROM STUDENT"
+Syntax error in SQL statement "SELECT *FROM FAKULTAET
+SELEFT *[*] FROM STUDENT"; SQL statement:
+SELECT *from fakultaet
+SELEFT * from Student [42000-200]
+2020-06-25 00:28:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELEFT[*] * FROM STUDENT"; erwartet "SET, SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"
+Syntax error in SQL statement "SELEFT[*] * FROM STUDENT"; expected "SET, SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+SELEFT * from Student [42001-200]
+2020-06-25 00:28:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT *FROM FAKULTAET
+SELECT[*] * FROM STUDENT"
+Syntax error in SQL statement "SELECT *FROM FAKULTAET
+SELECT[*] * FROM STUDENT"; SQL statement:
+SELECT *from fakultaet
+SELECT * from Student [42000-200]
+2020-06-25 08:24:17 database: flush
+org.h2.message.DbException: Allgemeiner Fehler: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/falko/OneDrive/Documents/GitHub/WMEJP/wmejpTest.mv.db [1.4.199/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/falko/OneDrive/Documents/GitHub/WMEJP/wmejpTest.mv.db [1.4.199/7]" [50000-199]
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:90)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2787)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:441)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:404)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:3343)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:162)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:95)
+	at org.h2.engine.Database.getPageStore(Database.java:2739)
+	at org.h2.engine.Database.open(Database.java:769)
+	at org.h2.engine.Database.openDatabase(Database.java:319)
+	at org.h2.engine.Database.<init>(Database.java:313)
+	at org.h2.engine.Engine.openSession(Engine.java:69)
+	at org.h2.engine.Engine.openSession(Engine.java:201)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:178)
+	at org.h2.engine.Engine.createSession(Engine.java:161)
+	at org.h2.engine.Engine.createSession(Engine.java:31)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:336)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:169)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:148)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at test.DatabaseDatamanager.getAll(DatabaseDatamanager.java:34)
+	at test.MainDBConnectTest.main(MainDBConnectTest.java:14)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Allgemeiner Fehler: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/falko/OneDrive/Documents/GitHub/WMEJP/wmejpTest.mv.db [1.4.199/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/falko/OneDrive/Documents/GitHub/WMEJP/wmejpTest.mv.db [1.4.199/7]" [50000-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	... 26 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/falko/OneDrive/Documents/GitHub/WMEJP/wmejpTest.mv.db [1.4.199/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:883)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:390)
+	... 20 more
+2020-06-25 09:03:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Feld "name" nicht gefunden
+Column "name" not found [42122-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3188)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3287)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:314)
+	at test.DatabaseDatamanager.getAll(DatabaseDatamanager.java:70)
+	at test.MainDBConnectTest.main(MainDBConnectTest.java:15)
+2020-06-25 09:31:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Feld "ID" nicht gefunden
+Column "ID" not found; SQL statement:
+DELETE FROM KURS WHERE id=1 [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.expression.condition.Comparison.optimize(Comparison.java:190)
+	at org.h2.command.dml.Delete.prepare(Delete.java:184)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:832)

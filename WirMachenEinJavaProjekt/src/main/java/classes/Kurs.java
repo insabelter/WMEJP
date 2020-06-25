@@ -12,6 +12,9 @@ public class Kurs {
     private String emailVerteiler;
     private Studienrichtung studienrichtung;
 
+    public int getId() {
+        return id;
+    }
 
     public Kurs(String name){
         this.name = name;

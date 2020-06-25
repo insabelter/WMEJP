@@ -18,14 +18,15 @@ public class Studienrichtung {
             k.setStudienrichtung(this);
         }
     }
-    public Studienrichtung(int id,String name,List<Kurs> kurse){
+
+    public int getId() {
+        return id;
+    }
+
+    public Studienrichtung(int id, String name){
         this.id = id;
         this.name = name;
-        this.kurse = kurse;
 
-        for (Kurs k:this.kurse) {
-            k.setStudienrichtung(this);
-        }
     }
     public void addSlave(Kurs kurs) {
         this.kurse.add(kurs);

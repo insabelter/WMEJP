@@ -2,6 +2,7 @@ package test;
 
 import classes.Fakultaet;
 import classes.Studiengang;
+import classes.Studienrichtung;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,9 +21,12 @@ public class DatabaseDatamanager {
     Connection conn = null;
     Statement stmt = null;
 
-    public List<Fakultaet> getAll(){
-        List<Fakultaet> lsFakultaet = new ArrayList<>();
-        List<Studiengang> lsStudiengang = new ArrayList<>();
+    List<Fakultaet> lsFakultaet = new ArrayList<>();
+    List<Studiengang> lsStudiengang = new ArrayList<>();
+    List<Studienrichtung> lsStudienrichtung = new ArrayList<>();
+
+    public List<Studiengang> getAll(){
+
 
         ResultSet rs =null;
 
@@ -33,17 +37,38 @@ public class DatabaseDatamanager {
             //STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            //Fakultaeten list mit entsprehenedem Resultset füllen.
+            //Fakultaeten
             rs = getAllX("fakultaet");
             //add objekts to List
             while(rs.next()){
                 lsFakultaet.add(new Fakultaet(rs.getInt("FAKULTAET_ID"),rs.getString("name")));
             }
+
+            //studiengang
             rs = getAllX("studiengang");
             //add objekts to List
             while(rs.next()){
-                lsStudiengang.add(new Studiengang(rs.getInt("studiengang_ID"),rs.getString("name"),rs.getString("kuerzel"),rs.getString("Studiengangsleiter")));
+                Studiengang i = new Studiengang(rs.getInt("studiengang_ID"),rs.getString("name"),rs.getString("kuerzel"),rs.getString("Studiengangsleiter"));
+
+                for(Fakultaet x: lsFakultaet){
+                    if(x.getId()==rs.getInt("fakultaet_ID")){
+                        x.addSlave(i);
+                        i.setFakultaet(x);
+
+                        System.out.println(i.getFakultaet());
+
+                    }
+                }
+                lsStudiengang.add(i);
             }
+
+            //studienrichtung
+            rs = getAllX("studienrichtung");
+            //add objekts to List
+            while(rs.next()){
+                lsStudienrichtung.add(new Studienrichtung(rs.getInt("Studienrichtung_id"),rs.getString("name")));
+            }
+
 
 
 
@@ -52,7 +77,7 @@ public class DatabaseDatamanager {
             conn.close();
 
             //return list
-            return lsFakultaet;
+            return lsStudiengang;
         } catch(SQLException se) {
 
             se.printStackTrace();
@@ -69,7 +94,7 @@ public class DatabaseDatamanager {
                 se.printStackTrace();
             }
         }
-        return lsFakultaet;
+        return lsStudiengang;
     }
     private ResultSet getAllX(String klass) throws SQLException { //"SELECT * FROM "+klass+";"  -> gibt Resultset aud der DB zurück.'
         stmt = conn.createStatement();

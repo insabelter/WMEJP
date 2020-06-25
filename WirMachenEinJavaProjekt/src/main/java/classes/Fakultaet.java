@@ -8,7 +8,11 @@ public class Fakultaet {
     private List<Studiengang> studiengang;
     private String verantwortlicher;
 
-    public Fakultaet(String name,List<Studiengang> studiengangs){
+    public int getId() {
+        return id;
+    }
+
+    public Fakultaet(String name, List<Studiengang> studiengangs){
         this.name=name;
         this.studiengang = studiengangs;
 
@@ -38,8 +42,8 @@ public class Fakultaet {
     }
 
     public void addSlave(Studiengang studiengang) {
+        System.out.println(studiengang.getName());
         this.studiengang.add(studiengang);
-        studiengang.setFakultaet(this);
     }
 
     public String getVerantwortlicher() {

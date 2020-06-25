@@ -65,7 +65,4 @@ public class Student {
         return matrikelnummer;
     }
 
-    public void setMatrikelnummer(String matrikelnummer) {
-        this.matrikelnummer = matrikelnummer;
-    }
 }
