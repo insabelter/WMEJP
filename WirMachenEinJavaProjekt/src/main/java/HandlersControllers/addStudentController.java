@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class addStudentController implements Initializable {
@@ -25,7 +27,7 @@ public class addStudentController implements Initializable {
     private Button addButton;
 
     @FXML
-    private ComboBox courseDropdown;
+    private ComboBox<Kurs> courseDropdown;
 
     @FXML
     private Slider javaSlider;
@@ -47,13 +49,12 @@ public class addStudentController implements Initializable {
         //Check if every Textfield is not empty
         if(nameField.getText().equals("")||numberField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
-
         }
         //Create Student based on User Inputs
         else{
-//
-//            Student newbie= new Student(nameField.getText(),lastNameField.getText(), numberField.getText(),new Kurs(courseDropdown.getSelectionModel().getSelectedItem().toString()),new Firma(companyField.getText()),((int) javaSlider.getValue())/10);
-//            MainHandler.mainWindowController1.insertInTable(newbie);
+          Student newbie= new Student(numberField.getText(),nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),new Firma(3, "Atos", "Peter", "123", new ArrayList<Student>()));
+
+          MainHandler.mainWindowController1.insertInTable(newbie);
         }
 
     }
@@ -68,7 +69,7 @@ public class addStudentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // add options to dropdown
 
-        courseDropdown.getItems().addAll("TINF19AI2","TINF19AI1","KINGSIZE CHONKERS");
+        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs);
         courseDropdown.getSelectionModel().selectFirst();
     }
 

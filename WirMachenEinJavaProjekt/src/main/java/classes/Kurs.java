@@ -116,9 +116,6 @@ public class Kurs {
         this.studienrichtung = studienrichtung;
     }
 
-    public String getStudentenName(Student s){
-        return s.getFirstname() +" "+s.getLastname();
-    }
 
     public String printUI() {
         return name;

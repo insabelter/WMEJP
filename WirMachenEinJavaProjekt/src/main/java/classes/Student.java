@@ -45,28 +45,36 @@ public class Student{
 
     }
 
+    public String getMatrikelnummer() {
+        return matrikelnummer;
+    }
+
+    public void setMatrikelnummer(String matrikelnummer) {
+        this.matrikelnummer = matrikelnummer;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
+
     public int getJavakenntnisse() {
         return javakenntnisse;
     }
 
     public void setJavakenntnisse(int javakenntnisse) {
         this.javakenntnisse = javakenntnisse;
-    }
-
-    public String getFirstname() {
-        return vorname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.vorname = firstname;
-    }
-
-    public String getLastname() {
-        return nachname;
-    }
-
-    public void setLastname(String lastname) {
-        this.nachname = lastname;
     }
 
     public Kurs getKurs() {
@@ -83,10 +91,6 @@ public class Student{
 
     public void setFirma(Firma firma) {
         this.firma = firma;
-    }
-
-    public String getMatrikelnummer() {
-        return matrikelnummer;
     }
 
     @Override

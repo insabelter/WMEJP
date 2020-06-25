@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import test.DataManager;
+import test.DatabaseDatamanager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,8 +25,6 @@ import java.util.function.Predicate;
 
 public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
-    public static List<Kurs> alleKurse = new ArrayList<Kurs>();
-    public static List<Firma> alleFirmen = new ArrayList<Firma>();
     Stage addCourseStage=null;
     Stage editStudentStage=null;
 
@@ -161,16 +161,28 @@ public class MainWindowController implements Initializable{
                 SelectionMode.MULTIPLE
         );
         //initialize the Table in main window to properly take Student objects as rows
+        try{
+            //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
+            //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
 
-        //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
-        //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
+        }catch (NullPointerException n){
+            System.out.println("Fakultät und studienrichtung noch gewollt leer!");
+        }
 
-        studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("firstname"));
-        studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        //initialize the Table in main window to properly take Student objects as rows
+        studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("vorname"));
+        studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("nachname"));
         studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("kurs"));
         studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("matrikelnummer"));
         studList.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("firma"));
         studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javakenntnisse"));
+
+
+        //put all student of db in table
+        studList.getItems().addAll(MainHandler.dm.lsStudent);
+
+
+
         fakultaetDropdown.getItems().addAll("Alle","Technik","Wirtschaft","Gesundheit");
         studienrichtungCombobox.getItems().addAll("Alle","Informatik");
         kursCombobox.getItems().addAll("Alle","TINF19AI2","TINF19AI1");
@@ -202,9 +214,6 @@ public class MainWindowController implements Initializable{
             addStudentStage = new Stage();
             addStudentStage.setScene(new Scene(root));
             addStudentStage.show();
-
-
-
         }
         catch (IOException e){
             e.printStackTrace();
