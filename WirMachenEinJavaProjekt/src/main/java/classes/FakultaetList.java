@@ -21,7 +21,7 @@ public class FakultaetList extends DataArrayList<Fakultaet>{
             list.add(new Fakultaet(
                     rsBasicInformation.getInt("FAKULTAET_ID"),
                     rsBasicInformation.getString("NAME"),
-                    null, //rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
+                    "RandomVerantwortlicher", //rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
                     null));
         }
     }
