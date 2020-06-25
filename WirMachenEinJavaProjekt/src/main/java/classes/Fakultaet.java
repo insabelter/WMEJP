@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class Fakultaet {
+public class Fakultaet implements HasID{
     private int id;
     private String name;
     private String verantwortlicher; //muss hinzugefügt werden in DB
@@ -20,21 +20,7 @@ public class Fakultaet {
         this.studiengaenge = studiengaenge;
     }
 
-    static public void fillArray(List<Fakultaet> toFill, Connection conn) throws SQLException {
-
-        Statement stmt = conn.createStatement();
-        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM FAKULTAET");
-
-        //add objects to List
-        while(rsBasicInformation.next()){
-            toFill.add(new Fakultaet(
-                    rsBasicInformation.getInt("FAKULTAET_ID"),
-                    rsBasicInformation.getString("NAME"),
-                    null, //rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
-                    null));
-        }
-    }
-
+    @Override
     public int getId() {
         return id;
     }

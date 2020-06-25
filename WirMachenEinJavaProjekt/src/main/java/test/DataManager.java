@@ -7,11 +7,11 @@ import java.util.List;
 
 public class DataManager {
 
-    public List<Student> lsStudent = new ArrayList<>();
-    public List<Firma> lsFirma = new ArrayList<>();
-    public List<Kurs> lsKurs = new ArrayList<>();
-    public List<Studienrichtung> lsStudienrichtung = new ArrayList<>();
-    public List<Studiengang> lsStudiengang = new ArrayList<>();
-    public List<Fakultaet> lsFakultaet = new ArrayList<>();
+    StudentList lsStudent = new StudentList();
+    FirmaList lsFirma = new FirmaList();
+    KursList lsKurs = new KursList();
+    StudienrichtungList lsStudienrichtung = new StudienrichtungList();
+    StudiengangList lsStudiengang = new StudiengangList();
+    FakultaetList lsFakultaet = new FakultaetList();
 
 }

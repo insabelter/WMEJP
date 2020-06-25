@@ -29,24 +29,24 @@ public class DatabaseDatamanager {
 
             //STEP 3: Fill Arrays
 
-            //fill lsStudent
-            Student.fillArray(dm.lsStudent, conn);
-            printArray(dm.lsStudent);
             //fill lsFirma
-            Firma.fillArray(dm.lsFirma, conn);
-            printArray(dm.lsFirma);
+            dm.lsFirma.fillArray(conn);
+            dm.lsFirma.printArray();
             //fill lsKurs
-            Kurs.fillArray(dm.lsKurs, conn);
-            printArray(dm.lsKurs);
+            dm.lsKurs.fillArray(conn);
+            dm.lsKurs.printArray();
+            //fill lsStudent
+            dm.lsStudent.fillArray(conn);
+            dm.lsStudent.printArray();
             //fill lsStudienrichtung
-            Studienrichtung.fillArray(dm.lsStudienrichtung, conn);
-            printArray(dm.lsStudienrichtung);
+            dm.lsStudienrichtung.fillArray(conn);
+            dm.lsStudienrichtung.printArray();
             //fill lsStudiengang
-            Studiengang.fillArray(dm.lsStudiengang, conn);
-            printArray(dm.lsStudiengang);
+            dm.lsStudiengang.fillArray(conn);
+            dm.lsStudiengang.printArray();
             //fill lsFakultaet
-            Fakultaet.fillArray(dm.lsFakultaet, conn);
-            printArray(dm.lsFakultaet);
+            dm.lsFakultaet.fillArray(conn);
+            dm.lsFakultaet.printArray();
 
             // STEP 4: Clean-up environment
             conn.close();
