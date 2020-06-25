@@ -1,9 +1,6 @@
-package test;
+package DataBase;
 
 import classes.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataManager {
 
