@@ -30,7 +30,7 @@ public class Fakultaet {
             toFill.add(new Fakultaet(
                     rsBasicInformation.getInt("FAKULTAET_ID"),
                     rsBasicInformation.getString("NAME"),
-                    rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
+                    null, //rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
                     null));
         }
     }
@@ -68,9 +68,17 @@ public class Fakultaet {
         this.verantwortlicher = verantwortlicher;
     }
 
-    @Override
-    public String toString() {
+    public String printUI() {
         return String.valueOf(id)+" "+name;
     }
 
+    @Override
+    public String toString() {
+        return "Fakultaet{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", verantwortlicher='" + verantwortlicher + '\'' +
+                ", studiengaenge=" + studiengaenge +
+                '}';
+    }
 }

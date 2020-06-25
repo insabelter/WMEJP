@@ -89,5 +89,15 @@ public class Student{
         return matrikelnummer;
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "matrikelnummer='" + matrikelnummer + '\'' +
+                ", vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
+                ", javakenntnisse=" + javakenntnisse +
+                ", kurs=" + kurs +
+                ", firma=" + firma +
+                '}';
+    }
 }

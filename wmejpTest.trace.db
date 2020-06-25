@@ -33503,3 +33503,16 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 16 more
+2020-06-25 16:59:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Feld "VERANTWORTLICHER" nicht gefunden
+Column "VERANTWORTLICHER" not found [42122-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3214)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3287)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:314)
+	at classes.Fakultaet.fillArray(Fakultaet.java:33)
+	at test.DatabaseDatamanager.initializeAll(DatabaseDatamanager.java:48)
+	at test.MainDBConnectTest.main(MainDBConnectTest.java:17)

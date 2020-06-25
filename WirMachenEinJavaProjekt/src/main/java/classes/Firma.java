@@ -63,9 +63,18 @@ public class Firma {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
+    public String printUI() {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "Firma{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ansprechpartner='" + ansprechpartner + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", studenten=" + studenten +
+                '}';
+    }
 }

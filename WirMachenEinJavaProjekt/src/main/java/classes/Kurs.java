@@ -26,14 +26,14 @@ public class Kurs {
         this.emailVerteiler = emailVerteiler;
         this.studienrichtung = studienrichtung;
         this.students = students;
-        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
+//        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
     }
 
     static public void fillArray(List<Kurs> toFill, Connection conn) throws SQLException {
 
         Statement stmt = conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM KURS");
-        ResultSet rsStudienrichtungen = stmt.executeQuery("SELECT KURS.KURS_ID, STUDIENRICHTUNG.NAME FROM KURS JOIN STUDIENRICHTUNG ON KURS.STUDIENRICHTUNG_ID = STUDIENRICHTUNG.STUDIENRICHTUNG_ID");
+        //ResultSet rsStudienrichtungen = stmt.executeQuery("SELECT KURS.KURS_ID, STUDIENRICHTUNG.NAME FROM KURS JOIN STUDIENRICHTUNG ON KURS.STUDIENRICHTUNG_ID = STUDIENRICHTUNG.STUDIENRICHTUNG_ID");
 
         //add objects to List
         while(rsBasicInformation.next()){
@@ -116,13 +116,26 @@ public class Kurs {
         this.studienrichtung = studienrichtung;
     }
 
-    @Override
-    public String toString() {
+    public String getStudentenName(Student s){
+        return s.getFirstname() +" "+s.getLastname();
+    }
+
+    public String printUI() {
         return name;
     }
 
-    public String getStudentenName(Student s){
-        return s.getFirstname() +" "+s.getLastname();
+    @Override
+    public String toString() {
+        return "Kurs{" +
+                "id=" + id +
+                ", jahrgang=" + jahrgang +
+                ", nummer=" + nummer +
+                ", raum='" + raum + '\'' +
+                ", emailVerteiler='" + emailVerteiler + '\'' +
+                ", studienrichtung=" + studienrichtung +
+                ", students=" + students +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
 

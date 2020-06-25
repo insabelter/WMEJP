@@ -91,8 +91,19 @@ public class Studiengang {
         studienrichtung.setStudiengang(this);
     }
 
+    public String printUI() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
-        return this.name;
+        return "Studiengang{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", kuerzel='" + kuerzel + '\'' +
+                ", studienGangsleiter='" + studienGangsleiter + '\'' +
+                ", fakultaet=" + fakultaet +
+                ", studienrichtungs=" + studienrichtungs +
+                '}';
     }
 }
