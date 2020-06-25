@@ -42,7 +42,7 @@ public class Fakultaet implements HasID{
     }
 
     public void addSlave(Studiengang studiengang) {
-        System.out.println(studiengang.getName());
+        studiengang.setFakultaet(this);
         this.studiengaenge.add(studiengang);
     }
 

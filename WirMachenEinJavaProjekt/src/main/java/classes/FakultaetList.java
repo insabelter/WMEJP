@@ -7,6 +7,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class FakultaetList extends DataArrayList<Fakultaet>{
     //list: List of type Fakultaet
@@ -22,7 +23,7 @@ public class FakultaetList extends DataArrayList<Fakultaet>{
                     rsBasicInformation.getInt("FAKULTAET_ID"),
                     rsBasicInformation.getString("NAME"),
                     "RandomVerantwortlicher", //rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
-                    null));
+                    new ArrayList<Studiengang>()));//wird in StudiengangList gefüllt
         }
     }
 }
