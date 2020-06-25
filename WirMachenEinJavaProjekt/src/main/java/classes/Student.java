@@ -17,10 +17,10 @@ public class Student implements HasID{
     private int javakenntnisse;
 
     private Kurs kurs;
-    private Firma firma;
+    private String firma;
 
 
-    public Student(int matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, Firma firma){
+    public Student(int matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, String firma){
         this.matrikelnummer = matrikelnummer;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -88,11 +88,11 @@ public class Student implements HasID{
         this.kurs = kurs;
     }
 
-    public Firma getFirma() {
+    public String getFirma() {
         return firma;
     }
 
-    public void setFirma(Firma firma) {
+    public void setFirma(String firma) {
         this.firma = firma;
     }
 
@@ -109,7 +109,7 @@ public class Student implements HasID{
                 ", nachname='" + nachname + '\'' +
                 ", javakenntnisse=" + javakenntnisse +
                 ", kurs=" + kurs.getName() +
-                ", firma=" + firma.getName() +
+                ", firma=" + firma +
                 '}';
     }
 }

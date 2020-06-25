@@ -30,7 +30,6 @@ public class DatabaseDatamanager {
             dm.lsFakultaet.fillArray(dm, conn);
             dm.lsStudiengang.fillArray(dm, conn);
             dm.lsStudienrichtung.fillArray(dm, conn);
-            dm.lsFirma.fillArray(dm, conn);
             dm.lsKurs.fillArray(dm, conn);
             dm.lsStudent.fillArray(dm, conn);
 
@@ -40,7 +39,6 @@ public class DatabaseDatamanager {
             }
 
             //Print
-            dm.lsFirma.printArray();
             dm.lsKurs.printArray();
             dm.lsStudent.printArray();
             dm.lsStudienrichtung.printArray();

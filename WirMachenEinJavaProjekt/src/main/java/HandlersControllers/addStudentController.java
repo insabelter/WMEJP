@@ -1,8 +1,5 @@
 package HandlersControllers;
 
-import classes.Firma;
-import classes.Kurs;
-import classes.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

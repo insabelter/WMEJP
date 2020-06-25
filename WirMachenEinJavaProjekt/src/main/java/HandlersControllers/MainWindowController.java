@@ -199,11 +199,11 @@ public class MainWindowController implements Initializable{
         //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
         //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
         kursColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getName()));
-        firmaColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirma().getName()));
         //initialize the Table in main window to properly take Student objects as rows
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("vorname"));
         studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("nachname"));
         studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("matrikelnummer"));
+        studList.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("firma"));
         studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javakenntnisse"));
 
         //put all student of db in table

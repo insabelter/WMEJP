@@ -19,9 +19,9 @@ public class StudentList extends DataArrayList<Student>{
                     rsBasicInformation.getInt("MATRIKEL_NR"),
                     rsBasicInformation.getString("VORNAME"),
                     rsBasicInformation.getString("NACHNAME"),
-                    rsBasicInformation.getInt("Javakenntnisse"),
+                    rsBasicInformation.getInt("JAVAKENNTNISSE"),
                     null, //wird bei addSlave befüllt
-                    null); //wird bei addSlave befüllt
+                    "defaultFirma"); //rsBasicInformation.getString("FIRMA"),
 
             //find Kurs
             int kurs_id = rsBasicInformation.getInt("KURS_ID");
@@ -30,15 +30,6 @@ public class StudentList extends DataArrayList<Student>{
             //Error Handling:
             if(newStudent.getKurs() == null){
                 System.out.println("The student still has no Class!");
-            }
-
-            //find Firma
-            int firma_id = rsBasicInformation.getInt("FIRMA_ID");
-            Firma firma = dm.lsFirma.getById(firma_id);
-            firma.addSlave(newStudent);
-            //Error Handling:
-            if(newStudent.getFirma() == null){
-                System.out.println("The student still has no Company!");
             }
 
             list.add(newStudent);
