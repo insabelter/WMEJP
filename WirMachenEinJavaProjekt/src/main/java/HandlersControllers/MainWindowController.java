@@ -47,6 +47,9 @@ public class MainWindowController implements Initializable{
     private Button delStudent;
 
     @FXML
+    private Button editStudent;
+
+    @FXML
     private Button addCourse;
 
     @FXML
@@ -79,7 +82,7 @@ public class MainWindowController implements Initializable{
 
         //handling the opening of addStudent window to be only openable once at a time
         if(addStudentStage==null){
-        loadAddCourseWindow();}
+        loadAddStudentWindow();}
         else if (!addStudentStage.isShowing()){
             addStudentStage.show();
         }
@@ -97,7 +100,7 @@ public class MainWindowController implements Initializable{
     @FXML
     void filterList(){
         FilteredList<Student> filteredList= new FilteredList<>(studList.getItems());
-
+        //wip
         filteredList.setPredicate(new Predicate<Student>() {
             @Override
             public boolean test(Student student) {
@@ -115,6 +118,27 @@ public class MainWindowController implements Initializable{
 
     }
 
+    @FXML
+    void editStudent(){
+
+    }
+
+    @FXML
+    void greyOut(){
+        if (studList.getSelectionModel().getSelectedItems().size()<=0){
+            delStudent.setDisable(true);
+            editStudent.setDisable(true);
+        }
+        else if(studList.getSelectionModel().getSelectedItems().size()==1){
+            delStudent.setDisable(false);
+            editStudent.setDisable(false);
+        }
+        else if(studList.getSelectionModel().getSelectedItems().size()>1){
+            delStudent.setDisable(false);
+            editStudent.setDisable(true);
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -125,8 +149,8 @@ public class MainWindowController implements Initializable{
         );
         //initialize the Table in main window to properly take Student objects as rows
 
-        fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
-        studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
+        //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
+        //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
 
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("firstname"));
         studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -138,6 +162,9 @@ public class MainWindowController implements Initializable{
         studienrichtungCombobox.getItems().addAll("Alle","Informatik");
         kursCombobox.getItems().addAll("Alle","TINF19AI2","TINF19AI1");
         javaCombobox.getItems().addAll("Alle","0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+
+        delStudent.setDisable(true);
+        editStudent.setDisable(true);
 
         //later data from db, but for now test data
 
@@ -180,9 +207,9 @@ public class MainWindowController implements Initializable{
             Parent root= loader.load();
 
             //show addStudent window
-            addStudentStage = new Stage();
-            addStudentStage.setScene(new Scene(root));
-            addStudentStage.show();
+            addCourseStage = new Stage();
+            addCourseStage.setScene(new Scene(root));
+            addCourseStage.show();
 
 
 
@@ -192,6 +219,7 @@ public class MainWindowController implements Initializable{
 
         }
     }
+
 
 
 
