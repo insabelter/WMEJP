@@ -3,7 +3,6 @@ package HandlersControllers;
 import classes.Firma;
 import classes.Kurs;
 import classes.Student;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +26,7 @@ public class MainWindowController implements Initializable{
     public static List<Kurs> alleKurse = new ArrayList<Kurs>();
     public static List<Firma> alleFirmen = new ArrayList<Firma>();
     Stage addCourseStage=null;
+    Stage editStudentStage=null;
 
 
 
@@ -85,6 +85,19 @@ public class MainWindowController implements Initializable{
         loadAddStudentWindow();}
         else if (!addStudentStage.isShowing()){
             addStudentStage.show();
+        }
+
+
+    }
+
+    @FXML
+    void editStudClick(ActionEvent event) {
+
+        //handling the opening of addStudent window to be only openable once at a time
+        if(editStudentStage==null){
+            loadEditStudentWindow();}
+        else if (!editStudentStage.isShowing()){
+            editStudentStage.show();
         }
 
 
@@ -189,6 +202,27 @@ public class MainWindowController implements Initializable{
             addStudentStage = new Stage();
             addStudentStage.setScene(new Scene(root));
             addStudentStage.show();
+
+
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+
+        }
+    }
+
+    private void loadEditStudentWindow(){
+        try{
+
+            //load addStudent window
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editStudent.fxml"));
+            Parent root= loader.load();
+
+            //show addStudent window
+            addCourseStage = new Stage();
+            addCourseStage.setScene(new Scene(root));
+            addCourseStage.show();
 
 
 
