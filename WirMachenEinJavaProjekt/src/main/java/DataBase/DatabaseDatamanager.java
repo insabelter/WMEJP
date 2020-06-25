@@ -1,5 +1,7 @@
 package DataBase;
 
+import classes.Kurs;
+
 import java.sql.*;
 import java.util.List;
 
@@ -31,6 +33,11 @@ public class DatabaseDatamanager {
             dm.lsStudienrichtung.fillArray(dm, conn);
             dm.lsStudiengang.fillArray(dm, conn);
             dm.lsFakultaet.fillArray(dm, conn);
+
+//            for (Kurs kurs:dm.lsKurs.list
+//                 ) {
+//                kurs.createName();
+//            }
 
             //Print
             dm.lsFirma.printArray();

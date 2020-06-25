@@ -20,8 +20,8 @@ public class StudentList extends DataArrayList<Student>{
                     rsBasicInformation.getString("VORNAME"),
                     rsBasicInformation.getString("NACHNAME"),
                     rsBasicInformation.getInt("Javakenntnisse"),
-                    null,
-                    null);
+                    null, //wird bei addSlave befüllt
+                    null); //wird bei addSlave befüllt
 
             //find Kurs
             int kurs_id = rsBasicInformation.getInt("KURS_ID");

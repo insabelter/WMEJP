@@ -79,7 +79,7 @@ public class Student implements HasID{
                 ", vorname='" + vorname + '\'' +
                 ", nachname='" + nachname + '\'' +
                 ", javakenntnisse=" + javakenntnisse +
-                ", kurs=" + kurs.getId() +
+                ", kurs=" + kurs.getName() +
                 ", firma=" + firma.getName() +
                 '}';
     }

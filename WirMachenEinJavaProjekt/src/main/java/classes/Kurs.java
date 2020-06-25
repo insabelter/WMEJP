@@ -27,7 +27,11 @@ public class Kurs implements HasID{
         this.emailVerteiler = emailVerteiler;
         this.studienrichtung = studienrichtung;
         this.students = students;
-//        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
+        this.name = "";
+    }
+
+    public void createName(){
+        this.name = studienrichtung.getStudiengang().getKuerzel()+jahrgang+studienrichtung.getKuerzel()+nummer;
     }
 
     public void addSlave(Student student) {

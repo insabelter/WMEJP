@@ -21,7 +21,7 @@ public class FirmaList extends DataArrayList<Firma>{
                     rsBasicInformation.getString("NAME"),
                     rsBasicInformation.getString("ANSPRECHPARTNER"),
                     rsBasicInformation.getString("ADRESSE"),
-                    new ArrayList<Student>()));
+                    new ArrayList<Student>())); //wird bei Studentenerstellung befüllt
         }
     }
 }

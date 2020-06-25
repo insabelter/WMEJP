@@ -24,8 +24,8 @@ public class KursList extends DataArrayList<Kurs>{
                     rsBasicInformation.getInt("NUMMER"),
                     rsBasicInformation.getString("RAUM"),
                     rsBasicInformation.getString("EMAILVERTEILER"),
-                    null, //findStudienrichtung(rsStudienrichtungen.getInt("STUDIENRICHTUNG_ID"))
-                    new ArrayList<Student>()));
+                    null,
+                    new ArrayList<Student>())); //wird bei Studentenerstellung befüllt
         }
     }
 }
