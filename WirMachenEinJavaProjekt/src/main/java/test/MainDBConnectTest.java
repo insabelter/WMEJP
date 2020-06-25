@@ -1,5 +1,6 @@
 package test;
 import classes.Fakultaet;
+import classes.Studiengang;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,9 +12,10 @@ public class MainDBConnectTest {
 
     public static void main(String[] args) {
         DatabaseDatamanager dbm = new DatabaseDatamanager();
-        List<Fakultaet> lsFakultaet = dbm.getAll();
-        for (Fakultaet x:lsFakultaet) {
-            System.out.println(x);
+        List<Studiengang> lsFakultaet = dbm.getAll();
+        for (Studiengang x:lsFakultaet) {
+            //System.out.println(x);
+            //System.out.println(x.getId());
         }
     }
 }

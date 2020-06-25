@@ -1,5 +1,9 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class Studiengang {
@@ -10,22 +14,39 @@ public class Studiengang {
     private Fakultaet fakultaet;
     private List<Studienrichtung>studienrichtungs;
 
-
-    public Studiengang(String abkuerzung, List<Studienrichtung> studienrichtungs){
-        this.name = abkuerzung;
-        this.studienrichtungs = studienrichtungs;
+    public Studiengang(int id, String name, String kuerzel, String studienGangsleiter, Fakultaet fakultaet, List<Studienrichtung> studienrichtungs) {
+        this.id = id;
+        this.name = name;
+        this.kuerzel = kuerzel;
+        this.studienGangsleiter = studienGangsleiter;
+        this.fakultaet = fakultaet;
         this.studienrichtungs = studienrichtungs;
     }
-    public Studiengang(int id,String abkuerzung,List<Studienrichtung>studienrichtungs){
-        this.id=id;
-        this.name = abkuerzung;
-        this.studienrichtungs = studienrichtungs;
 
+    static public void fillArray(List<Studiengang> toFill, Connection conn) throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDIENGANG");
+
+        //add objects to List
+        while (rsBasicInformation.next()) {
+            toFill.add(new Studiengang(
+                    rsBasicInformation.getInt("STUDIENGANG_ID"),
+                    rsBasicInformation.getString("NAME"),
+                    rsBasicInformation.getString("KUERZEL"),
+                    rsBasicInformation.getString("STUDIENGANGSLEITER"),
+                    null,
+                    null));
+        }
     }
 
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setName(String name) {
