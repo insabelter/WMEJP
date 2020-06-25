@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -149,13 +148,13 @@ public class MainWindowController implements Initializable{
                     if(!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())){
                         return false;
                     }
-                    if(!studienrichtungCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getName())){
+                    else if(!studienrichtungCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getName())){
                         return false;
                     }
-                    if(!kursCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getName())){
+                    else if(!kursCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getName())){
                         return false;
                     }
-                    if(javaCombobox.getSelectionModel().getSelectedItem() != student.getJavakenntnisse()){
+                    else if(javaCombobox.getSelectionModel().getSelectedItem() != student.getJavakenntnisse()){
                         return false;
                     }
 

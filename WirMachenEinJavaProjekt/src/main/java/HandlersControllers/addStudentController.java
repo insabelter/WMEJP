@@ -1,5 +1,7 @@
 package HandlersControllers;
 
+import classes.Kurs;
+import classes.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +20,6 @@ import java.util.ResourceBundle;
 public class addStudentController implements Initializable {
 
     private TextField studList;
-
 
 
     @FXML
@@ -50,9 +51,16 @@ public class addStudentController implements Initializable {
         }
         //Create Student based on User Inputs
         else{
-          Student newbie= new Student(Integer.parseInt(numberField.getText()),nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),new Firma(3, "Atos", "Peter", "123", new ArrayList<Student>()));
-          MainHandler.dm.lsStudent.list.add(newbie);
-          MainHandler.mainWindowController1.insertInTable(newbie);
+            Student newbie=null;
+            try{
+                newbie= new Student(Integer.parseInt(numberField.getText()),nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),companyField.getText());
+            }catch(NumberFormatException n){
+                return;
+            }
+
+            MainHandler.dbm.insert("STUDENT","vorname,nachname,javakenntnisse,kurs_id,firma_id","'"+newbie.getVorname()+"','"+newbie.getNachname()+"',"+newbie.getJavakenntnisse()+","+newbie.getKurs().getId()+","+"4");
+            MainHandler.dm.lsStudent.list.add(newbie);
+            MainHandler.mainWindowController1.insertInTable(newbie);
         }
 
     }
@@ -71,7 +79,7 @@ public class addStudentController implements Initializable {
             @Override
             public String toString(Kurs k) {
                 if (k==null) return "";
-                else{return k.getRaum();}
+                else{return k.getName();}
             }
 
             @Override

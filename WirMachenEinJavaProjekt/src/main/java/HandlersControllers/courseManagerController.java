@@ -50,7 +50,7 @@ public class courseManagerController implements Initializable {
             @Override
             public String toString(Kurs k) {
                 if (k==null) return "";
-                else{return k.getRaum();}
+                else{return k.getName();}
             }
 
             @Override

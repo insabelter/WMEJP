@@ -1,6 +1,6 @@
 package HandlersControllers;
 
-import classes.Firma;
+
 import classes.Kurs;
 import classes.Student;
 import javafx.event.ActionEvent;
@@ -59,7 +59,7 @@ public class editStudentController implements Initializable {
             @Override
             public String toString(Kurs k) {
                 if (k==null) return "";
-                else{return k.getRaum();}
+                else{return k.getName();}
             }
 
             @Override
