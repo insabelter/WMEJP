@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import test.DataManager;
 import test.DatabaseDatamanager;
 
@@ -27,6 +28,9 @@ public class MainWindowController implements Initializable{
     Stage addStudentStage=null;
     Stage addCourseStage=null;
     Stage editStudentStage=null;
+    FXMLLoader addStudentLoader;
+    FXMLLoader editStudentLoader;
+    FXMLLoader addCourseLoader;
 
 
 
@@ -59,7 +63,7 @@ public class MainWindowController implements Initializable{
     private ComboBox studienrichtungCombobox;
 
     @FXML
-    private ComboBox kursCombobox;
+    private ComboBox<Kurs> kursCombobox;
 
     @FXML
     private ComboBox javaCombobox;
@@ -70,8 +74,9 @@ public class MainWindowController implements Initializable{
 
     @FXML
     void manageCourses(ActionEvent event) {
+
         if(addCourseStage==null){
-            loadAddCourseWindow();}
+            addCourseLoader = loadAddCourseWindow();}
         else if (!addCourseStage.isShowing()){
             addCourseStage.show();
         }
@@ -82,7 +87,7 @@ public class MainWindowController implements Initializable{
 
         //handling the opening of addStudent window to be only openable once at a time
         if(addStudentStage==null){
-        loadAddStudentWindow();}
+            addStudentLoader = loadAddStudentWindow();}
         else if (!addStudentStage.isShowing()){
             addStudentStage.show();
         }
@@ -91,14 +96,18 @@ public class MainWindowController implements Initializable{
     }
 
     @FXML
-    void editStudClick(ActionEvent event) {
+    void editStudent(ActionEvent event) {
 
         //handling the opening of addStudent window to be only openable once at a time
         if(editStudentStage==null){
-            loadEditStudentWindow();}
+            editStudentLoader = loadEditStudentWindow();}
         else if (!editStudentStage.isShowing()){
             editStudentStage.show();
         }
+
+        editStudentController editStudentController=editStudentLoader.getController();
+        Student s = studList.getSelectionModel().getSelectedItem();
+        editStudentController.setInformation(s);
 
 
     }
@@ -131,10 +140,7 @@ public class MainWindowController implements Initializable{
 
     }
 
-    @FXML
-    void editStudent(){
 
-    }
 
     @FXML
     void greyOut(){
@@ -177,15 +183,25 @@ public class MainWindowController implements Initializable{
         studList.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("firma"));
         studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javakenntnisse"));
 
-
         //put all student of db in table
         studList.getItems().addAll(MainHandler.dm.lsStudent);
 
+        kursCombobox.setConverter(new StringConverter<Kurs>() {
+            @Override
+            public String toString(Kurs k) {
+                if (k==null) return "";
+                else{return k.getRaum();}
+            }
 
+            @Override
+            public Kurs fromString(String s) {
+                return null;
+            }
+        });
 
         fakultaetDropdown.getItems().addAll("Alle","Technik","Wirtschaft","Gesundheit");
         studienrichtungCombobox.getItems().addAll("Alle","Informatik");
-        kursCombobox.getItems().addAll("Alle","TINF19AI2","TINF19AI1");
+        kursCombobox.getItems().addAll(MainHandler.dm.lsKurs);
         javaCombobox.getItems().addAll("Alle","0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
         delStudent.setDisable(true);
@@ -203,30 +219,59 @@ public class MainWindowController implements Initializable{
         //add student object to Table
         studList.getItems().add(stud);
     }
-    private void loadAddStudentWindow(){
+    private FXMLLoader loadAddStudentWindow(){
+        FXMLLoader loader=null;
         try{
 
             //load addStudent window
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addStudent.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/addStudent.fxml"));
             Parent root= loader.load();
 
             //show addStudent window
             addStudentStage = new Stage();
             addStudentStage.setScene(new Scene(root));
             addStudentStage.show();
+
+
+        }
+        catch (IOException e){
+
+            e.printStackTrace();
+
+        }
+        return loader;
+    }
+
+    private FXMLLoader loadEditStudentWindow(){
+        FXMLLoader loader=null;
+        try{
+
+            //load addStudent window
+            loader = new FXMLLoader(getClass().getResource("/editStudent.fxml"));
+            Parent root= loader.load();
+
+            //show addStudent window
+            editStudentStage = new Stage();
+            editStudentStage.setScene(new Scene(root));
+            editStudentStage.show();
+
+
+
         }
         catch (IOException e){
             e.printStackTrace();
 
         }
+        return loader;
     }
 
-    private void loadEditStudentWindow(){
-        try{
+    private FXMLLoader loadAddCourseWindow(){
+        FXMLLoader loader=null;
+        try {
 
             //load addStudent window
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editStudent.fxml"));
-            Parent root= loader.load();
+            loader = new FXMLLoader(getClass().getResource("/courseManager.fxml"));
+            Parent root = loader.load();
 
             //show addStudent window
             addCourseStage = new Stage();
@@ -234,33 +279,12 @@ public class MainWindowController implements Initializable{
             addCourseStage.show();
 
 
-
         }
         catch (IOException e){
             e.printStackTrace();
 
         }
-    }
-
-    private void loadAddCourseWindow(){
-        try{
-
-            //load addStudent window
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/courseManager.fxml"));
-            Parent root= loader.load();
-
-            //show addStudent window
-            addCourseStage = new Stage();
-            addCourseStage.setScene(new Scene(root));
-            addCourseStage.show();
-
-
-
-        }
-        catch (IOException e){
-            e.printStackTrace();
-
-        }
+        return loader;
     }
 
 
