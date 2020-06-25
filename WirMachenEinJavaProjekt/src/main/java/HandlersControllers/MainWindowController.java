@@ -1,8 +1,7 @@
 package HandlersControllers;
 
-import classes.Firma;
-import classes.Kurs;
-import classes.Student;
+import classes.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +13,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import test.DataManager;
-import test.DatabaseDatamanager;
+
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -39,10 +36,14 @@ public class MainWindowController implements Initializable{
     private TableView<Student> studList;
 
     @FXML
-    private TableColumn<Student,String> fakultaet;
+    private TableColumn<Student,String> fakultaetColumn;
 
     @FXML
-    private TableColumn<Student,String> studienrichtung;
+    private TableColumn<Student,String> studienrichtungColumn;
+    @FXML
+    private TableColumn<Student,String> kursColumn;
+    @FXML
+    private TableColumn<Student,String> firmaColumn;
 
     @FXML
     private Button addStudent;
@@ -57,20 +58,32 @@ public class MainWindowController implements Initializable{
     private Button addCourse;
 
     @FXML
-    private ComboBox fakultaetDropdown;
+    private Button clearFilters;
 
     @FXML
-    private ComboBox studienrichtungCombobox;
+    private ComboBox<Fakultaet> fakultaetDropdown;
+
+    @FXML
+    private ComboBox<Studienrichtung> studienrichtungCombobox;
 
     @FXML
     private ComboBox<Kurs> kursCombobox;
 
     @FXML
-    private ComboBox javaCombobox;
+    private ComboBox<Integer> javaCombobox;
 
     @FXML
     private TextField numberField;
 
+    @FXML
+    void clearFilters(){
+        javaCombobox.getSelectionModel().clearSelection();
+        kursCombobox.getSelectionModel().clearSelection();
+        studienrichtungCombobox.getSelectionModel().clearSelection();
+        fakultaetDropdown.getSelectionModel().clearSelection();
+
+        studList.getItems().addAll(MainHandler.dm.lsStudent.list);
+    }
 
     @FXML
     void manageCourses(ActionEvent event) {
@@ -120,23 +133,39 @@ public class MainWindowController implements Initializable{
     }
 
     @FXML
-    void filterList(){
-        FilteredList<Student> filteredList= new FilteredList<>(studList.getItems());
-        //wip
-        filteredList.setPredicate(new Predicate<Student>() {
-            @Override
-            public boolean test(Student student) {
-                if(!student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName().equals(fakultaetDropdown.getSelectionModel().getSelectedItem().toString())&&!fakultaetDropdown.getSelectionModel().getSelectedItem().toString().equals("Alle")){
-                    return false;
-                }
-                if(!student.getKurs().getStudienrichtung().getName().equals(studienrichtungCombobox.getSelectionModel().getSelectedItem().toString())&&!studienrichtungCombobox.getSelectionModel().getSelectedItem().toString().equals("Alle")){
-                    return false;
-                }
+        void filterList(){
+            studList.getItems().clear();
+            studList.getItems().addAll(MainHandler.dm.lsStudent.list);
+            FilteredList<Student> filteredList= new FilteredList<>(studList.getItems());
 
 
-                return true;
-            }
-        });
+            //NOT WORKING YET!
+
+
+
+            filteredList.setPredicate(new Predicate<Student>() {
+                @Override
+                public boolean test(Student student) {
+                    if(!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())){
+                        return false;
+                    }
+                    if(!studienrichtungCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getName())){
+                        return false;
+                    }
+                    if(!kursCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getName())){
+                        return false;
+                    }
+                    if(javaCombobox.getSelectionModel().getSelectedItem() != student.getJavakenntnisse()){
+                        return false;
+                    }
+
+
+                    return true;
+                }
+            });
+
+            studList.getItems().clear();
+            studList.getItems().addAll(filteredList);
 
     }
 
@@ -167,30 +196,31 @@ public class MainWindowController implements Initializable{
                 SelectionMode.MULTIPLE
         );
         //initialize the Table in main window to properly take Student objects as rows
-        try{
-            //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
-            //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
-
-        }catch (NullPointerException n){
-            System.out.println("Fakultät und studienrichtung noch gewollt leer!");
-        }
-
+        //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
+        //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
+        kursColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getName()));
+        firmaColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getFirma().getName()));
         //initialize the Table in main window to properly take Student objects as rows
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("vorname"));
         studList.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("nachname"));
-        studList.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("kurs"));
         studList.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("matrikelnummer"));
-        studList.getColumns().get(6).setCellValueFactory(new PropertyValueFactory<>("firma"));
         studList.getColumns().get(7).setCellValueFactory(new PropertyValueFactory<>("javakenntnisse"));
 
         //put all student of db in table
-        studList.getItems().addAll(MainHandler.dm.lsStudent);
+        studList.getItems().addAll(MainHandler.dm.lsStudent.list);
 
+
+
+
+
+
+
+        //attach stringconverters for Kurs
         kursCombobox.setConverter(new StringConverter<Kurs>() {
             @Override
             public String toString(Kurs k) {
                 if (k==null) return "";
-                else{return k.getRaum();}
+                else{return k.getName();}
             }
 
             @Override
@@ -198,12 +228,35 @@ public class MainWindowController implements Initializable{
                 return null;
             }
         });
+        fakultaetDropdown.setConverter(new StringConverter<Fakultaet>() {
+            @Override
+            public String toString(Fakultaet fakultaet) {
+                if(fakultaet==null){return "-";}
+                else{return fakultaet.getName();}
+            }
 
-        fakultaetDropdown.getItems().addAll("Alle","Technik","Wirtschaft","Gesundheit");
-        studienrichtungCombobox.getItems().addAll("Alle","Informatik");
-        kursCombobox.getItems().addAll(MainHandler.dm.lsKurs);
-        javaCombobox.getItems().addAll("Alle","0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+            @Override
+            public Fakultaet fromString(String s) {
+                return null;
+            }
+        });
+        studienrichtungCombobox.setConverter(new StringConverter<Studienrichtung>() {
+            @Override
+            public String toString(Studienrichtung studienrichtung) {
+                if (studienrichtung==null){return "-";}
+                else{return studienrichtung.getName();}
+            }
 
+            @Override
+            public Studienrichtung fromString(String s) {
+                return null;
+            }
+        });
+
+        fakultaetDropdown.getItems().addAll(MainHandler.dm.lsFakultaet.list);
+        studienrichtungCombobox.getItems().addAll(MainHandler.dm.lsStudienrichtung.list);
+        kursCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
+        javaCombobox.getItems().addAll(0,1,2,3,4,5,6,7,8,9,10);
         delStudent.setDisable(true);
         editStudent.setDisable(true);
 

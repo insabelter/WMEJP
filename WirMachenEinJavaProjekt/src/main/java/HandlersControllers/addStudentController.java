@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,8 +53,8 @@ public class addStudentController implements Initializable {
         }
         //Create Student based on User Inputs
         else{
-          Student newbie= new Student(numberField.getText(),nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),new Firma(3, "Atos", "Peter", "123", new ArrayList<Student>()));
-
+          Student newbie= new Student(Integer.parseInt(numberField.getText()),nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),new Firma(3, "Atos", "Peter", "123", new ArrayList<Student>()));
+          MainHandler.dm.lsStudent.list.add(newbie);
           MainHandler.mainWindowController1.insertInTable(newbie);
         }
 
@@ -69,7 +70,21 @@ public class addStudentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // add options to dropdown
 
-        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs);
+        courseDropdown.setConverter(new StringConverter<Kurs>() {
+            @Override
+            public String toString(Kurs k) {
+                if (k==null) return "";
+                else{return k.getRaum();}
+            }
+
+            @Override
+            public Kurs fromString(String s) {
+                return null;
+            }
+        });
+
+
+        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs.list);
         courseDropdown.getSelectionModel().selectFirst();
     }
 

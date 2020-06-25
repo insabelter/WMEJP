@@ -1,5 +1,7 @@
 package classes;
 
+import javafx.fxml.Initializable;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +37,7 @@ public class Student implements HasID{
         //add objects to List
         while(rsBasicInformation.next()){
             toFill.add(new Student(
-                    String.valueOf(rsBasicInformation.getInt("MATRIKEL_NR")),
+                    rsBasicInformation.getInt("MATRIKEL_NR"),
                     rsBasicInformation.getString("VORNAME"),
                     rsBasicInformation.getString("NACHNAME"),
                     rsBasicInformation.getInt("Javakenntnisse"),
@@ -45,11 +47,11 @@ public class Student implements HasID{
 
     }
 
-    public String getMatrikelnummer() {
+    public Integer getMatrikelnummer() {
         return matrikelnummer;
     }
 
-    public void setMatrikelnummer(String matrikelnummer) {
+    public void setMatrikelnummer(Integer matrikelnummer) {
         this.matrikelnummer = matrikelnummer;
     }
 

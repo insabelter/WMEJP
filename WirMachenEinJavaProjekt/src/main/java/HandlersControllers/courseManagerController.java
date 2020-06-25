@@ -58,7 +58,7 @@ public class courseManagerController implements Initializable {
                 return null;
             }
         });
-        courseCombobox.getItems().addAll(MainHandler.dm.lsKurs);
+        courseCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
 
     }
 }

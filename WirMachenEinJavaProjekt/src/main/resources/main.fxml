@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -26,6 +29,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
+                  <Button fx:id="clearFilters" layoutX="33.0" layoutY="264.0" mnemonicParsing="false" onAction="#clearFilters" text="Clear" />
                </children></Pane>
             <Pane>
                <children>
@@ -38,18 +42,27 @@
                   <Button fx:id="delStudent" layoutX="47.0" layoutY="92.0" mnemonicParsing="false" onAction="#delStudentOnClick" prefHeight="25.0" prefWidth="126.0" text="Student exmatrikulieren" />
                   <Button fx:id="addCourse" layoutX="47.0" layoutY="141.0" mnemonicParsing="false" onAction="#manageCourses" prefHeight="25.0" prefWidth="123.0" text="Kurse verwalten" />
                   <Button fx:id="editStudent" layoutX="47.0" layoutY="190.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="25.0" prefWidth="126.0" text="Student bearbeiten" />
+                  <MenuBar layoutY="339.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
                </children></Pane>
         </items>
       </SplitPane>
       <TableView fx:id="studList" cache="true" editable="true" focusTraversable="false" onMouseClicked="#greyOut" prefHeight="698.0" prefWidth="316.0">
          <columns>
-            <TableColumn fx:id="fakultaet" prefWidth="75.0" text="Fakultät" />
-            <TableColumn fx:id="studienrichtung" prefWidth="131.19998168945312" text="Studienrichtung" />
+            <TableColumn fx:id="fakultaetColumn" prefWidth="75.0" text="Fakultät" />
+            <TableColumn fx:id="studienrichtungColumn" prefWidth="131.19998168945312" text="Studienrichtung" />
             <TableColumn prefWidth="139.20004272460938" text="Vorname" />
             <TableColumn prefWidth="151.0" resizable="false" text="Nachname" />
-            <TableColumn prefWidth="100.0" resizable="false" text="Kurs" />
+            <TableColumn fx:id="kursColumn" prefWidth="100.0" resizable="false" text="Kurs" />
             <TableColumn prefWidth="125.0" resizable="false" text="Mat.-Nr," />
-            <TableColumn prefWidth="191.0" resizable="false" text="Firma" />
+            <TableColumn fx:id="firmaColumn" prefWidth="191.0" resizable="false" text="Firma" />
             <TableColumn prefWidth="110.0" resizable="false" text="Java Kenntnisse" />
          </columns>
       </TableView>

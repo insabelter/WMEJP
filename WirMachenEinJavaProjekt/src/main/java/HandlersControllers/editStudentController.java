@@ -42,7 +42,7 @@ public class editStudentController implements Initializable {
         nameField.setText(s.getVorname());
         lastNameField.setText(s.getNachname());
         courseDropdown.getSelectionModel().select(s.getKurs());
-        numberField.setText(s.getMatrikelnummer());
+        numberField.setText(String.valueOf(s.getMatrikelnummer()));
         //companyField.setText(s.getFirma().getName());
         javaSlider.setValue(s.getJavakenntnisse());
 
@@ -69,7 +69,7 @@ public class editStudentController implements Initializable {
         });
 
 
-        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs);
+        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs.list);
         courseDropdown.getSelectionModel().selectFirst();
     }
 }
