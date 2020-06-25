@@ -1,8 +1,6 @@
 package test;
 
-import classes.Fakultaet;
-import classes.Studiengang;
-import classes.Studienrichtung;
+import classes.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,9 +19,12 @@ public class DatabaseDatamanager {
     Connection conn = null;
     Statement stmt = null;
 
-    List<Fakultaet> lsFakultaet = new ArrayList<>();
-    List<Studiengang> lsStudiengang = new ArrayList<>();
+    List<Student> lsStudent = new ArrayList<>();
+    List<Firma> lsFirma = new ArrayList<>();
+    List<Kurs> lsKurs = new ArrayList<>();
     List<Studienrichtung> lsStudienrichtung = new ArrayList<>();
+    List<Studiengang> lsStudiengang = new ArrayList<>();
+    List<Fakultaet> lsFakultaet = new ArrayList<>();
 
     public List<Studiengang> getAll(){
 
@@ -37,41 +38,20 @@ public class DatabaseDatamanager {
             //STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            //Fakultaeten
-            rs = getAllX("fakultaet");
-            //add objekts to List
-            while(rs.next()){
-                lsFakultaet.add(new Fakultaet(rs.getInt("FAKULTAET_ID"),rs.getString("name")));
-            }
+            //STEP 3: Fill Arrays
 
-            //studiengang
-            rs = getAllX("studiengang");
-            //add objekts to List
-            while(rs.next()){
-                Studiengang i = new Studiengang(rs.getInt("studiengang_ID"),rs.getString("name"),rs.getString("kuerzel"),rs.getString("Studiengangsleiter"));
-
-                for(Fakultaet x: lsFakultaet){
-                    if(x.getId()==rs.getInt("fakultaet_ID")){
-                        x.addSlave(i);
-                        i.setFakultaet(x);
-
-                        System.out.println(i.getFakultaet());
-
-                    }
-                }
-                lsStudiengang.add(i);
-            }
-
-            //studienrichtung
-            rs = getAllX("studienrichtung");
-            //add objekts to List
-            while(rs.next()){
-                lsStudienrichtung.add(new Studienrichtung(rs.getInt("Studienrichtung_id"),rs.getString("name")));
-            }
-
-
-
-
+            //fill lsStudent
+            Student.fillArray(lsStudent, conn);
+            //fill lsFirma
+            Firma.fillArray(lsFirma, conn);
+            //fill lsKurs
+            Kurs.fillArray(lsKurs, conn);
+            //fill lsStudienrichtung
+            Studienrichtung.fillArray(lsStudienrichtung, conn);
+            //fill lsStudiengang
+            Studiengang.fillArray(lsStudiengang, conn);
+            //fill lsFakultaet
+            Fakultaet.fillArray(lsFakultaet, conn);
             // STEP 4: Clean-up environment
             stmt.close();
             conn.close();
@@ -96,9 +76,9 @@ public class DatabaseDatamanager {
         }
         return lsStudiengang;
     }
-    private ResultSet getAllX(String klass) throws SQLException { //"SELECT * FROM "+klass+";"  -> gibt Resultset aud der DB zurück.'
+    private ResultSet getAllX(String klasse) throws SQLException { //"SELECT * FROM "+klass+";"  -> gibt Resultset aud der DB zurück.'
         stmt = conn.createStatement();
-        String sql =  "SELECT * FROM "+klass+";";
+        String sql =  "SELECT * FROM "+klasse+";";
         return stmt.executeQuery(sql);
     }
 }

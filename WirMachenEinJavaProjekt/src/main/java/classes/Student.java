@@ -1,24 +1,48 @@
 package classes;
 
-public class Student {
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+public class Student{
     //this is a very basic Student class just for testing purposes, WIP
+
+    private String matrikelnummer;
+    private String vorname;
+    private String nachname;
     private int javakenntnisse;
-    private String firstname;
-    private String lastname;
+
     private Kurs kurs;
     private Firma firma;
-    private String matrikelnummer;
 
-    public Student(String firstname, String lastname, String matrikelnummer, int javakenntnisse){
-        this(firstname,lastname, matrikelnummer,new Kurs("-"),new Firma("-"), javakenntnisse);
-    }
-    public Student(String firstname, String lastname, String matrikelnummer, Kurs kurs, Firma company, int javakenntnisse){
-        this.firstname =firstname;
-        this.lastname = lastname;
-        this.kurs = kurs;
+
+    public Student(String matrikelnummer, String vorname, String nachname, int javakenntnisse, Kurs kurs, Firma firma){
         this.matrikelnummer = matrikelnummer;
-        this.firma=company;
+        this.vorname = vorname;
+        this.nachname = nachname;
         this.javakenntnisse = javakenntnisse;
+        this.kurs = kurs;
+        this.firma = firma;
+    }
+
+    public static void fillArray(List<Student> toFill, Connection conn) throws SQLException {
+
+        Statement stmt = conn.createStatement();
+        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDENT");
+
+        //add objects to List
+        while(rsBasicInformation.next()){
+            toFill.add(new Student(
+                    String.valueOf(rsBasicInformation.getInt("MATRIKEL_NR")),
+                    rsBasicInformation.getString("VORNAME"),
+                    rsBasicInformation.getString("NACHNAME"),
+                    rsBasicInformation.getInt("Javakenntnisse"),
+                    null,
+                    null));
+        }
+
     }
 
     public int getJavakenntnisse() {
@@ -30,19 +54,19 @@ public class Student {
     }
 
     public String getFirstname() {
-        return firstname;
+        return vorname;
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.vorname = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return nachname;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.nachname = lastname;
     }
 
     public Kurs getKurs() {
@@ -64,5 +88,6 @@ public class Student {
     public String getMatrikelnummer() {
         return matrikelnummer;
     }
+
 
 }
