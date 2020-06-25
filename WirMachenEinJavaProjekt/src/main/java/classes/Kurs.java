@@ -27,7 +27,7 @@ public class Kurs implements HasID{
         this.emailVerteiler = emailVerteiler;
         this.studienrichtung = studienrichtung;
         this.students = students;
-        this.name = "";
+        this.name = "defaultName";
     }
 
     public void createName(){
@@ -116,7 +116,7 @@ public class Kurs implements HasID{
                 ", nummer=" + nummer +
                 ", raum='" + raum + '\'' +
                 ", emailVerteiler='" + emailVerteiler + '\'' +
-                ", studienrichtung=" + studienrichtung +
+                ", studienrichtung=" + studienrichtung.getName() +
                 ", students=" + students +
                 ", name='" + name + '\'' +
                 '}';
