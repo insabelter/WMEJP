@@ -32,7 +32,7 @@ public class Firma {
                     rsBasicInformation.getInt("FIRMA_ID"),
                     rsBasicInformation.getString("NAME"),
                     rsBasicInformation.getString("ANSPRECHPARTNER"),
-                    rsBasicInformation.getString("ANSPRECHPARTNER"),
+                    rsBasicInformation.getString("ADRESSE"),
                     null));
         }
 
@@ -65,7 +65,12 @@ public class Firma {
 
     @Override
     public String toString() {
-        return name;
+        return "Firma{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ansprechpartner='" + ansprechpartner + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", studenten=" + studenten +
+                '}';
     }
-
 }

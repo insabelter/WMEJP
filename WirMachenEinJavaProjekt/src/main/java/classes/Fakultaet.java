@@ -30,7 +30,7 @@ public class Fakultaet {
             toFill.add(new Fakultaet(
                     rsBasicInformation.getInt("FAKULTAET_ID"),
                     rsBasicInformation.getString("NAME"),
-                    rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
+                    null, //rsBasicInformation.getString("VERANTWORTLICHER"),//ToDo!! Add to DB
                     null));
         }
     }
@@ -70,7 +70,11 @@ public class Fakultaet {
 
     @Override
     public String toString() {
-        return String.valueOf(id)+" "+name;
+        return "Fakultaet{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", verantwortlicher='" + verantwortlicher + '\'' +
+                ", studiengaenge=" + studiengaenge +
+                '}';
     }
-
 }

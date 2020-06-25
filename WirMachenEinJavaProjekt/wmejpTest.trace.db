@@ -1,0 +1,16 @@
+2020-06-25 15:28:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "STUDENT" nicht gefunden
+Table "STUDENT" not found; SQL statement:
+SELECT * FROM STUDENT [42102-199]
+2020-06-25 15:30:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "STUDENT" nicht gefunden
+Table "STUDENT" not found; SQL statement:
+SELECT * FROM STUDENT [42102-199]
+2020-06-25 15:31:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "FIRMA" nicht gefunden
+Table "FIRMA" not found; SQL statement:
+SELECT * FROM FIRMA [42102-199]
+2020-06-25 15:31:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "STUDENT" nicht gefunden
+Table "STUDENT" not found; SQL statement:
+SELECT * FROM STUDENT [42102-199]

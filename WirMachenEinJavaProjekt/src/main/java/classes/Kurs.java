@@ -33,7 +33,7 @@ public class Kurs {
 
         Statement stmt = conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM KURS");
-        ResultSet rsStudienrichtungen = stmt.executeQuery("SELECT KURS.KURS_ID, STUDIENRICHTUNG.NAME FROM KURS JOIN STUDIENRICHTUNG ON KURS.STUDIENRICHTUNG_ID = STUDIENRICHTUNG.STUDIENRICHTUNG_ID");
+        //ResultSet rsStudienrichtungen = stmt.executeQuery("SELECT KURS.KURS_ID, STUDIENRICHTUNG.NAME FROM KURS JOIN STUDIENRICHTUNG ON KURS.STUDIENRICHTUNG_ID = STUDIENRICHTUNG.STUDIENRICHTUNG_ID");
 
         //add objects to List
         while(rsBasicInformation.next()){

@@ -12,15 +12,15 @@ public class Studiengang {
     private String kuerzel;
     private String studienGangsleiter;
     private Fakultaet fakultaet;
-    private List<Studienrichtung>studienrichtungs;
+    private List<Studienrichtung>studienrichtungen;
 
-    public Studiengang(int id, String name, String kuerzel, String studienGangsleiter, Fakultaet fakultaet, List<Studienrichtung> studienrichtungs) {
+    public Studiengang(int id, String name, String kuerzel, String studienGangsleiter, Fakultaet fakultaet, List<Studienrichtung> studienrichtungen) {
         this.id = id;
         this.name = name;
         this.kuerzel = kuerzel;
         this.studienGangsleiter = studienGangsleiter;
         this.fakultaet = fakultaet;
-        this.studienrichtungs = studienrichtungs;
+        this.studienrichtungen = studienrichtungen;
     }
 
     static public void fillArray(List<Studiengang> toFill, Connection conn) throws SQLException {
@@ -39,7 +39,6 @@ public class Studiengang {
                     null));
         }
     }
-
 
     public String getName() {
         return name;
@@ -78,21 +77,28 @@ public class Studiengang {
     }
 
     public List<Studienrichtung>getStudienrichtungs() {
-        return studienrichtungs;
+        return studienrichtungen;
     }
 
 
     public void setStudienrichtungs(List<Studienrichtung>studienrichtungs) {
-        this.studienrichtungs = studienrichtungs;
+        this.studienrichtungen = studienrichtungs;
     }
 
     public void addSlave(Studienrichtung studienrichtung) {
-        this.studienrichtungs.add(studienrichtung);
+        this.studienrichtungen.add(studienrichtung);
         studienrichtung.setStudiengang(this);
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return "Studiengang{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", kuerzel='" + kuerzel + '\'' +
+                ", studienGangsleiter='" + studienGangsleiter + '\'' +
+                ", fakultaet=" + fakultaet +
+                ", studienrichtungs=" + studienrichtungen +
+                '}';
     }
 }

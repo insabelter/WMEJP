@@ -80,6 +80,12 @@ public class Studienrichtung {
 
     @Override
     public String toString() {
-        return this.name;
+        return "Studienrichtung{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", kuerzel='" + kuerzel + '\'' +
+                ", studiengang=" + studiengang +
+                ", kurse=" + kurse +
+                '}';
     }
 }
