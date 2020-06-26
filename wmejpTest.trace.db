@@ -33631,3 +33631,39 @@ SELECT * FROM STUDENT LIMIT [42001-200]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT * FROM STUDENT LIMIT[*]"; erwartet "NOT, EXISTS, INTERSECTS, UNIQUE"
 Syntax error in SQL statement "SELECT * FROM STUDENT LIMIT[*]"; expected "NOT, EXISTS, INTERSECTS, UNIQUE"; SQL statement:
 SELECT * FROM STUDENT LIMIT [42001-200]
+2020-06-25 21:15:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELEVT[*] *FROM STUDENT"; erwartet "SET, SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"
+Syntax error in SQL statement "SELEVT[*] *FROM STUDENT"; expected "SET, SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+SELEVT *FROM Student [42001-200]
+2020-06-25 21:17:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "UPDATE STUDENT SET FIRMA=(SELECT NAME FFROM FIRMA[*] WHERE FIRMA.FIRMA_ID=STUDENT.FIRMA.ID)"; erwartet ",, FROM, WHERE, GROUP, HAVING, WINDOW, QUALIFY, UNION, EXCEPT, MINUS, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, SAMPLE_SIZE, FOR, [, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"
+Syntax error in SQL statement "UPDATE STUDENT SET FIRMA=(SELECT NAME FFROM FIRMA[*] WHERE FIRMA.FIRMA_ID=STUDENT.FIRMA.ID)"; expected ",, FROM, WHERE, GROUP, HAVING, WINDOW, QUALIFY, UNION, EXCEPT, MINUS, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, SAMPLE_SIZE, FOR, [, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+UPDATE STUDENT SET FIRMA=(SELECT name FFROM Firma WHERE Firma.firma_id=Student.firma.id) [42001-200]
+2020-06-25 21:17:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Feld "STUDENT.FIRMA.ID" nicht gefunden
+Column "STUDENT.FIRMA.ID" not found; SQL statement:
+UPDATE STUDENT SET FIRMA=(SELECT name FROM Firma WHERE Firma.firma_id=Student.firma.id) [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.expression.condition.Comparison.optimize(Comparison.java:191)
+	at org.h2.command.dml.Select.prepare(Select.java:1209)
+	at org.h2.engine.Session.optimizeQueryExpression(Session.java:314)
+	at org.h2.expression.Subquery.optimize(Subquery.java:89)
+	at org.h2.command.dml.Update.prepare(Update.java:275)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1078)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1065)
+	at org.h2.server.web.WebThread.process(WebThread.java:178)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.base/java.lang.Thread.run(Thread.java:832)
