@@ -1,6 +1,6 @@
 package DataBase;
 
-import classes.Kurs;
+import classes.*;
 
 import java.sql.*;
 import java.util.List;
@@ -77,8 +77,42 @@ public class DatabaseDatamanager {
     public void insert(String TABLE,String COLUMNS, String VALUES){ //bsp:"INSERT INTO Fakultaet(name)VALUES('technik');"
         execStatement("INSERT INTO "+ TABLE + "("+ COLUMNS +")VALUES("+ VALUES+");");
     }
-    public void delete(String TABLE, String WHERE){ //bsp:"DELETE FROM Fakultaet WHERE fakultaet_id>4"
-        execStatement("DELETE FROM "+ TABLE +" WHERE "+WHERE+" ;");
+
+    //wip
+    public void delete(Object hasIDObjekt,DataManager dm){ //Übernimmt Objekt mit interface "hasID" un löscht es aus Übergebenen dm und DB
+
+        String Table = null;
+
+        if(hasIDObjekt instanceof HasID){
+
+            int id = ((HasID) hasIDObjekt).getId();
+
+            if(hasIDObjekt instanceof Student){
+                Table = "STUDENT";
+                dm.lsStudent.list.remove(hasIDObjekt);
+                execStatement("DELETE FROM "+ Table +" WHERE MATRIKEL_NR="+id+";");
+            }else{
+                if(hasIDObjekt instanceof Kurs){
+                    Table = "KURS";
+                    dm.lsKurs.list.remove(hasIDObjekt);
+
+                }else if(hasIDObjekt instanceof Studienrichtung){
+                    Table = "STUDIENRICHTUNG";
+                    dm.lsStudienrichtung.list.remove(hasIDObjekt);
+
+                }else if(hasIDObjekt instanceof Studiengang){
+                    Table = "STUDIENGANG";
+                    dm.lsStudiengang.list.remove(hasIDObjekt);
+
+                }else if(hasIDObjekt instanceof Fakultaet){
+                    Table = "FAKULTAET";
+                    dm.lsFakultaet.list.remove(hasIDObjekt);
+                }
+                execStatement("DELETE FROM "+ Table +" WHERE "+Table+"_ID ="+id+";");
+            }
+
+        }
+
     }
 
     //execStatement fürt ein beliebiges Statement ohne rückgabewert aus. Nutzung:savingfunction
