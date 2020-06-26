@@ -195,8 +195,8 @@ public class MainWindowController implements Initializable{
                 SelectionMode.MULTIPLE
         );
         //initialize the Table in main window to properly take Student objects as rows
-        //fakultaet.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
-        //studienrichtung.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
+        fakultaetColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName()));
+        studienrichtungColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getStudienrichtung().getName()));
         kursColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKurs().getName()));
         //initialize the Table in main window to properly take Student objects as rows
         studList.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("vorname"));
