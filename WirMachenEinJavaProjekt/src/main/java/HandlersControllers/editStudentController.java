@@ -43,7 +43,7 @@ public class editStudentController implements Initializable {
         lastNameField.setText(s.getNachname());
         courseDropdown.getSelectionModel().select(s.getKurs());
         numberField.setText(String.valueOf(s.getMatrikelnummer()));
-        //companyField.setText(s.getFirma().getName());
+        companyField.setText(s.getFirma());
         javaSlider.setValue(s.getJavakenntnisse());
 
     }

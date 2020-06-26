@@ -2,6 +2,7 @@ package HandlersControllers;
 
 import classes.*;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,10 +14,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.w3c.dom.Text;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -41,8 +46,6 @@ public class MainWindowController implements Initializable{
     private TableColumn<Student,String> studienrichtungColumn;
     @FXML
     private TableColumn<Student,String> kursColumn;
-    @FXML
-    private TableColumn<Student,String> firmaColumn;
 
     @FXML
     private Button addStudent;
@@ -80,7 +83,6 @@ public class MainWindowController implements Initializable{
         kursCombobox.getSelectionModel().clearSelection();
         studienrichtungCombobox.getSelectionModel().clearSelection();
         fakultaetDropdown.getSelectionModel().clearSelection();
-
         studList.getItems().addAll(MainHandler.dm.lsStudent.list);
     }
 
@@ -92,6 +94,8 @@ public class MainWindowController implements Initializable{
         else if (!addCourseStage.isShowing()){
             addCourseStage.show();
         }
+        courseManagerController courseManagerController = addCourseLoader.getController();
+
     }
 
     @FXML
@@ -128,43 +132,36 @@ public class MainWindowController implements Initializable{
     @FXML
     void delStudentOnClick(ActionEvent event) {
         //delete all selected
+        MainHandler.dm.lsStudent.list.removeAll(studList.getSelectionModel().getSelectedItems());
         studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
+
     }
 
     @FXML
-        void filterList(){
-            studList.getItems().clear();
-            studList.getItems().addAll(MainHandler.dm.lsStudent.list);
-            FilteredList<Student> filteredList= new FilteredList<>(studList.getItems());
+    void filterList(ActionEvent event){
+        studList.getItems().clear();
+        ObservableList<Student> actualList= studList.getItems();
+        FilteredList<Student> filteredList = new FilteredList<>(actualList);
 
+        studList.setItems(filteredList);
 
-            //NOT WORKING YET!
+        filteredList.setPredicate(new Predicate<Student>() {
+            @Override
+            public boolean test(Student student) {
 
-
-
-            filteredList.setPredicate(new Predicate<Student>() {
-                @Override
-                public boolean test(Student student) {
-                    if(!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())){
-                        return false;
-                    }
-                    else if(!studienrichtungCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getName())){
-                        return false;
-                    }
-                    else if(!kursCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getName())){
-                        return false;
-                    }
-                    else if(javaCombobox.getSelectionModel().getSelectedItem() != student.getJavakenntnisse()){
+                if(!(fakultaetDropdown.getSelectionModel().getSelectedItem()==null)) {
+                    if (!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())) {
                         return false;
                     }
 
-
-                    return true;
                 }
-            });
 
-            studList.getItems().clear();
-            studList.getItems().addAll(filteredList);
+
+
+
+                return true;
+            }
+        });
 
     }
 
@@ -207,11 +204,6 @@ public class MainWindowController implements Initializable{
 
         //put all student of db in table
         studList.getItems().addAll(MainHandler.dm.lsStudent.list);
-
-
-
-
-
 
 
         //attach stringconverters for Kurs
@@ -266,6 +258,16 @@ public class MainWindowController implements Initializable{
 
     }
 //main end
+
+    public boolean isDuplicate(Student s){
+        boolean b = false;
+        List<Integer> l= new LinkedList<>();
+        studList.getItems().forEach(student -> l.add(student.getMatrikelnummer()));
+        if (l.contains(s.getMatrikelnummer())){
+            b=true;
+        }
+        return b;
+    }
 
     public void insertInTable(Student stud){
         //add student object to Table
@@ -329,8 +331,6 @@ public class MainWindowController implements Initializable{
             addCourseStage = new Stage();
             addCourseStage.setScene(new Scene(root));
             addCourseStage.show();
-
-
         }
         catch (IOException e){
             e.printStackTrace();
