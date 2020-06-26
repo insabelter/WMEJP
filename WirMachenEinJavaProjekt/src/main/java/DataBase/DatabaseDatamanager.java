@@ -74,12 +74,48 @@ public class DatabaseDatamanager {
     public void update(String TABLE,String SET, String WHERE){ //bsp:"UPDATE Fakultaet SET name='geaendert' WHERE Fakultaet_ID>20;"
         execStatement("UPDATE "+ TABLE + " SET "+ SET +" WHERE "+ WHERE+";");
     }
-    public void insert(String TABLE,String COLUMNS, String VALUES){ //bsp:"INSERT INTO Fakultaet(name)VALUES('technik');"
+
+    //legacy
+    public void execinsert(String TABLE,String COLUMNS, String VALUES){ // legacy! bsp:"INSERT INTO Fakultaet(name)VALUES('technik');"
         execStatement("INSERT INTO "+ TABLE + "("+ COLUMNS +")VALUES("+ VALUES+");");
     }
 
-    //wip
-    public void delete(Object hasIDObjekt,DataManager dm){ //Übernimmt Objekt mit interface "hasID" un löscht es aus Übergebenen dm und DB
+    public void insert(Object hasIDObjekt,DataManager dm){ //inseriert das übergebene Objekt in DM und DB. Duplizierter code kann durch legacy-methode umgangen werden
+        String Table = null;
+
+        if(hasIDObjekt instanceof HasID){
+
+            if(hasIDObjekt instanceof Student){
+                Student castobj = ((Student) hasIDObjekt);
+                dm.lsStudent.list.add(castobj);
+                execStatement("INSERT INTO STUDENT(VORNAME,NACHNAME,JAVAKENNTNISSE,KURS_ID,FIRMA)VALUES('"+castobj.getVorname()+"','"+castobj.getNachname()+"',"+castobj.getJavakenntnisse()+","+castobj.getKurs().getId()+",'"+castobj.getFirma()+"';");
+
+            }else if(hasIDObjekt instanceof Kurs){
+                Kurs castobj = ((Kurs) hasIDObjekt);
+                dm.lsKurs.list.add(castobj);
+                execStatement("INSERT INTO KURS(JAHRGANG,NUMMER,RAUM,EMAILVERTEILER,STUDIENRICHTUNG_ID)VALUES("+castobj.getJahrgang()+","+castobj.getNummer()+",'"+castobj.getRaum()+"','"+castobj.getEmailVerteiler()+"',"+castobj.getStudienrichtung().getId()+";");
+
+            }else if(hasIDObjekt instanceof Studienrichtung){
+                Studienrichtung castobj = ((Studienrichtung) hasIDObjekt);
+                dm.lsStudienrichtung.list.add(castobj);
+                execStatement("INSERT INTO STUDIENRICHTUNG(NAME,KUERZEL,STUDIENGANG_ID)VALUES('"+castobj.getName()+"','"+castobj.getKuerzel()+"',"+castobj.getStudiengang().getId()+";");
+
+            }else if(hasIDObjekt instanceof Studiengang){
+                Studiengang castobj = ((Studiengang) hasIDObjekt);
+                dm.lsStudiengang.list.add(castobj);
+                execStatement("INSERT INTO STUDIENGANG(NAME,KUERZEL,STUDIENGANGSLEITER,FAKULTAET_ID)VALUES('"+castobj.getName()+"','"+castobj.getKuerzel()+"','"+castobj.getStudienGangsleiter()+"',"+castobj.getFakultaet().getId()+";");
+
+            }else if(hasIDObjekt instanceof Fakultaet){
+                Fakultaet castobj = ((Fakultaet) hasIDObjekt);
+                dm.lsFakultaet.list.add(castobj);
+                //execinsert("FAKULTAET","NAME","'"+ castobj.getName()+"'");
+                execStatement("INSERT INTO FAKULTAET(NAME)VALUES('"+ castobj.getName()+"');");
+            }
+        }
+    }
+
+
+    public void delete(Object hasIDObjekt,DataManager dm){ //Übernimmt Objekt mit interface "hasID" un löscht es aus übergebnene dm und DB
 
         String Table = null;
 
