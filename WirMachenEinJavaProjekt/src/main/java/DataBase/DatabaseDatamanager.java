@@ -76,7 +76,7 @@ public class DatabaseDatamanager {
     }
 
     //legacy
-    public void execinsert(String TABLE,String COLUMNS, String VALUES){ // legacy! bsp:"INSERT INTO Fakultaet(name)VALUES('technik');"
+    public void insert(String TABLE,String COLUMNS, String VALUES){ // legacy! bsp:"INSERT INTO Fakultaet(name)VALUES('technik');"
         execStatement("INSERT INTO "+ TABLE + "("+ COLUMNS +")VALUES("+ VALUES+");");
     }
 
@@ -88,22 +88,22 @@ public class DatabaseDatamanager {
             if(hasIDObjekt instanceof Student){
                 Student castobj = ((Student) hasIDObjekt);
                 dm.lsStudent.list.add(castobj);
-                execStatement("INSERT INTO STUDENT(VORNAME,NACHNAME,JAVAKENNTNISSE,KURS_ID,FIRMA)VALUES('"+castobj.getVorname()+"','"+castobj.getNachname()+"',"+castobj.getJavakenntnisse()+","+castobj.getKurs().getId()+",'"+castobj.getFirma()+"';");
+                execStatement("INSERT INTO STUDENT(VORNAME,NACHNAME,JAVAKENNTNISSE,KURS_ID,FIRMA)VALUES('"+castobj.getVorname()+"','"+castobj.getNachname()+"',"+castobj.getJavakenntnisse()+","+castobj.getKurs().getId()+",'"+castobj.getFirma()+"');");
 
             }else if(hasIDObjekt instanceof Kurs){
                 Kurs castobj = ((Kurs) hasIDObjekt);
                 dm.lsKurs.list.add(castobj);
-                execStatement("INSERT INTO KURS(JAHRGANG,NUMMER,RAUM,EMAILVERTEILER,STUDIENRICHTUNG_ID)VALUES("+castobj.getJahrgang()+","+castobj.getNummer()+",'"+castobj.getRaum()+"','"+castobj.getEmailVerteiler()+"',"+castobj.getStudienrichtung().getId()+";");
+                execStatement("INSERT INTO KURS(JAHRGANG,NUMMER,RAUM,EMAILVERTEILER,STUDIENRICHTUNG_ID)VALUES("+castobj.getJahrgang()+","+castobj.getNummer()+",'"+castobj.getRaum()+"','"+castobj.getEmailVerteiler()+"',"+castobj.getStudienrichtung().getId()+");");
 
             }else if(hasIDObjekt instanceof Studienrichtung){
                 Studienrichtung castobj = ((Studienrichtung) hasIDObjekt);
                 dm.lsStudienrichtung.list.add(castobj);
-                execStatement("INSERT INTO STUDIENRICHTUNG(NAME,KUERZEL,STUDIENGANG_ID)VALUES('"+castobj.getName()+"','"+castobj.getKuerzel()+"',"+castobj.getStudiengang().getId()+";");
+                execStatement("INSERT INTO STUDIENRICHTUNG(NAME,KUERZEL,STUDIENGANG_ID)VALUES('"+castobj.getName()+"','"+castobj.getKuerzel()+"',"+castobj.getStudiengang().getId()+");");
 
             }else if(hasIDObjekt instanceof Studiengang){
                 Studiengang castobj = ((Studiengang) hasIDObjekt);
                 dm.lsStudiengang.list.add(castobj);
-                execStatement("INSERT INTO STUDIENGANG(NAME,KUERZEL,STUDIENGANGSLEITER,FAKULTAET_ID)VALUES('"+castobj.getName()+"','"+castobj.getKuerzel()+"','"+castobj.getStudienGangsleiter()+"',"+castobj.getFakultaet().getId()+";");
+                execStatement("INSERT INTO STUDIENGANG(NAME,KUERZEL,STUDIENGANGSLEITER,FAKULTAET_ID)VALUES('"+castobj.getName()+"','"+castobj.getKuerzel()+"','"+castobj.getStudienGangsleiter()+"',"+castobj.getFakultaet().getId()+");");
 
             }else if(hasIDObjekt instanceof Fakultaet){
                 Fakultaet castobj = ((Fakultaet) hasIDObjekt);
@@ -111,10 +111,11 @@ public class DatabaseDatamanager {
                 //execinsert("FAKULTAET","NAME","'"+ castobj.getName()+"'");
                 execStatement("INSERT INTO FAKULTAET(NAME)VALUES('"+ castobj.getName()+"');");
             }
+        }else{
+            System.out.println("obj hat keine id");
         }
     }
-
-
+    
     public void delete(Object hasIDObjekt,DataManager dm){ //Übernimmt Objekt mit interface "hasID" un löscht es aus übergebnene dm und DB
 
         String Table = null;
@@ -151,8 +152,10 @@ public class DatabaseDatamanager {
 
     }
 
-    //execStatement fürt ein beliebiges Statement ohne rückgabewert aus. Nutzung:savingfunction
+    //execStatement fürt ein beliebiges Statement ohne rückgabewert aus.
     private void execStatement(String Statement){
+
+        //System.out.println(Statement);
         try {
             // STEP 1: Register JDBC driver
             Class.forName(JDBC_DRIVER);
