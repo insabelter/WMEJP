@@ -23,7 +23,7 @@
                   <ComboBox fx:id="studienrichtungCombobox" layoutX="33.0" layoutY="79.0" onAction="#filterList" prefWidth="150.0" promptText="Studienrichtung" />
                   <ComboBox fx:id="kursCombobox" layoutX="33.0" layoutY="121.0" onAction="#filterList" prefWidth="150.0" promptText="Kurs" />
                   <ComboBox fx:id="javaCombobox" layoutX="33.0" layoutY="164.0" onAction="#filterList" prefWidth="150.0" promptText="Java Kenntnisse" />
-                  <TextField fx:id="numberField" layoutX="34.0" layoutY="207.0" onAction="#filterList" promptText="Matrikelnummer" />
+                  <TextField fx:id="numberField" layoutX="34.0" layoutY="207.0" onAction="#filterList" onKeyTyped="#filterList" promptText="Matrikelnummer" />
                   <Label layoutX="77.0" layoutY="-1.0" text="Filtern">
                      <font>
                         <Font name="System Bold" size="20.0" />
@@ -61,7 +61,7 @@
             <TableColumn prefWidth="139.20004272460938" text="Vorname" />
             <TableColumn prefWidth="151.0" resizable="false" text="Nachname" />
             <TableColumn fx:id="kursColumn" prefWidth="100.0" resizable="false" text="Kurs" />
-            <TableColumn prefWidth="125.0" resizable="false" text="Mat.-Nr," />
+            <TableColumn fx:id="matrikelnummer" prefWidth="125.0" resizable="false" text="Mat.-Nr," />
             <TableColumn fx:id="firmaColumn" prefWidth="191.0" resizable="false" text="Firma" />
             <TableColumn prefWidth="110.0" resizable="false" text="Java Kenntnisse" />
          </columns>

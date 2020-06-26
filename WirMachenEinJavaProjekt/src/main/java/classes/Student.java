@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Objects;
 
 public class Student implements HasID{
     //this is a very basic Student class just for testing purposes, WIP
@@ -112,4 +113,5 @@ public class Student implements HasID{
                 ", firma=" + firma +
                 '}';
     }
+
 }

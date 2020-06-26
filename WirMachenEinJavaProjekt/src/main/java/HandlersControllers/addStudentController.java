@@ -19,8 +19,6 @@ import java.util.ResourceBundle;
 
 public class addStudentController implements Initializable {
 
-    private TextField studList;
-
 
     @FXML
     private Button addButton;
@@ -38,29 +36,33 @@ public class addStudentController implements Initializable {
     private TextField lastNameField;
 
     @FXML
-    private TextField numberField;
-
-    @FXML
     private TextField companyField;
 
     @FXML
     void newStudent(ActionEvent event) {
         //Check if every Textfield is not empty
-        if(nameField.getText().equals("")||numberField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         //Create Student based on User Inputs
         else{
             Student newbie=null;
             try{
-                newbie= new Student(Integer.parseInt(numberField.getText()),nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),companyField.getText());
+                newbie= new Student(1,nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),companyField.getText());
             }catch(NumberFormatException n){
                 return;
             }
+            if (!MainHandler.mainWindowController1.isDuplicate(newbie)){
 
-            MainHandler.dbm.insert("STUDENT","vorname,nachname,javakenntnisse,kurs_id,firma_id","'"+newbie.getVorname()+"','"+newbie.getNachname()+"',"+newbie.getJavakenntnisse()+","+newbie.getKurs().getId()+","+"4");
-            MainHandler.dm.lsStudent.list.add(newbie);
-            MainHandler.mainWindowController1.insertInTable(newbie);
+
+                MainHandler.dbm.insert("STUDENT","vorname,nachname,javakenntnisse,kurs_id,firma_id",newbie.getVorname()+"','"+newbie.getNachname()+"',"+newbie.getJavakenntnisse()+","+newbie.getKurs().getId()+","+"4");
+                MainHandler.dm.lsStudent.list.add(newbie);
+                MainHandler.mainWindowController1.insertInTable(newbie);
+
+            }
+            else{JOptionPane.showMessageDialog(new Frame(),"Die Matrikelnummer "+newbie.getMatrikelnummer()+" ist schon vergeben.");}
+
+
         }
 
     }

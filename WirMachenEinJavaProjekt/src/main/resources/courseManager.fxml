@@ -15,17 +15,20 @@
          <children>
             <TextField fx:id="newCourseTextfield" layoutX="41.0" layoutY="224.0" prefWidth="150.0" promptText="Kurs" />
             <ComboBox fx:id="courseCombobox" layoutX="41.0" layoutY="57.0" onAction="#displayCourse" prefWidth="150.0" promptText="Kurs anzeigen" />
-            <TextField fx:id="newCourseroomTextfield" layoutX="42.0" layoutY="267.0" prefWidth="150.0" promptText="Raum" />
+            <TextField fx:id="newCourseroomTextfield" layoutX="41.0" layoutY="268.0" prefWidth="150.0" promptText="Raum" />
             <Label layoutX="42.0" layoutY="100.0" text="Kursraum:" />
             <Label fx:id="courseroomLabel" layoutX="115.0" layoutY="100.0" text="Label" />
             <Label layoutX="53.0" layoutY="179.0" text="Neuen Kurs hinzufügen" />
-            <Button fx:id="addButton" layoutX="40.0" layoutY="310.0" mnemonicParsing="false" onAction="#newCourse" prefWidth="150.0" text="Hinzufügen" />
+            <Button fx:id="addButton" layoutX="40.0" layoutY="429.0" mnemonicParsing="false" onAction="#newCourse" prefWidth="150.0" text="Hinzufügen" />
+            <ComboBox fx:id="studienrichtungComboBox" layoutX="41.0" layoutY="387.0" prefWidth="150.0" promptText="Studienrichtung" />
+            <TextField fx:id="numberTextfield" layoutX="41.0" layoutY="311.0" promptText="Nummer" />
+            <TextField fx:id="jahrgangTextfield" layoutX="41.0" layoutY="348.0" promptText="Jahrgang" />
          </children></Pane>
       <TableView fx:id="studList" prefHeight="200.0" prefWidth="200.0">
         <columns>
-            <TableColumn prefWidth="144.2000274658203" text="Matrikelnummer" />
-          <TableColumn prefWidth="169.00001525878906" text="Nachname" />
-          <TableColumn prefWidth="133.4000244140625" text="Vorname" />
+            <TableColumn prefWidth="144" text="Matrikelnummer" />
+          <TableColumn prefWidth="169" text="Nachname" />
+          <TableColumn prefWidth="133" text="Vorname" />
         </columns>
       </TableView>
    </items>
