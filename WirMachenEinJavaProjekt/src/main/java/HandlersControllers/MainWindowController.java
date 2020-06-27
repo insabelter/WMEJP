@@ -92,7 +92,7 @@ public class MainWindowController implements Initializable{
 
         if(addCourseStage==null){
             addCourseLoader = loadAddCourseWindow();}
-        else if (!addCourseStage.isShowing()){
+        if (!addCourseStage.isShowing()){
             addCourseStage.show();
         }
         courseManagerController courseManagerController = addCourseLoader.getController();
@@ -105,7 +105,7 @@ public class MainWindowController implements Initializable{
         //handling the opening of addStudent window to be only openable once at a time
         if(addStudentStage==null){
             addStudentLoader = loadAddStudentWindow();}
-        else if (!addStudentStage.isShowing()){
+        if (!addStudentStage.isShowing()){
             addStudentStage.show();
         }
 
@@ -118,7 +118,7 @@ public class MainWindowController implements Initializable{
         //handling the opening of addStudent window to be only openable once at a time
         if(editStudentStage==null){
             editStudentLoader = loadEditStudentWindow();}
-        else if (!editStudentStage.isShowing()){
+        if (!editStudentStage.isShowing()){
             editStudentStage.show();
         }
 
@@ -133,11 +133,11 @@ public class MainWindowController implements Initializable{
     @FXML
     void delStudentOnClick(ActionEvent event) throws SQLException {
         //delete all selected
-        //MainHandler.dm.lsStudent.list.removeAll(studList.getSelectionModel().getSelectedItems());
-        studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
         for (Student x: studList.getSelectionModel().getSelectedItems()) {
             MainHandler.dm.delete(x, MainHandler.conn);
         }
+        studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
+
 
     }
 
@@ -255,6 +255,9 @@ public class MainWindowController implements Initializable{
         delStudent.setDisable(true);
         editStudent.setDisable(true);
 
+        addStudentLoader=loadAddStudentWindow();
+        addCourseLoader=loadAddCourseWindow();
+        editStudentLoader=loadEditStudentWindow();
         //later data from db, but for now test data
 
 
@@ -272,10 +275,12 @@ public class MainWindowController implements Initializable{
         }
         return b;
     }
-
     public void insertInTable(Student stud){
         //add student object to Table
         studList.getItems().add(stud);
+    }
+    public void deleteFromTable(Student stud){
+        studList.getItems().remove(stud);
     }
     private FXMLLoader loadAddStudentWindow(){
         FXMLLoader loader=null;
@@ -288,7 +293,6 @@ public class MainWindowController implements Initializable{
             //show addStudent window
             addStudentStage = new Stage();
             addStudentStage.setScene(new Scene(root));
-            addStudentStage.show();
 
 
         }
@@ -311,7 +315,6 @@ public class MainWindowController implements Initializable{
             //show addStudent window
             editStudentStage = new Stage();
             editStudentStage.setScene(new Scene(root));
-            editStudentStage.show();
 
 
 
@@ -334,13 +337,33 @@ public class MainWindowController implements Initializable{
             //show addStudent window
             addCourseStage = new Stage();
             addCourseStage.setScene(new Scene(root));
-            addCourseStage.show();
+
         }
         catch (IOException e){
             e.printStackTrace();
 
         }
         return loader;
+    }
+
+    public void updateAll(){
+        fakultaetDropdown.getItems().clear();
+        studienrichtungCombobox.getItems().clear();
+        kursCombobox.getItems().clear();
+
+
+        fakultaetDropdown.getItems().addAll(MainHandler.dm.lsFakultaet.list);
+        studienrichtungCombobox.getItems().addAll(MainHandler.dm.lsStudienrichtung.list);
+        kursCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
+
+
+
+        editStudentController ec= editStudentLoader.getController();
+        ec.updateAll();
+        addStudentController ac= addStudentLoader.getController();
+        ac.updateAll();
+        courseManagerController cc=addCourseLoader.getController();
+        cc.updateAll();
     }
 
 

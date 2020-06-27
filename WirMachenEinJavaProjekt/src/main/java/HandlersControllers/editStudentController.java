@@ -6,16 +6,20 @@ import classes.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Slider;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class editStudentController implements Initializable {
+    Student currentStudent=null;
 
     @FXML
     private TextField nameField;
@@ -37,20 +41,47 @@ public class editStudentController implements Initializable {
 
     @FXML
     private Button addButton;
+    @FXML
+    private Label javakenntnisseLabel;
 
     void setInformation(Student s){
+        currentStudent = s;
         nameField.setText(s.getVorname());
         lastNameField.setText(s.getNachname());
         courseDropdown.getSelectionModel().select(s.getKurs());
         numberField.setText(String.valueOf(s.getMatrikelnummer()));
         companyField.setText(s.getFirma());
-        javaSlider.setValue(s.getJavakenntnisse());
+        javaSlider.setValue(s.getJavakenntnisse()*10);
 
     }
 
     @FXML
     void saveStudent(){
+        MainHandler.mainWindowController1.deleteFromTable(currentStudent);
+        Kurs oldCourse = currentStudent.getKurs();
+        Kurs newCourse = courseDropdown.getSelectionModel().getSelectedItem();
+        oldCourse.getStudents().remove(currentStudent);
+        newCourse.getStudents().add(currentStudent);
+        currentStudent.setKurs(newCourse);
+        currentStudent.setFirma(companyField.getText());
+        currentStudent.setJavakenntnisse(((int)javaSlider.getValue())/10);
+        currentStudent.setVorname(nameField.getText());
+        currentStudent.setNachname(lastNameField.getText());
+        try{
+            MainHandler.dm.update(currentStudent,MainHandler.conn);
+        }catch(SQLException s){
+            s.printStackTrace();
+            JOptionPane.showMessageDialog(new Frame(),"Fehler beim Speichern");
+        }
+        MainHandler.mainWindowController1.insertInTable(currentStudent);
 
+
+
+    }
+    @FXML
+    void displayNumber(){
+        int i = ((int)javaSlider.getValue())/10;
+        javakenntnisseLabel.setText(String.valueOf(i));
     }
 
     @Override
@@ -69,6 +100,12 @@ public class editStudentController implements Initializable {
         });
 
 
+        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs.list);
+        courseDropdown.getSelectionModel().selectFirst();
+    }
+
+    public void updateAll(){
+        courseDropdown.getItems().clear();
         courseDropdown.getItems().addAll(MainHandler.dm.lsKurs.list);
         courseDropdown.getSelectionModel().selectFirst();
     }

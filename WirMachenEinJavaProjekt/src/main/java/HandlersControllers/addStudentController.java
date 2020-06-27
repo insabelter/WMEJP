@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
@@ -40,6 +41,9 @@ public class addStudentController implements Initializable {
     private TextField companyField;
 
     @FXML
+    private Label javakenntnisseLabel;
+
+    @FXML
     void newStudent(ActionEvent event) throws SQLException {
         //Check if every Textfield is not empty
         if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
@@ -57,8 +61,7 @@ public class addStudentController implements Initializable {
 
                 MainHandler.dm.insert(newbie, MainHandler.conn);
                 System.out.println(MainHandler.dm.lsStudent.list.contains(newbie));
-                //MainHandler.dbm.insert("STUDENT","vorname,nachname,javakenntnisse,kurs_id,firma_id",newbie.getVorname()+"','"+newbie.getNachname()+"',"+newbie.getJavakenntnisse()+","+newbie.getKurs().getId()+","+"4");
-                //MainHandler.dm.lsStudent.list.add(newbie);
+
                 MainHandler.mainWindowController1.insertInTable(newbie);
 
             }
@@ -70,10 +73,10 @@ public class addStudentController implements Initializable {
     }
 
     @FXML
-    void newCourse(){
-
+    void displayNumber(){
+        int i = ((int)javaSlider.getValue())/10;
+        javakenntnisseLabel.setText(String.valueOf(i));
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +96,12 @@ public class addStudentController implements Initializable {
         });
 
 
+        courseDropdown.getItems().addAll(MainHandler.dm.lsKurs.list);
+        courseDropdown.getSelectionModel().selectFirst();
+    }
+
+    public void updateAll(){
+        courseDropdown.getItems().clear();
         courseDropdown.getItems().addAll(MainHandler.dm.lsKurs.list);
         courseDropdown.getSelectionModel().selectFirst();
     }

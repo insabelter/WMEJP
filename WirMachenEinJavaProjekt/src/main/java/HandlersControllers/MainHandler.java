@@ -40,13 +40,7 @@ public class MainHandler extends Application {
             stage.show();
         }catch(SQLException | ClassNotFoundException se) {
             se.printStackTrace();
-        } finally {
-            try {
-                if(conn!=null) conn.close();
-            } catch(SQLException se){
-                se.printStackTrace();
-            }
-        }
+        } 
     }
 
     @Override

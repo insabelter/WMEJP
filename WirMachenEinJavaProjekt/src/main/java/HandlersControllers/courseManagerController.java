@@ -16,7 +16,9 @@ import javafx.util.StringConverter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -30,9 +32,6 @@ public class courseManagerController implements Initializable {
 
     @FXML
     private Label courseroomLabel;
-
-    @FXML
-    private TextField newCourseTextfield;
 
     @FXML
     private TextField newCourseroomTextfield;
@@ -52,23 +51,34 @@ public class courseManagerController implements Initializable {
     @FXML
     void displayCourse(){
         studList.getItems().clear();
-        studList.getItems().addAll(courseCombobox.getSelectionModel().getSelectedItem().getStudents());
-        courseroomLabel.setText(courseCombobox.getSelectionModel().getSelectedItem().getRaum());
+        if(courseCombobox.getSelectionModel().getSelectedItem()!=null){
+            studList.getItems().addAll(courseCombobox.getSelectionModel().getSelectedItem().getStudents());
+            courseroomLabel.setText(courseCombobox.getSelectionModel().getSelectedItem().getRaum());
+        }
+
+
     }
 
     @FXML
     void newCourse(){
         List<Student> l = MainHandler.dm.lsStudent.list;
         l.clear();
-        if(jahrgangTextfield.getText().equals("")||numberTextfield.getText().equals("")|| newCourseroomTextfield.getText().equals("")||Pattern.matches("[a-zA-Z]+", numberTextfield.getText()) == true||Pattern.matches("[a-zA-Z]+", jahrgangTextfield.getText()) == true){
+        if(jahrgangTextfield.getText().equals("")||numberTextfield.getText().equals("")|| newCourseroomTextfield.getText().equals("")||Pattern.matches("[0-9]+", numberTextfield.getText()) == false||Pattern.matches("[0-9]+", jahrgangTextfield.getText()) == false){
             JOptionPane.showMessageDialog(new Frame(),"Eingabe überprüfen! Jahrgang und Nummer müssen numerisch sein!");
+        }else{
+
+            Kurs newCourse = new Kurs(1, Integer.parseInt(jahrgangTextfield.getText()), Integer.parseInt(numberTextfield.getText()), newCourseroomTextfield.getText(), "", studienrichtungComboBox.getSelectionModel().getSelectedItem(), l);
+            newCourse.createName();
+            try{
+            MainHandler.dm.insert(newCourse,MainHandler.conn);
+            }catch(SQLException s){
+                s.printStackTrace();
+            }
+            MainHandler.mainWindowController1.updateAll();
         }
 
-        //MainHandler.dbm.insert("KURS","jahrgang,nummer,raum,emailverteiler,studienrichtung_id,",);
-        Kurs newCourse = new Kurs(1, Integer.parseInt(jahrgangTextfield.getText()), Integer.parseInt(numberTextfield.getText()), newCourseroomTextfield.getText(), "", studienrichtungComboBox.getSelectionModel().getSelectedItem(), l);
-        MainHandler.dm.lsKurs.list.add(newCourse);
-        courseCombobox.getItems().clear();
-        courseCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
+
+
     }
 
     @Override
@@ -104,6 +114,21 @@ public class courseManagerController implements Initializable {
         System.out.println(MainHandler.dm.lsKurs.list);
         courseCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
         studienrichtungComboBox.getItems().addAll(MainHandler.dm.lsStudienrichtung.list);
+        courseCombobox.getSelectionModel().selectFirst();
+        studienrichtungComboBox.getSelectionModel().selectFirst();
+        courseroomLabel.setText(courseCombobox.getSelectionModel().getSelectedItem().getRaum());
+        studList.getItems().clear();
+        studList.getItems().addAll(courseCombobox.getSelectionModel().getSelectedItem().getStudents());
+
+
+    }
+
+    public void updateAll(){
+        courseCombobox.getItems().clear();
+        studienrichtungComboBox.getItems().clear();
+        courseCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
+        studienrichtungComboBox.getItems().addAll(MainHandler.dm.lsStudienrichtung.list);
+        studienrichtungComboBox.getSelectionModel().selectFirst();
 
 
     }
