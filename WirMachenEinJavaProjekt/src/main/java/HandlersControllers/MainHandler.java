@@ -38,9 +38,12 @@ public class MainHandler extends Application {
 
             //Set root as scene and show
             stage.setScene(new Scene(root));
-            stage.setOnHiding(windowEvent -> {
-                mainWindowController1.closeAll();
-            });
+            stage.setOnHiding(windowEvent -> mainWindowController1.closeAll();
+            stage.setMaxHeight(1000);
+            stage.setMaxWidth(1500);
+            stage.setMinWidth(1450);
+            stage.setMinHeight(1000);
+
             stage.show();
         }catch(SQLException | ClassNotFoundException se) {
             se.printStackTrace();

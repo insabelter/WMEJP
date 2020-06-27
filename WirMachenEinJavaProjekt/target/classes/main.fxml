@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.20534223706176963" prefHeight="700.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.MainWindowController">
+<SplitPane dividerPositions="0.20534223706176963" prefHeight="756.0" prefWidth="1426.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HandlersControllers.MainWindowController">
    <items>
       <SplitPane dividerPositions="0.47250859106529214" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -42,16 +42,16 @@
                </children></Pane>
         </items>
       </SplitPane>
-      <TableView fx:id="studList" cache="true" editable="true" focusTraversable="false" onMouseClicked="#greyOut" prefHeight="698.0" prefWidth="316.0">
+      <TableView fx:id="studList" cache="true" focusTraversable="false" onMouseClicked="#greyOut" prefHeight="698.0" prefWidth="316.0">
          <columns>
-            <TableColumn fx:id="fakultaetColumn" prefWidth="75.0" text="Fakultät" />
-            <TableColumn fx:id="studienrichtungColumn" prefWidth="131.19998168945312" text="Studienrichtung" />
-            <TableColumn prefWidth="139.20004272460938" text="Vorname" />
+            <TableColumn fx:id="fakultaetColumn" prefWidth="138.0" text="Fakultät" />
+            <TableColumn fx:id="studienrichtungColumn" prefWidth="143.0" text="Studienrichtung" />
+            <TableColumn prefWidth="109.0" text="Vorname" />
             <TableColumn prefWidth="151.0" resizable="false" text="Nachname" />
-            <TableColumn fx:id="kursColumn" prefWidth="100.0" resizable="false" text="Kurs" />
-            <TableColumn fx:id="matrikelnummer" prefWidth="125.0" resizable="false" text="Mat.-Nr," />
-            <TableColumn fx:id="firmaColumn" prefWidth="191.0" resizable="false" text="Firma" />
-            <TableColumn prefWidth="110.0" resizable="false" text="Java Kenntnisse" />
+            <TableColumn fx:id="kursColumn" prefWidth="84.0" resizable="false" text="Kurs" />
+            <TableColumn fx:id="matrikelnummer" prefWidth="136.0" resizable="false" text="Mat.-Nr," />
+            <TableColumn fx:id="firmaColumn" prefWidth="261.0" resizable="false" text="Firma" />
+            <TableColumn prefWidth="107.0" resizable="false" text="Java Kenntnisse" />
          </columns>
       </TableView>
    </items>

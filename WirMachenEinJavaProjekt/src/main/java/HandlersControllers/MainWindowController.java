@@ -101,6 +101,7 @@ public class MainWindowController implements Initializable{
             addCourseLoader = loadAddCourseWindow();}
         if (!addCourseStage.isShowing()){
             addCourseStage.show();
+            addCourseStage.setResizable(false);
         }
         courseManagerController courseManagerController = addCourseLoader.getController();
 
@@ -114,6 +115,7 @@ public class MainWindowController implements Initializable{
             addStudentLoader = loadAddStudentWindow();}
         if (!addStudentStage.isShowing()){
             addStudentStage.show();
+            addStudentStage.setResizable(false);
         }
 
 
@@ -127,6 +129,7 @@ public class MainWindowController implements Initializable{
             editStudentLoader = loadEditStudentWindow();}
         if (!editStudentStage.isShowing()){
             editStudentStage.show();
+            editStudentStage.setResizable(false);
         }
 
         editStudentController editStudentController=editStudentLoader.getController();
@@ -340,6 +343,7 @@ public class MainWindowController implements Initializable{
         addStudentLoader=loadAddStudentWindow();
         addCourseLoader=loadAddCourseWindow();
         editStudentLoader=loadEditStudentWindow();
+
 
         //later data from db, but for now test data
 
