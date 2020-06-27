@@ -48,7 +48,7 @@ public class addStudentController implements Initializable {
     @FXML
     void newStudent(ActionEvent event) throws SQLException {
         //Check if every Textfield is not empty
-        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| !Pattern.matches("[a-zA-Z- ]+",nameField.getText())||!Pattern.matches("[a-zA-Z- ]+",companyField.getText())||!Pattern.matches("[a-zA-Z- ]+",lastNameField.getText())){
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| !Pattern.matches("[äöüÄÖÜa-zA-Z- ]+",nameField.getText())||!Pattern.matches("[äöüÄÖÜa-zA-Z- ]+",companyField.getText())||!Pattern.matches("[äöüÄÖÜa-zA-Z- ]+",lastNameField.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein. Außerdem nur alphabetisch.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
