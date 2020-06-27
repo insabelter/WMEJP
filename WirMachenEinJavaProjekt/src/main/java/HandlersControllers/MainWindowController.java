@@ -22,10 +22,7 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class MainWindowController implements Initializable{
@@ -156,7 +153,7 @@ public class MainWindowController implements Initializable{
     @FXML
     void filterList(ActionEvent event){
 
-
+        numberField.setText("");
         filteredList.setPredicate(student -> {
             if(!(fakultaetDropdown.getSelectionModel().getSelectedItem()==null)){
                 if(!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())){
@@ -186,6 +183,39 @@ public class MainWindowController implements Initializable{
         studList.setItems(sortedstuff);
         sortedstuff.comparatorProperty().bind(studList.comparatorProperty());
 
+    }
+
+    @FXML
+    void search(){
+
+        FilteredList<Student> filteredStuff= new FilteredList<>(studList.getItems());
+        // 2. Set the filter Predicate whenever the filter changes.
+        numberField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredStuff.setPredicate(student -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name field in your object with filter.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (String.valueOf(student.getMatrikelnummer()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                    // Filter matches mat number.
+                }
+
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Student> sortedData = new SortedList<>(filteredStuff);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(studList.comparatorProperty());
+        // 5. Add sorted (and filtered) data to the table.
+        studList.setItems(sortedData);
     }
 
 

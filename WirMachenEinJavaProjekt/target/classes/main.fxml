@@ -20,7 +20,7 @@
                   <ComboBox fx:id="studienrichtungCombobox" layoutX="33.0" layoutY="79.0" onAction="#filterList" prefWidth="150.0" promptText="Studienrichtung" />
                   <ComboBox fx:id="kursCombobox" layoutX="33.0" layoutY="121.0" onAction="#filterList" prefWidth="150.0" promptText="Kurs" />
                   <ComboBox fx:id="javaCombobox" layoutX="33.0" layoutY="164.0" onAction="#filterList" prefWidth="150.0" promptText="Java Kenntnisse" />
-                  <TextField fx:id="numberField" layoutX="34.0" layoutY="207.0" onKeyPressed="#filterList" onKeyTyped="#filterList" promptText="Matrikelnummer" />
+                  <TextField fx:id="numberField" layoutX="34.0" layoutY="207.0" onKeyPressed="#search" onKeyTyped="#search" promptText="Matrikelnummer" />
                   <Label layoutX="77.0" layoutY="-1.0" text="Filtern">
                      <font>
                         <Font name="System Bold" size="20.0" />
