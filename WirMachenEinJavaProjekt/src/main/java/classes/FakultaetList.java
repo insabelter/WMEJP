@@ -4,7 +4,6 @@ package classes;
 import DataBase.DataManager;
 
 import java.sql.*;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,8 +12,8 @@ public class FakultaetList extends DataArrayList<Fakultaet>{
     //list: List of type Fakultaet
 
     @Override
-    public void fillArray(DataManager dm, Connection conn) throws SQLException{
-        Statement stmt = conn.createStatement();
+    public void fillArray(DataManager dm) throws SQLException{
+        Statement stmt = dm.conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM FAKULTAET");
 
         //add objects to List

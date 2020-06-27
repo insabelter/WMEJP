@@ -30,24 +30,6 @@ public class Student implements HasID{
         this.firma = firma;
     }
 
-    public static void fillArray(List<Student> toFill, Connection conn) throws SQLException {
-
-        Statement stmt = conn.createStatement();
-        ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDENT");
-
-        //add objects to List
-        while(rsBasicInformation.next()){
-            toFill.add(new Student(
-                    rsBasicInformation.getInt("MATRIKEL_NR"),
-                    rsBasicInformation.getString("VORNAME"),
-                    rsBasicInformation.getString("NACHNAME"),
-                    rsBasicInformation.getInt("Javakenntnisse"),
-                    null,
-                    null));
-        }
-
-    }
-
     public Integer getMatrikelnummer() {
         return matrikelnummer;
     }

@@ -2,15 +2,14 @@ package classes;
 
 import DataBase.DataManager;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class StudentList extends DataArrayList<Student>{
     @Override
-    public void fillArray(DataManager dm, Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
+    public void fillArray(DataManager dm) throws SQLException {
+        Statement stmt = dm.conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDENT");
 
         //add objects to List
@@ -21,7 +20,7 @@ public class StudentList extends DataArrayList<Student>{
                     rsBasicInformation.getString("NACHNAME"),
                     rsBasicInformation.getInt("JAVAKENNTNISSE"),
                     null, //wird bei addSlave befüllt
-                    "defaultFirma"); //rsBasicInformation.getString("FIRMA"),
+                    rsBasicInformation.getString("FIRMA")); //rsBasicInformation.getString("FIRMA"),
 
             //find Kurs
             int kurs_id = rsBasicInformation.getInt("KURS_ID");

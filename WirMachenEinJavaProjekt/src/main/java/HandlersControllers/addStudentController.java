@@ -54,7 +54,7 @@ public class addStudentController implements Initializable {
             }
             if (!MainHandler.mainWindowController1.isDuplicate(newbie)){
 
-                MainHandler.dbm.insert(newbie,MainHandler.dm);
+                MainHandler.dm.insert(newbie);
                 System.out.println(MainHandler.dm.lsStudent.list.contains(newbie));
                 //MainHandler.dbm.insert("STUDENT","vorname,nachname,javakenntnisse,kurs_id,firma_id",newbie.getVorname()+"','"+newbie.getNachname()+"',"+newbie.getJavakenntnisse()+","+newbie.getKurs().getId()+","+"4");
                 //MainHandler.dm.lsStudent.list.add(newbie);
