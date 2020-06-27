@@ -19,10 +19,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class courseManagerController implements Initializable {
@@ -63,7 +61,7 @@ public class courseManagerController implements Initializable {
 
     @FXML
     void newCourse(){
-        List<Student> l =new LinkedList<>();
+        List<Student> l =new ArrayList<>();
         if(jahrgangTextfield.getText().equals("")||numberTextfield.getText().equals("")|| newCourseroomTextfield.getText().equals("")||!Pattern.matches("[0-9]+", numberTextfield.getText())||!Pattern.matches("[0-9]+", jahrgangTextfield.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Eingabe überprüfen! Jahrgang und Nummer müssen numerisch sein und kein Feld darf leer sein!");
         }
@@ -75,11 +73,17 @@ public class courseManagerController implements Initializable {
             Kurs newCourse = new Kurs(1, Integer.parseInt(jahrgangTextfield.getText()), Integer.parseInt(numberTextfield.getText()), newCourseroomTextfield.getText(), "", studienrichtungComboBox.getSelectionModel().getSelectedItem(), l);
             newCourse.createName();
             try{
-            MainHandler.dm.insert(newCourse,MainHandler.conn);
+                MainHandler.dm.insert(newCourse,MainHandler.conn);
+                MainHandler.dm.lsKurs.fillArray(MainHandler.dm,MainHandler.conn);
+                for (Kurs k:MainHandler.dm.lsKurs.list) {
+                    k.createName();
+                }
+                MainHandler.mainWindowController1.updateAll();
             }catch(SQLException s){
                 s.printStackTrace();
             }
-            MainHandler.mainWindowController1.updateAll();
+
+
         }
 
 
