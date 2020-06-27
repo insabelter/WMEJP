@@ -1,0 +1,4 @@
+2020-06-27 12:21:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "FAKULTAET" nicht gefunden
+Table "FAKULTAET" not found; SQL statement:
+SELECT * FROM FAKULTAET [42102-199]
