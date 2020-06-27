@@ -17,6 +17,7 @@ import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class editStudentController implements Initializable {
     Student currentStudent=null;
@@ -58,7 +59,7 @@ public class editStudentController implements Initializable {
 
     @FXML
     void saveStudent(){
-        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| !Pattern.matches("[a-zA-Z- ]+",nameField.getText())||!Pattern.matches("[a-zA-Z- ]+",companyField.getText())||!Pattern.matches("[a-zA-Z- ]+",lastNameField.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
