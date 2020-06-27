@@ -14,7 +14,7 @@ public class MainDBConnectTest {
         try{
             //Create DB Connection
             Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:C:/Users/neeli/Java/WMEJP/WirMachenEinJavaProjekt/src/main/resources/wmejpTest","sa","");
+            conn = DriverManager.getConnection("jdbc:h2:../WirMachenEinJavaProjekt/src/main/resources/wmejpTest","sa","");
 
             dm.initializeAll(conn);
 
