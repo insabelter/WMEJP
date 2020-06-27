@@ -64,7 +64,7 @@ public class courseManagerController implements Initializable {
     @FXML
     void newCourse(){
         List<Student> l =new LinkedList<>();
-        if(jahrgangTextfield.getText().equals("")||numberTextfield.getText().equals("")|| newCourseroomTextfield.getText().equals("")||Pattern.matches("[0-9]+", numberTextfield.getText()) == false||Pattern.matches("[0-9]+", jahrgangTextfield.getText()) == false){
+        if(jahrgangTextfield.getText().equals("")||numberTextfield.getText().equals("")|| newCourseroomTextfield.getText().equals("")||!Pattern.matches("[0-9]+", numberTextfield.getText())||!Pattern.matches("[0-9]+", jahrgangTextfield.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Eingabe überprüfen! Jahrgang und Nummer müssen numerisch sein und kein Feld darf leer sein!");
         }
         else if(jahrgangTextfield.getText().length()>3||numberTextfield.getText().length()>5) {

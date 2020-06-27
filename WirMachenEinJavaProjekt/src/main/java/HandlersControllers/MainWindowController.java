@@ -80,13 +80,17 @@ public class MainWindowController implements Initializable{
 
     @FXML
     void clearFilters(){
+
+
+
         javaCombobox.valueProperty().set(null);
         kursCombobox.valueProperty().set(null);
         studienrichtungCombobox.valueProperty().set(null);
         fakultaetDropdown.valueProperty().set(null);
+        numberField.setText("");
 
         filteredList.setPredicate(p -> true);
-
+        studList.setItems(filteredList);
 
     }
 
@@ -141,8 +145,11 @@ public class MainWindowController implements Initializable{
         }
         if(studList.getItems() instanceof SortedList){
             FilteredList filteredStuff = (FilteredList) ((SortedList<Student>) studList.getItems()).getSource();
-            ((FilteredList<Student>) filteredStuff).getSource().removeAll(studList.getSelectionModel().getSelectedItems());
-        }else{
+            ((FilteredList<Student>) filteredStuff)
+                    .getSource()
+                    .removeAll(studList.getSelectionModel().getSelectedItems());
+        }
+        else{
             studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
         }
 
@@ -188,10 +195,10 @@ public class MainWindowController implements Initializable{
     @FXML
     void search(){
 
-        FilteredList<Student> filteredStuff= new FilteredList<>(studList.getItems());
+
         // 2. Set the filter Predicate whenever the filter changes.
         numberField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredStuff.setPredicate(student -> {
+            filteredList.setPredicate(student -> {
                 // If filter text is empty, display all persons.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
@@ -204,18 +211,39 @@ public class MainWindowController implements Initializable{
                     return true;
                     // Filter matches mat number.
                 }
+                if(!(fakultaetDropdown.getSelectionModel().getSelectedItem()==null)){
+                    if(!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())){
+                        return false;
+                    }
+                }
+                if(!(kursCombobox.getSelectionModel().getSelectedItem()==null)){
+                    if(!kursCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getName())){
+                        return false;
+                    }
+                }
+                if(!(studienrichtungCombobox.getSelectionModel().getSelectedItem()==null)){
+                    if(!studienrichtungCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getName())){
+                        return false;
+                    }
+                }
+                if(!(javaCombobox.getSelectionModel().getSelectedItem()==null)){
+                    if(!(javaCombobox.getSelectionModel().getSelectedItem()==student.getJavakenntnisse())){
+                        return false;
+                    }
+                }
 
                 return false; // Does not match.
             });
         });
 
         // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Student> sortedData = new SortedList<>(filteredStuff);
+        SortedList<Student> sortedData = new SortedList<>(filteredList);
 
         // 4. Bind the SortedList comparator to the TableView comparator.
+        studList.setItems(sortedData);
         sortedData.comparatorProperty().bind(studList.comparatorProperty());
         // 5. Add sorted (and filtered) data to the table.
-        studList.setItems(sortedData);
+
     }
 
 
@@ -261,6 +289,9 @@ public class MainWindowController implements Initializable{
         studList.getItems().addAll(MainHandler.dm.lsStudent.list);
         //init list for later filters
         filteredList = new FilteredList<>(studList.getItems(),p ->true);
+        SortedList<Student> sortedstuff= new SortedList<>(filteredList);
+        studList.setItems(sortedstuff);
+        sortedstuff.comparatorProperty().bind(studList.comparatorProperty());
 
 
         //attach stringconverters for Kurs
@@ -421,6 +452,11 @@ public class MainWindowController implements Initializable{
         ac.updateAll();
         courseManagerController cc=addCourseLoader.getController();
         cc.updateAll();
+    }
+    public void closeAll(){
+        addStudentStage.hide();
+        addCourseStage.hide();
+        editStudentStage.hide();
     }
 
 
