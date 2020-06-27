@@ -267,6 +267,7 @@ public class MainWindowController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         //allow multiple selection
         studList.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE
