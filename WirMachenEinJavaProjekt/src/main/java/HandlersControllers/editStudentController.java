@@ -60,8 +60,7 @@ public class editStudentController implements Initializable {
 
     @FXML
     void saveStudent(){
-
-        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",nameField.getText())||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",companyField.getText())||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",lastNameField.getText())){
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| !Pattern.matches("[äöüÄÖÜa-zA-Z- ]+",nameField.getText())||!Pattern.matches("[äöüÄÖÜa-zA-Z- ]+",companyField.getText())||!Pattern.matches("[äöüÄÖÜa-zA-Z- ]+",lastNameField.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
