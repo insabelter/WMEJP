@@ -2,6 +2,7 @@ package HandlersControllers;
 
 import classes.Kurs;
 import classes.Student;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,9 +61,7 @@ public class addStudentController implements Initializable {
             if (!MainHandler.mainWindowController1.isDuplicate(newbie)){
 
                 MainHandler.dm.insert(newbie, MainHandler.conn);
-                System.out.println(MainHandler.dm.lsStudent.list.contains(newbie));
-
-                MainHandler.mainWindowController1.insertInTable(newbie);
+                MainHandler.dm.lsStudent.fillArray(MainHandler.dm,MainHandler.conn);
 
             }
             else{JOptionPane.showMessageDialog(new Frame(),"Die Matrikelnummer "+newbie.getMatrikelnummer()+" ist schon vergeben.");}

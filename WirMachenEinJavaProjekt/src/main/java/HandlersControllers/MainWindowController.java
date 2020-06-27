@@ -4,6 +4,7 @@ import classes.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import org.w3c.dom.Text;
+
+
 
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ public class MainWindowController implements Initializable{
     FXMLLoader addStudentLoader;
     FXMLLoader editStudentLoader;
     FXMLLoader addCourseLoader;
+    FilteredList<Student> filteredList;
 
 
 
@@ -80,11 +83,14 @@ public class MainWindowController implements Initializable{
 
     @FXML
     void clearFilters(){
-        javaCombobox.getSelectionModel().clearSelection();
-        kursCombobox.getSelectionModel().clearSelection();
-        studienrichtungCombobox.getSelectionModel().clearSelection();
-        fakultaetDropdown.getSelectionModel().clearSelection();
-        studList.getItems().addAll(MainHandler.dm.lsStudent.list);
+        javaCombobox.valueProperty().set(null);
+        kursCombobox.valueProperty().set(null);
+        studienrichtungCombobox.valueProperty().set(null);
+        fakultaetDropdown.valueProperty().set(null);
+
+        filteredList.setPredicate(p -> true);
+
+
     }
 
     @FXML
@@ -136,38 +142,53 @@ public class MainWindowController implements Initializable{
         for (Student x: studList.getSelectionModel().getSelectedItems()) {
             MainHandler.dm.delete(x, MainHandler.conn);
         }
-        studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
+        if(studList.getItems() instanceof SortedList){
+            System.out.println();
+            ((SortedList<Student>) studList.getItems()).getSource().removeAll(studList.getSelectionModel().getSelectedItems());
+        }else{
+            studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
+        }
+
 
 
     }
 
     @FXML
     void filterList(ActionEvent event){
-        studList.getItems().clear();
-        ObservableList<Student> actualList= studList.getItems();
-        FilteredList<Student> filteredList = new FilteredList<>(actualList);
 
-        studList.setItems(filteredList);
 
-        filteredList.setPredicate(new Predicate<Student>() {
-            @Override
-            public boolean test(Student student) {
-
-                if(!(fakultaetDropdown.getSelectionModel().getSelectedItem()==null)) {
-                    if (!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())) {
-                        return false;
-                    }
-
+        filteredList.setPredicate(student -> {
+            if(!(fakultaetDropdown.getSelectionModel().getSelectedItem()==null)){
+                if(!fakultaetDropdown.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getStudiengang().getFakultaet().getName())){
+                    return false;
                 }
-
-
-
-
-                return true;
             }
+            if(!(kursCombobox.getSelectionModel().getSelectedItem()==null)){
+                if(!kursCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getName())){
+                    return false;
+                }
+            }
+            if(!(studienrichtungCombobox.getSelectionModel().getSelectedItem()==null)){
+                if(!studienrichtungCombobox.getSelectionModel().getSelectedItem().getName().equals(student.getKurs().getStudienrichtung().getName())){
+                    return false;
+                }
+            }
+            if(!(javaCombobox.getSelectionModel().getSelectedItem()==null)){
+                if(!(javaCombobox.getSelectionModel().getSelectedItem()==student.getJavakenntnisse())){
+                    return false;
+                }
+            }
+
+            return true;
         });
 
+        SortedList<Student> sortedstuff= new SortedList<>(filteredList);
+        studList.setItems(sortedstuff);
+        sortedstuff.comparatorProperty().bind(studList.comparatorProperty());
+
     }
+
+
 
 
 
@@ -208,6 +229,8 @@ public class MainWindowController implements Initializable{
 
         //put all student of db in table
         studList.getItems().addAll(MainHandler.dm.lsStudent.list);
+        //init list for later filters
+        filteredList = new FilteredList<>(studList.getItems(),p ->true);
 
 
         //attach stringconverters for Kurs
@@ -258,6 +281,7 @@ public class MainWindowController implements Initializable{
         addStudentLoader=loadAddStudentWindow();
         addCourseLoader=loadAddCourseWindow();
         editStudentLoader=loadEditStudentWindow();
+
         //later data from db, but for now test data
 
 
@@ -275,9 +299,15 @@ public class MainWindowController implements Initializable{
         }
         return b;
     }
-    public void insertInTable(Student stud){
+    public void insertInTable(Student student){
         //add student object to Table
-        studList.getItems().add(stud);
+
+        if(studList.getItems() instanceof SortedList){
+            ((SortedList) studList.getItems()).getSource().add(student);
+        }else{
+            studList.getItems().add(student);
+        }
+
     }
     public void deleteFromTable(Student stud){
         studList.getItems().remove(stud);
@@ -348,14 +378,14 @@ public class MainWindowController implements Initializable{
 
     public void updateAll(){
         fakultaetDropdown.getItems().clear();
+        fakultaetDropdown.setPromptText("Fakultät");
         studienrichtungCombobox.getItems().clear();
+        studienrichtungCombobox.setPromptText("Studienrichtung");
         kursCombobox.getItems().clear();
-
-
+        kursCombobox.setPromptText("Kurs");
         fakultaetDropdown.getItems().addAll(MainHandler.dm.lsFakultaet.list);
         studienrichtungCombobox.getItems().addAll(MainHandler.dm.lsStudienrichtung.list);
         kursCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
-
 
 
         editStudentController ec= editStudentLoader.getController();
@@ -365,6 +395,7 @@ public class MainWindowController implements Initializable{
         courseManagerController cc=addCourseLoader.getController();
         cc.updateAll();
     }
+
 
 
 

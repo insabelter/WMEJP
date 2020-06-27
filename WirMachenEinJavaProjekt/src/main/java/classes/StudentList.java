@@ -10,6 +10,7 @@ import java.sql.Statement;
 public class StudentList extends DataArrayList<Student>{
     @Override
     public void fillArray(DataManager dm, Connection conn) throws SQLException {
+        list.clear();
         Statement stmt = conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDENT");
 
@@ -21,7 +22,7 @@ public class StudentList extends DataArrayList<Student>{
                     rsBasicInformation.getString("NACHNAME"),
                     rsBasicInformation.getInt("JAVAKENNTNISSE"),
                     null, //wird bei addSlave befüllt
-                    rsBasicInformation.getString("FIRMA")); //rsBasicInformation.getString("FIRMA"),
+                    rsBasicInformation.getString("FIRMA"));
 
             //find Kurs
             int kurs_id = rsBasicInformation.getInt("KURS_ID");
