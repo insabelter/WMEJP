@@ -132,8 +132,11 @@ public class MainWindowController implements Initializable{
     @FXML
     void delStudentOnClick(ActionEvent event) {
         //delete all selected
-        MainHandler.dm.lsStudent.list.removeAll(studList.getSelectionModel().getSelectedItems());
+        //MainHandler.dm.lsStudent.list.removeAll(studList.getSelectionModel().getSelectedItems());
         studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
+        for (Student x: studList.getSelectionModel().getSelectedItems()) {
+            MainHandler.dm.delete(x);
+        }
 
     }
 
