@@ -29,7 +29,7 @@ public class MainHandler extends Application {
         try{
             //Create DB Connection
             Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:./wmejpTest","sa","");
+            conn = DriverManager.getConnection("jdbc:h2:./resources/wmejpTest","sa","");
 
             dm.initializeAll(conn);
             buildScene();
