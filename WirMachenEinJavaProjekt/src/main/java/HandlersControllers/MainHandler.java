@@ -1,11 +1,13 @@
 package HandlersControllers;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import DataBase.DataManager;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -36,6 +38,9 @@ public class MainHandler extends Application {
 
             //Set root as scene and show
             stage.setScene(new Scene(root));
+            stage.setOnHiding(windowEvent -> {
+                mainWindowController1.closeAll();
+            });
             stage.show();
         }catch(SQLException | ClassNotFoundException se) {
             se.printStackTrace();

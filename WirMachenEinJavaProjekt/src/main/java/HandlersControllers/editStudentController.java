@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ import java.awt.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class editStudentController implements Initializable {
     Student currentStudent=null;
@@ -58,7 +60,8 @@ public class editStudentController implements Initializable {
 
     @FXML
     void saveStudent(){
-        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
+
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",nameField.getText())||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",companyField.getText())||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",lastNameField.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
@@ -80,6 +83,8 @@ public class editStudentController implements Initializable {
                 s.printStackTrace();
                 JOptionPane.showMessageDialog(new Frame(),"Fehler beim Speichern");
             }
+            Stage stage =(Stage) addButton.getScene().getWindow();
+            stage.hide();
         }
 
 
@@ -96,6 +101,8 @@ public class editStudentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        int i = ((int)javaSlider.getValue())/10;
+        javakenntnisseLabel.setText(String.valueOf(i));
         courseDropdown.setConverter(new StringConverter<Kurs>() {
             @Override
             public String toString(Kurs k) {

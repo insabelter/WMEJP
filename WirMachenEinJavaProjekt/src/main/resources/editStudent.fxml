@@ -56,7 +56,7 @@
             <ComboBox fx:id="courseDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="numberField" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="companyField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Slider fx:id="javaSlider" majorTickUnit="10.0" minorTickCount="0" onMouseReleased="#displayNumber" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Slider fx:id="javaSlider" majorTickUnit="10.0" minorTickCount="0" onKeyPressed="#displayNumber" onMouseReleased="#displayNumber" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Nachname" GridPane.rowIndex="1" />
          </children>
          <padding>

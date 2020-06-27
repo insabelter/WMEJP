@@ -2,6 +2,7 @@ package HandlersControllers;
 
 import classes.Kurs;
 import classes.Student;
+import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import javax.swing.*;
@@ -48,7 +50,7 @@ public class addStudentController implements Initializable {
     @FXML
     void newStudent(ActionEvent event) throws SQLException {
         //Check if every Textfield is not empty
-        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| !Pattern.matches("[a-zA-Z]+",nameField.getText())||!Pattern.matches("[a-zA-Z]+",companyField.getText())||!Pattern.matches("[a-zA-Z]+",lastNameField.getText())){
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| !Pattern.matches("[a-zA-ZÜüÖöÄä ]+",nameField.getText())||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",companyField.getText())||!Pattern.matches("[a-zA-ZÜüÖöÄä ]+",lastNameField.getText())){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein. Außerdem nur alphabetisch.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
@@ -56,7 +58,7 @@ public class addStudentController implements Initializable {
         }
         //Create Student based on User Inputs
         else{
-            Student newbie=null;
+            Student newbie;
             try{
                 newbie= new Student(1,nameField.getText(),lastNameField.getText(),((int)javaSlider.getValue())/10,courseDropdown.getSelectionModel().getSelectedItem(),companyField.getText());
             }catch(NumberFormatException n){
@@ -70,8 +72,8 @@ public class addStudentController implements Initializable {
 
             }
             else{JOptionPane.showMessageDialog(new Frame(),"Die Matrikelnummer "+newbie.getMatrikelnummer()+" ist schon vergeben.");}
-
-
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.hide();
         }
 
     }
@@ -85,7 +87,8 @@ public class addStudentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // add options to dropdown
-
+        int i = ((int)javaSlider.getValue())/10;
+        javakenntnisseLabel.setText(String.valueOf(i));
         courseDropdown.setConverter(new StringConverter<Kurs>() {
             @Override
             public String toString(Kurs k) {

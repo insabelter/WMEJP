@@ -81,8 +81,6 @@ public class MainWindowController implements Initializable{
     @FXML
     void clearFilters(){
 
-
-
         javaCombobox.valueProperty().set(null);
         kursCombobox.valueProperty().set(null);
         studienrichtungCombobox.valueProperty().set(null);
@@ -90,7 +88,9 @@ public class MainWindowController implements Initializable{
         numberField.setText("");
 
         filteredList.setPredicate(p -> true);
-        studList.setItems(filteredList);
+        SortedList sortedList =new SortedList<>(filteredList);
+        studList.setItems(sortedList);
+        sortedList.comparatorProperty().bind(studList.comparatorProperty());
 
     }
 
@@ -186,6 +186,7 @@ public class MainWindowController implements Initializable{
             return true;
         });
 
+
         SortedList<Student> sortedstuff= new SortedList<>(filteredList);
         studList.setItems(sortedstuff);
         sortedstuff.comparatorProperty().bind(studList.comparatorProperty());
@@ -236,13 +237,9 @@ public class MainWindowController implements Initializable{
             });
         });
 
-        // 3. Wrap the FilteredList in a SortedList.
         SortedList<Student> sortedData = new SortedList<>(filteredList);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
         studList.setItems(sortedData);
         sortedData.comparatorProperty().bind(studList.comparatorProperty());
-        // 5. Add sorted (and filtered) data to the table.
 
     }
 
