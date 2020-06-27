@@ -31,7 +31,6 @@ public class MainHandler extends Application {
             Class.forName("org.h2.Driver");
             System.out.println(System.getProperty("user.dir"));
             conn = DriverManager.getConnection("jdbc:h2:"+System.getProperty("user.dir")+"/src/main/resources/wmejpTest","sa","");
-
             dm.initializeAll(conn);
             buildScene();
 
@@ -40,7 +39,7 @@ public class MainHandler extends Application {
             stage.show();
         }catch(SQLException | ClassNotFoundException se) {
             se.printStackTrace();
-        } 
+        }
     }
 
     @Override
