@@ -52,6 +52,7 @@ public class editStudentController implements Initializable {
         numberField.setText(String.valueOf(s.getMatrikelnummer()));
         companyField.setText(s.getFirma());
         javaSlider.setValue(s.getJavakenntnisse()*10);
+        javakenntnisseLabel.setText(String.valueOf(s.getJavakenntnisse()));
 
     }
 

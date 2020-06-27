@@ -26,13 +26,15 @@ public class DataManager {
             kurs.createName();
         }
 
+
         //Print
+        /*
         lsKurs.printArray();
         lsStudent.printArray();
         lsStudienrichtung.printArray();
         lsStudiengang.printArray();
         lsFakultaet.printArray();
-
+        */
     }
 
     public void insert(HasID object, Connection conn) throws SQLException{ //inseriert das übergebene Objekt in DM und DB. Duplizierter code kann durch legacy-methode umgangen werden
