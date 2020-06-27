@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -130,12 +131,12 @@ public class MainWindowController implements Initializable{
 
 
     @FXML
-    void delStudentOnClick(ActionEvent event) {
+    void delStudentOnClick(ActionEvent event) throws SQLException {
         //delete all selected
         //MainHandler.dm.lsStudent.list.removeAll(studList.getSelectionModel().getSelectedItems());
         studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
         for (Student x: studList.getSelectionModel().getSelectedItems()) {
-            MainHandler.dm.delete(x);
+            MainHandler.dm.delete(x, MainHandler.conn);
         }
 
     }

@@ -13,6 +13,7 @@ import javafx.util.StringConverter;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,7 +40,7 @@ public class addStudentController implements Initializable {
     private TextField companyField;
 
     @FXML
-    void newStudent(ActionEvent event) {
+    void newStudent(ActionEvent event) throws SQLException {
         //Check if every Textfield is not empty
         if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
             JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
@@ -54,7 +55,7 @@ public class addStudentController implements Initializable {
             }
             if (!MainHandler.mainWindowController1.isDuplicate(newbie)){
 
-                MainHandler.dm.insert(newbie);
+                MainHandler.dm.insert(newbie, MainHandler.conn);
                 System.out.println(MainHandler.dm.lsStudent.list.contains(newbie));
                 //MainHandler.dbm.insert("STUDENT","vorname,nachname,javakenntnisse,kurs_id,firma_id",newbie.getVorname()+"','"+newbie.getNachname()+"',"+newbie.getJavakenntnisse()+","+newbie.getKurs().getId()+","+"4");
                 //MainHandler.dm.lsStudent.list.add(newbie);

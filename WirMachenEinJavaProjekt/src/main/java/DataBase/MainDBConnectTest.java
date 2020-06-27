@@ -1,12 +1,33 @@
 package DataBase;
 
+import javafx.scene.Scene;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class MainDBConnectTest {
 
     public static void main(String[] args) {
+        Connection conn = null;
         DataManager dm = new DataManager();
-        dm.initializeAll();
-        //dbm.update("Fakultaet","name='prepared'","fakultaet_id>20");
-        //dbm.delete(dm.lsStudent.list.get(1),dm);
+        try{
+            //Create DB Connection
+            Class.forName("org.h2.Driver");
+            conn = DriverManager.getConnection("jdbc:h2:./wmejpTest","sa","");
+
+            dm.initializeAll(conn);
+
+            conn.close();
+        }catch(SQLException | ClassNotFoundException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn!=null) conn.close();
+            } catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
 
     }
 }

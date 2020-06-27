@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import DataBase.DataManager;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class MainHandler extends Application {
 
@@ -15,6 +18,7 @@ public class MainHandler extends Application {
     Parent root = null;
     static MainWindowController mainWindowController1;
     static DataManager dm = new DataManager();
+    static Connection conn = null;
 
     public static void main(String[] args) {
         launch(args);
@@ -22,12 +26,36 @@ public class MainHandler extends Application {
 
     @Override
     public void start(Stage stage){
-        dm.initializeAll();
-        buildScene();
+        try{
+            //Create DB Connection
+            Class.forName("org.h2.Driver");
+            conn = DriverManager.getConnection("jdbc:h2:./wmejpTest","sa","");
 
-        //Set root as scene and show
-        stage.setScene(new Scene(root));
-        stage.show();
+            dm.initializeAll(conn);
+            buildScene();
+
+            //Set root as scene and show
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(SQLException | ClassNotFoundException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn!=null) conn.close();
+            } catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        try {
+            conn.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     void buildScene(){
@@ -43,9 +71,6 @@ public class MainHandler extends Application {
 
         //get Controller of loader for later access/passing back values
         mainWindowController1 = loader.getController();
-
-
-
 
     }
 

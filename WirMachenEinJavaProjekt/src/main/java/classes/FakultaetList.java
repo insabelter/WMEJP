@@ -12,8 +12,8 @@ public class FakultaetList extends DataArrayList<Fakultaet>{
     //list: List of type Fakultaet
 
     @Override
-    public void fillArray(DataManager dm) throws SQLException{
-        Statement stmt = dm.conn.createStatement();
+    public void fillArray(DataManager dm, Connection conn) throws SQLException{
+        Statement stmt = conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM FAKULTAET");
 
         //add objects to List

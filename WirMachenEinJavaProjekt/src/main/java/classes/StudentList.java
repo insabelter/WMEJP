@@ -2,14 +2,15 @@ package classes;
 
 import DataBase.DataManager;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class StudentList extends DataArrayList<Student>{
     @Override
-    public void fillArray(DataManager dm) throws SQLException {
-        Statement stmt = dm.conn.createStatement();
+    public void fillArray(DataManager dm, Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
         ResultSet rsBasicInformation = stmt.executeQuery("SELECT * FROM STUDENT");
 
         //add objects to List
