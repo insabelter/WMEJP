@@ -1,12 +1,12 @@
 Übersicht über unser Projekt
 
-Auführungshinweise:
+Ausführungshinweise:
 
 Leider haben wir es nach sehr langem hin- und herprobieren mit verschiedensten 
 Java JDK Versionen und verschiedensten Tutorials nicht geschafft, eine ausführbare
 .jar-Datei aus unserem Modul zu erstellen. (Auch nach der Antwort auf die E-Mail von Frederic leider nicht)
 
-Daher stellen wir das ganze Repository zur Verfügung mit folgenden Hinweisen zur Auführung:
+Daher stellen wir das ganze Repository zur Verfügung mit folgenden Hinweisen zur Ausführung:
 
 1. Öffne "WirMachenEinJavaProjekt" in IntelliJ
 2. Füge bei "Run" unter "Edit Configurations" bei den VM Options folgendes hinzu:
