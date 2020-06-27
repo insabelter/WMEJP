@@ -57,7 +57,6 @@ public class editStudentController implements Initializable {
 
     @FXML
     void saveStudent(){
-        MainHandler.mainWindowController1.deleteFromTable(currentStudent);
         Kurs oldCourse = currentStudent.getKurs();
         Kurs newCourse = courseDropdown.getSelectionModel().getSelectedItem();
         oldCourse.getStudents().remove(currentStudent);
@@ -69,11 +68,12 @@ public class editStudentController implements Initializable {
         currentStudent.setNachname(lastNameField.getText());
         try{
             MainHandler.dm.update(currentStudent,MainHandler.conn);
+            MainHandler.mainWindowController1.updateAll();
         }catch(SQLException s){
             s.printStackTrace();
             JOptionPane.showMessageDialog(new Frame(),"Fehler beim Speichern");
         }
-        MainHandler.mainWindowController1.insertInTable(currentStudent);
+
 
 
 

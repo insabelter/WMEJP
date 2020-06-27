@@ -62,6 +62,7 @@ public class addStudentController implements Initializable {
 
                 MainHandler.dm.insert(newbie, MainHandler.conn);
                 MainHandler.dm.lsStudent.fillArray(MainHandler.dm,MainHandler.conn);
+                MainHandler.mainWindowController1.updateAll();
 
             }
             else{JOptionPane.showMessageDialog(new Frame(),"Die Matrikelnummer "+newbie.getMatrikelnummer()+" ist schon vergeben.");}

@@ -143,8 +143,8 @@ public class MainWindowController implements Initializable{
             MainHandler.dm.delete(x, MainHandler.conn);
         }
         if(studList.getItems() instanceof SortedList){
-            System.out.println();
-            ((SortedList<Student>) studList.getItems()).getSource().removeAll(studList.getSelectionModel().getSelectedItems());
+            FilteredList filteredStuff = (FilteredList) ((SortedList<Student>) studList.getItems()).getSource();
+            ((FilteredList<Student>) filteredStuff).getSource().removeAll(studList.getSelectionModel().getSelectedItems());
         }else{
             studList.getItems().removeAll(studList.getSelectionModel().getSelectedItems());
         }
@@ -299,19 +299,6 @@ public class MainWindowController implements Initializable{
         }
         return b;
     }
-    public void insertInTable(Student student){
-        //add student object to Table
-
-        if(studList.getItems() instanceof SortedList){
-            ((SortedList) studList.getItems()).getSource().add(student);
-        }else{
-            studList.getItems().add(student);
-        }
-
-    }
-    public void deleteFromTable(Student stud){
-        studList.getItems().remove(stud);
-    }
     private FXMLLoader loadAddStudentWindow(){
         FXMLLoader loader=null;
         try{
@@ -387,6 +374,16 @@ public class MainWindowController implements Initializable{
         studienrichtungCombobox.getItems().addAll(MainHandler.dm.lsStudienrichtung.list);
         kursCombobox.getItems().addAll(MainHandler.dm.lsKurs.list);
 
+
+        if(studList.getItems() instanceof SortedList){
+            FilteredList filteredStuff = (FilteredList) ((SortedList<Student>) studList.getItems()).getSource();
+            ((FilteredList) filteredStuff).getSource().clear();
+            ((FilteredList) filteredStuff).getSource().addAll(MainHandler.dm.lsStudent.list);
+        }else{
+            studList.getItems().clear();
+            studList.getItems().addAll(MainHandler.dm.lsStudent.list);
+
+        }
 
         editStudentController ec= editStudentLoader.getController();
         ec.updateAll();
