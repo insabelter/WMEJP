@@ -29,7 +29,8 @@ public class MainHandler extends Application {
         try{
             //Create DB Connection
             Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:../WirMachenEinJavaProjekt/src/main/resources/wmejpTest","sa","");
+            System.out.println(System.getProperty("user.dir"));
+            conn = DriverManager.getConnection("jdbc:h2:"+System.getProperty("user.dir")+"/src/main/resources/wmejpTest","sa","");
 
             dm.initializeAll(conn);
             buildScene();
