@@ -19,6 +19,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -61,11 +63,14 @@ public class courseManagerController implements Initializable {
 
     @FXML
     void newCourse(){
-        List<Student> l = MainHandler.dm.lsStudent.list;
-        l.clear();
+        List<Student> l =new LinkedList<>();
         if(jahrgangTextfield.getText().equals("")||numberTextfield.getText().equals("")|| newCourseroomTextfield.getText().equals("")||Pattern.matches("[0-9]+", numberTextfield.getText()) == false||Pattern.matches("[0-9]+", jahrgangTextfield.getText()) == false){
-            JOptionPane.showMessageDialog(new Frame(),"Eingabe überprüfen! Jahrgang und Nummer müssen numerisch sein!");
-        }else{
+            JOptionPane.showMessageDialog(new Frame(),"Eingabe überprüfen! Jahrgang und Nummer müssen numerisch sein und kein Feld darf leer sein!");
+        }
+        else if(jahrgangTextfield.getText().length()>3||numberTextfield.getText().length()>5) {
+            JOptionPane.showMessageDialog(new Frame(),"Jahrgang darf maximal 2 Zeichen betragen und Nummer maximal 4.");
+        }
+        else{
 
             Kurs newCourse = new Kurs(1, Integer.parseInt(jahrgangTextfield.getText()), Integer.parseInt(numberTextfield.getText()), newCourseroomTextfield.getText(), "", studienrichtungComboBox.getSelectionModel().getSelectedItem(), l);
             newCourse.createName();

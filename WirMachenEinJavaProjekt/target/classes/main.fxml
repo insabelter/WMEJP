@@ -3,9 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -42,15 +39,6 @@
                   <Button fx:id="delStudent" layoutX="47.0" layoutY="92.0" mnemonicParsing="false" onAction="#delStudentOnClick" prefHeight="25.0" prefWidth="126.0" text="Student exmatrikulieren" />
                   <Button fx:id="addCourse" layoutX="47.0" layoutY="141.0" mnemonicParsing="false" onAction="#manageCourses" prefHeight="25.0" prefWidth="123.0" text="Kurse verwalten" />
                   <Button fx:id="editStudent" layoutX="47.0" layoutY="190.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="25.0" prefWidth="126.0" text="Student bearbeiten" />
-                  <MenuBar layoutY="339.0">
-                    <menus>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
-                      </Menu>
-                    </menus>
-                  </MenuBar>
                </children></Pane>
         </items>
       </SplitPane>

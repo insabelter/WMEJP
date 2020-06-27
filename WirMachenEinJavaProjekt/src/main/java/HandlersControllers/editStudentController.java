@@ -57,22 +57,31 @@ public class editStudentController implements Initializable {
 
     @FXML
     void saveStudent(){
-        Kurs oldCourse = currentStudent.getKurs();
-        Kurs newCourse = courseDropdown.getSelectionModel().getSelectedItem();
-        oldCourse.getStudents().remove(currentStudent);
-        newCourse.getStudents().add(currentStudent);
-        currentStudent.setKurs(newCourse);
-        currentStudent.setFirma(companyField.getText());
-        currentStudent.setJavakenntnisse(((int)javaSlider.getValue())/10);
-        currentStudent.setVorname(nameField.getText());
-        currentStudent.setNachname(lastNameField.getText());
-        try{
-            MainHandler.dm.update(currentStudent,MainHandler.conn);
-            MainHandler.mainWindowController1.updateAll();
-        }catch(SQLException s){
-            s.printStackTrace();
-            JOptionPane.showMessageDialog(new Frame(),"Fehler beim Speichern");
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
+            JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
+        else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
+            JOptionPane.showMessageDialog(new Frame(),"Vorname und Nachname dürfen maximal 100 Zeichen lang sein.","Fehler",JOptionPane.ERROR_MESSAGE);
+        }else{
+            Kurs oldCourse = currentStudent.getKurs();
+            Kurs newCourse = courseDropdown.getSelectionModel().getSelectedItem();
+            oldCourse.getStudents().remove(currentStudent);
+            newCourse.getStudents().add(currentStudent);
+            currentStudent.setKurs(newCourse);
+            currentStudent.setFirma(companyField.getText());
+            currentStudent.setJavakenntnisse(((int)javaSlider.getValue())/10);
+            currentStudent.setVorname(nameField.getText());
+            currentStudent.setNachname(lastNameField.getText());
+            try{
+                MainHandler.dm.update(currentStudent,MainHandler.conn);
+                MainHandler.mainWindowController1.updateAll();
+            }catch(SQLException s){
+                s.printStackTrace();
+                JOptionPane.showMessageDialog(new Frame(),"Fehler beim Speichern");
+            }
+        }
+
+
 
 
 

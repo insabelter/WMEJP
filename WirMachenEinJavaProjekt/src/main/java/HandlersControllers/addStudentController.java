@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class addStudentController implements Initializable {
 
@@ -47,8 +48,11 @@ public class addStudentController implements Initializable {
     @FXML
     void newStudent(ActionEvent event) throws SQLException {
         //Check if every Textfield is not empty
-        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")){
-            JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein.","Fehler",JOptionPane.ERROR_MESSAGE);
+        if(nameField.getText().equals("")||companyField.getText().equals("")||lastNameField.getText().equals("")|| Pattern.matches("[A-Z,a-z]",nameField.getText())==false||Pattern.matches("[A-Z,a-z]",companyField.getText())==false||Pattern.matches("[A-Z,a-z]",lastNameField.getText())==false){
+            JOptionPane.showMessageDialog(new Frame(),"Textfelder die nicht optional sind dürfen nicht leer sein. Außerdem nur alphabetisch.","Fehler",JOptionPane.ERROR_MESSAGE);
+        }
+        else if(nameField.getText().length()>101||lastNameField.getText().length()>101){
+            JOptionPane.showMessageDialog(new Frame(),"Vorname und Nachname dürfen maximal 100 Zeichen lang sein.","Fehler",JOptionPane.ERROR_MESSAGE);
         }
         //Create Student based on User Inputs
         else{
