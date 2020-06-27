@@ -163,7 +163,7 @@ public class DatabaseDatamanager {
             //STEP 2: Open a connection
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            //STEP 3: Fill Arrays
+            //STEP 3: ExexStatement
 
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(Statement);
