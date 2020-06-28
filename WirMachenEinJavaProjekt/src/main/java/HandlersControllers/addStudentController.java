@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -67,6 +68,10 @@ public class addStudentController implements Initializable {
             if (!MainHandler.mainWindowController1.isDuplicate(newbie)){
 
                 MainHandler.dm.insert(newbie, MainHandler.conn);
+                MainHandler.dm.lsKurs.fillArray(MainHandler.dm,MainHandler.conn);
+                for (Kurs k:MainHandler.dm.lsKurs.list) {
+                    k.createName();
+                }
                 MainHandler.dm.lsStudent.fillArray(MainHandler.dm,MainHandler.conn);
                 MainHandler.mainWindowController1.updateAll();
 
