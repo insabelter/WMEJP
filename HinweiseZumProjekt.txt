@@ -5,6 +5,7 @@ Ausführungshinweise:
 Leider haben wir es nach sehr langem hin- und herprobieren mit verschiedensten 
 Java JDK Versionen und verschiedensten Tutorials nicht geschafft, eine ausführbare
 .jar-Datei aus unserem Modul zu erstellen. (Auch nach der Antwort auf die E-Mail von Frederic leider nicht)
+(Dokumentation: https://docs.google.com/document/d/1QW0rL13dAzoFVYog2ikg17uJpESW_4SvJN-kmLsbwKA/edit?usp=sharing)
 
 Daher stellen wir das ganze Repository zur Verfügung mit folgenden Hinweisen zur Ausführung:
 
